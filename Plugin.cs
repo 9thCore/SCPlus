@@ -19,5 +19,6 @@ public class Plugin : BaseUnityPlugin
 
         harmony.PatchAll();
         VariableRegister.Awake();
+        VariableUnrestrict.RemoveDiseaseTypes();
     }
 }

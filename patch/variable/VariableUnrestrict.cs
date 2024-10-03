@@ -11,14 +11,25 @@ namespace SCPlus.patch.variable
         private static readonly HashSet<Disease.EDiseaseType> ALL_TYPES = 
             new(Enum.GetValues(typeof(Disease.EDiseaseType)).Cast<Disease.EDiseaseType>());
 
-        // Return a set of all available disease types whenever code asks for available diseases
-        [HarmonyPatch(typeof(ScenarioInformation))]
-        [HarmonyPatch(nameof(ScenarioInformation.GetDiseaseTypes))]
-        [HarmonyPrefix]
-        internal static bool GetDiseaseTypesPatch(ref HashSet<Disease.EDiseaseType> __result)
+        // Trick editor into considering all disease types as valid for scope
+        [HarmonyPatch(typeof(VariableSelectOverlay))]
+        [HarmonyPatch(nameof(VariableSelectOverlay.UpdateTree))]
+        [HarmonyPostfix]
+        internal static void UpdateTreePostfix(VariableSelectOverlay __instance)
         {
-            __result = ALL_TYPES;
-            return false;
+            __instance.types = ALL_TYPES;
+        }
+
+        // Not a patch, but a method called from Awake()
+        // Plugin runs after main game code,
+        // when variables are already registered,
+        // so this can't really be patching anything relevant
+        internal static void RemoveDiseaseTypes()
+        {
+            foreach (EventVariable variable in ScenarioCreatorAPI.Instance.sortedEventVariables)
+            {
+                variable.diseaseType = ""; // Just clear it out
+            }
         }
     }
 }
