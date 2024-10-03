@@ -99,13 +99,13 @@ namespace SCPlus.patch.variable
             VariableHelpers.RegisterVariable(eventVariable);
         }
 
-        public enum CategoryType
+        internal enum CategoryType
         {
             CUSTOM,
             HUMAN_RESPONSE
         }
 
-        public enum ComplexityType
+        internal enum ComplexityType
         {
             BASIC,
             ADVANCED,
