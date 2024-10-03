@@ -37,15 +37,20 @@ namespace SCPlus.patch.variable
         {
             return Translation($"UI_{translation}", $"Help_{translation}");
         }
-        
-        internal VariableBuilder CategoryCustom()
+
+        internal VariableBuilder DefaultTranslation()
         {
-            return Category("Custom");
+            return Translation($"Event_Variable_{eventVariable.variable}");
         }
 
-        internal VariableBuilder CategoryHumanResponse()
+        internal VariableBuilder Category(CategoryType type)
         {
-            return Category("Human Response");
+            return type switch
+            {
+                CategoryType.CUSTOM => Category("Custom"),
+                CategoryType.HUMAN_RESPONSE => Category("Human Response"),
+                _ => throw new Exception($"Invalid CategoryType {type}"),
+            };
         }
 
         internal VariableBuilder Category(string category)
@@ -54,19 +59,21 @@ namespace SCPlus.patch.variable
             return this;
         }
 
-        internal VariableBuilder ComplexityBasic()
+        internal VariableBuilder Complexity(ComplexityType type)
         {
-            return Complexity("Basic");
+            return type switch
+            {
+                ComplexityType.BASIC => Complexity("Basic"),
+                ComplexityType.ADVANCED => Complexity("Advanced"),
+                ComplexityType.SUPER_ADVANCED => Complexity("Super Advanced"),
+                _ => throw new Exception($"Invalid ComplexityType {type}"),
+            };
         }
 
-        internal VariableBuilder ComplexityAdvanced()
+        internal VariableBuilder Complexity(string complexity)
         {
-            return Complexity("Advanced");
-        }
-
-        internal VariableBuilder ComplexitySuperAdvanced()
-        {
-            return Complexity("Super Advanced");
+            eventVariable.complexity = complexity;
+            return this;
         }
 
         internal VariableBuilder Condition()
@@ -92,10 +99,17 @@ namespace SCPlus.patch.variable
             VariableHelpers.RegisterVariable(eventVariable);
         }
 
-        internal VariableBuilder Complexity(string complexity)
+        public enum CategoryType
         {
-            eventVariable.complexity = complexity;
-            return this;
+            CUSTOM,
+            HUMAN_RESPONSE
+        }
+
+        public enum ComplexityType
+        {
+            BASIC,
+            ADVANCED,
+            SUPER_ADVANCED
         }
     }
 }
