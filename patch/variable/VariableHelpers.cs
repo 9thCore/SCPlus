@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 
 namespace SCPlus.patch.variable
 {
@@ -9,7 +8,7 @@ namespace SCPlus.patch.variable
         internal static void UpdateVariable(EventVariable variable)
         {
             ScenarioCreatorAPI instance = ScenarioCreatorAPI.Instance;
-            string key = GetVariableKey(variable);
+            string key = GetFullVariableKey(variable);
 
             if (variable.outcome > 0)
             {
@@ -34,10 +33,12 @@ namespace SCPlus.patch.variable
         internal static void RegisterVariable(EventVariable variable)
         {
             ScenarioCreatorAPI instance = ScenarioCreatorAPI.Instance;
+            string fullKey = GetFullVariableKey(variable);
             string key = GetVariableKey(variable);
 
-            if (!instance.variableDataSorted.ContainsKey(key))
+            if (!instance.variableDataSorted.ContainsKey(fullKey) || !instance.variableDataSorted.ContainsKey(key))
             {
+                instance.variableDataSorted[fullKey] = variable;
                 instance.variableDataSorted[key] = variable;
                 
                 // Perform insertion sort on sorted event list
@@ -53,8 +54,6 @@ namespace SCPlus.patch.variable
                     i++;
                 }
 
-                Plugin.Logger.LogInfo($"First event: {instance.sortedEventVariables[i]}, at {i}");
-
                 // Find where to insert
                 while (i < instance.sortedEventVariables.Count)
                 {
@@ -66,8 +65,6 @@ namespace SCPlus.patch.variable
                     i++;
                 }
 
-                Plugin.Logger.LogInfo($"Found event: {instance.sortedEventVariables[i]}, at {i}");
-
                 if (i >= instance.sortedEventVariables.Count
                     || instance.sortedEventVariables[i].category != variable.category)
                 {
@@ -75,24 +72,18 @@ namespace SCPlus.patch.variable
                 }
 
                 instance.sortedEventVariables.Insert(i, variable);
-
-                Plugin.Logger.LogInfo("New list");
-                Plugin.Logger.LogInfo(instance.sortedEventVariables);
             }
             UpdateVariable(variable);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static string GetVariableKey(EventVariable variable)
         {
-            return string.Concat(
-            [
-                variable.CamelCaseID,
-                "/",
-                variable.ReflectionTarget.ToString(),
-                "/",
-                variable.diseaseType
-            ]);
+            return $"{variable.CamelCaseID}/{variable.ReflectionTarget}";
+        }
+
+        internal static string GetFullVariableKey(EventVariable variable)
+        {
+            return variable.diseaseType.Length > 0 ? $"{GetVariableKey(variable)}/{variable.diseaseType}" : GetVariableKey(variable);
         }
     }
 }
