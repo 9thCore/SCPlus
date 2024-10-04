@@ -65,11 +65,6 @@ namespace SCPlus.patch.variable
                     i++;
                 }
 
-                if (i >= instance.sortedEventVariables.Count)
-                {
-                    throw new Exception($"Could not insert variable {variable} into sorted event list");
-                }
-
                 instance.sortedEventVariables.Insert(i, variable);
             }
             UpdateVariable(variable);
