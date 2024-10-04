@@ -27,6 +27,27 @@ namespace SCPlus.patch.variable
                 // .Outcome() // Seems to be reset every day, so don't let it be settable (for now)
                 .Expression()
                 .Register();
+
+            new VariableBuilder("transmission_extra_cost", "World")
+                .Category(CategoryType.DISEASE_STATS)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("symptom_extra_cost", "World")
+                .Category(CategoryType.DISEASE_STATS)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("ability_extra_cost", "World")
+                .Category(CategoryType.DISEASE_STATS)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
         }
     }
 }
