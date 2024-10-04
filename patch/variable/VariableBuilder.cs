@@ -78,10 +78,22 @@ namespace SCPlus.patch.variable
             return this;
         }
 
+        internal VariableBuilder Condition(ConditionOps operations)
+        {
+            eventVariable.conditionOperations = JoinEnumFlags(typeof(ConditionOps), operations);
+            return Condition();
+        }
+
         internal VariableBuilder Condition()
         {
             eventVariable.condition = 1;
             return this;
+        }
+
+        internal VariableBuilder Outcome(OutcomeOps operators)
+        {
+            eventVariable.outcomeOperations = JoinEnumFlags(typeof(OutcomeOps), operators);
+            return Outcome();
         }
 
         internal VariableBuilder Outcome()
@@ -101,9 +113,52 @@ namespace SCPlus.patch.variable
             return Condition().Outcome().Expression();
         }
 
+        internal VariableBuilder AsEnum(Type enumType)
+        {
+            if (!enumType.IsEnum)
+            {
+                throw new Exception($"{enumType} is not an enum");
+            }
+
+            eventVariable.outcomeListData = GetEnumName(enumType);
+            Plugin.Logger.LogInfo(eventVariable.outcomeListData);
+            Condition(ConditionOps.EQUAL | ConditionOps.NOT_EQUAL);
+            return Outcome(OutcomeOps.SET);
+        }
+
         internal void Register()
         {
             VariableHelpers.RegisterVariable(eventVariable);
+        }
+
+        private static string JoinEnumFlags(Type enumType, Enum enumValue)
+        {
+            if (!enumType.IsEnum)
+            {
+                return "";
+            }
+
+            Array allValues = enumType.GetEnumValues();
+            string[] values = new string[allValues.Length];
+
+            foreach (Enum item in allValues)
+            {
+                if (enumValue.HasFlag(item))
+                {
+                    values[values.Length - 1] = item.ToString();
+                }
+            }
+
+            return String.Join(",", values);
+        }
+
+        private static string GetEnumName(Type enumType)
+        {
+            if (enumType.ReflectedType == null)
+            {
+                return enumType.Name;
+            }
+            return $"{enumType.ReflectedType}.{enumType.Name}";
         }
 
         internal enum CategoryType
@@ -118,6 +173,19 @@ namespace SCPlus.patch.variable
             BASIC,
             ADVANCED,
             SUPER_ADVANCED
+        }
+
+        [Flags]
+        internal enum ConditionOps
+        {
+            EQUAL = 1,
+            NOT_EQUAL = 2
+        }
+
+        [Flags]
+        internal enum OutcomeOps
+        {
+            SET = 1
         }
     }
 }
