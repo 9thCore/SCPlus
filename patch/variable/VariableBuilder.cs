@@ -56,6 +56,9 @@ namespace SCPlus.patch.variable
                 CategoryType.CUSTOM => Category("Custom"),
                 CategoryType.HUMAN_RESPONSE => Category("Human Response"),
                 CategoryType.DISEASE_STATS => Category("Disease Stats"),
+                CategoryType.POPULATION => Category("Population"),
+                CategoryType.APE => Category("Ape"),
+                CategoryType.ZOMBIE => Category("Zombie"),
                 _ => throw new Exception($"Invalid CategoryType {type}"),
             };
         }
@@ -170,7 +173,10 @@ namespace SCPlus.patch.variable
         {
             CUSTOM,
             HUMAN_RESPONSE,
-            DISEASE_STATS
+            DISEASE_STATS,
+            POPULATION,
+            APE,
+            ZOMBIE
         }
 
         internal enum ComplexityType
