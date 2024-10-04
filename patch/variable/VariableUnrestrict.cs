@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using SCPlus.plugin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,11 @@ namespace SCPlus.patch.variable
         [HarmonyPostfix]
         internal static void UpdateTreePostfix(VariableSelectOverlay __instance)
         {
+            if (!Config.liftVariableTypeCheck.Value)
+            {
+                return;
+            }
+
             __instance.types = ALL_TYPES;
         }
 
@@ -26,6 +32,11 @@ namespace SCPlus.patch.variable
         // so this can't really be patching anything relevant
         internal static void RemoveDiseaseTypes()
         {
+            if (!Config.liftVariableTypeCheck.Value)
+            {
+                return;
+            }
+
             foreach (EventVariable variable in ScenarioCreatorAPI.Instance.sortedEventVariables)
             {
                 variable.diseaseType = ""; // Just clear it out
