@@ -11,18 +11,18 @@ namespace SCPlus.patch.lang
             {
                 RegisterSCPlusVariable(
                     "transmission_extra_cost",
-                    "Transmission tech extra cost",
-                    "Additional cost of Transmission technology. Increases for every Transmission technology evolved, unless the gene Trans-Stasis is used.");
+                    "Transmission extra cost",
+                    "Additional cost of Transmission technology. Increases for every Transmission technology evolved, unless the gene [Trans-Stasis] is used.");
 
                 RegisterSCPlusVariable(
                     "symptom_extra_cost",
-                    "Symptom tech extra cost",
-                    "Additional cost of Symptom technology. Increases for every Symptom technology evolved, unless the gene Sympto-Stasis is used.");
+                    "Symptom extra cost",
+                    "Additional cost of Symptom technology. Increases for every Symptom technology evolved, unless the gene [Sympto-Stasis] is used.");
 
                 RegisterSCPlusVariable(
                     "ability_extra_cost",
-                    "Ability tech extra cost",
-                    "Additional cost of Ability technology. Increases for every Ability technology evolved, unless the gene Patho-Stasis is used.");
+                    "Ability extra cost",
+                    "Additional cost of Ability technology. Increases for every Ability technology evolved, unless the gene [Patho-Stasis] is used.");
 
                 RegisterSCPlusVariable(
                     "infected_this_turn",
@@ -43,6 +43,36 @@ namespace SCPlus.patch.lang
                     "infected_apes_this_turn",
                     "Infected apes last turn",
                     "Number of new infected apes last turn.");
+
+                RegisterSCPlusVariable(
+                    "transmission_devolve_cost",
+                    "Transmission devolve cost",
+                    "Cost penalty applied when trying to devolve Transmission tech. Increases by [Transmission devolve cost increase] on Transmission tech devolve.");
+
+                RegisterSCPlusVariable(
+                    "transmission_devolve_cost_increase",
+                    "Transmission devolve cost increase",
+                    "How much the cost penalty increases on Transmission tech devolve. Defaults to 1, or 0 if the gene [Translesion +] is used.");
+
+                RegisterSCPlusVariable(
+                    "symptom_devolve_cost",
+                    "Symptom devolve cost",
+                    "Cost penalty applied when trying to devolve Symptom tech. Increases by [Symptom devolve cost increase] on Symptom tech devolve.");
+
+                RegisterSCPlusVariable(
+                    "symptom_devolve_cost_increase",
+                    "Symptom devolve cost increase",
+                    "How much the cost penalty increases on Symptom tech devolve. Defaults to 1, or 0 if the gene [Translesion +] is used.");
+
+                RegisterSCPlusVariable(
+                    "ability_devolve_cost",
+                    "Ability devolve cost",
+                    "Cost penalty applied when trying to devolve Ability tech. Increases by [Ability devolve cost increase] on Ability tech devolve.");
+
+                RegisterSCPlusVariable(
+                    "ability_devolve_cost_increase",
+                    "Ability devolve cost increase",
+                    "How much the cost penalty increases on Ability tech devolve. Defaults to 1, or 0 if the gene [Translesion +] is used.");
             }
         }
 

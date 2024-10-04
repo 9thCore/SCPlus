@@ -80,6 +80,48 @@ namespace SCPlus.patch.variable
                 .Condition()
                 .Expression()
                 .Register();
+
+            new VariableBuilder("transmission_devolve_cost", "World")
+                .Category(CategoryType.GENERAL)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.BASIC)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("transmission_devolve_cost_increase", "World")
+                .Category(CategoryType.GENERAL)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.BASIC)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("symptom_devolve_cost", "World")
+                .Category(CategoryType.GENERAL)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.BASIC)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("symptom_devolve_cost_increase", "World")
+                .Category(CategoryType.GENERAL)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.BASIC)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("ability_devolve_cost", "World")
+                .Category(CategoryType.GENERAL)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.BASIC)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("ability_devolve_cost_increase", "World")
+                .Category(CategoryType.GENERAL)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.BASIC)
+                .AsNumber()
+                .Register();
         }
     }
 }
