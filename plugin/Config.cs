@@ -9,6 +9,7 @@ namespace SCPlus.plugin
         internal static readonly ConfigFile config = new(Path.Combine(Paths.ConfigPath, "SCPlus.cfg"), true);
         internal static ConfigEntry<bool> patchTranslationLowercasing;
         internal static ConfigEntry<bool> liftVariableTypeCheck;
+        internal static ConfigEntry<bool> exposeMoreVariables;
 
         internal static void Awake()
         {
@@ -23,6 +24,12 @@ namespace SCPlus.plugin
                 nameof(liftVariableTypeCheck),
                 true,
                 "Removes the checks for current disease type related to variables.");
+
+            exposeMoreVariables = config.Bind(
+                "Variable",
+                nameof(exposeMoreVariables),
+                true,
+                "Expose variables to the Scenario Creator that are not usually accessible. Not all may be settable.");
         }
     }
 }

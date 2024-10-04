@@ -1,4 +1,5 @@
-﻿using static SCPlus.patch.variable.VariableBuilder;
+﻿using SCPlus.plugin;
+using static SCPlus.patch.variable.VariableBuilder;
 
 namespace SCPlus.patch.variable
 {
@@ -6,6 +7,11 @@ namespace SCPlus.patch.variable
     {
         internal static void Awake()
         {
+            if (!Config.exposeMoreVariables.Value)
+            {
+                return;
+            }
+
             new VariableBuilder("custom_global_variable_6", "World")
                 .Category(CategoryType.CUSTOM)
                 .DefaultTranslation()
