@@ -59,6 +59,7 @@ namespace SCPlus.patch.variable
                 CategoryType.POPULATION => Category("Population"),
                 CategoryType.APE => Category("Ape"),
                 CategoryType.ZOMBIE => Category("Zombie"),
+                CategoryType.GENERAL => Category("General"),
                 _ => throw new Exception($"Invalid CategoryType {type}"),
             };
         }
@@ -176,7 +177,8 @@ namespace SCPlus.patch.variable
             DISEASE_STATS,
             POPULATION,
             APE,
-            ZOMBIE
+            ZOMBIE,
+            GENERAL
         }
 
         internal enum ComplexityType
