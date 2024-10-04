@@ -44,6 +44,11 @@ namespace SCPlus.patch.variable
             return Translation($"Event_Variable_{eventVariable.variable}");
         }
 
+        internal VariableBuilder DefaultSCPlusTranslation()
+        {
+            return Translation($"SCPlus_Event_Variable_{eventVariable.variable}");
+        }
+
         internal VariableBuilder Category(CategoryType type)
         {
             return type switch
