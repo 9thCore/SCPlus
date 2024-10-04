@@ -23,6 +23,26 @@ namespace SCPlus.patch.lang
                     "ability_extra_cost",
                     "Ability Tech Extra Cost",
                     "Additional cost of Ability technology. Increases for every Ability technology evolved, unless the gene Patho-Stasis is used.");
+
+                RegisterSCPlusVariable(
+                    "infected_this_turn",
+                    "Infected last turn",
+                    "Number of new infected humans last turn (one turn behind Daily Infections in Disease Overview).");
+
+                RegisterSCPlusVariable(
+                    "dead_this_turn",
+                    "Dead last turn",
+                    "Number of new dead humans last turn (one turn behind Daily Deaths in Disease Overview).");
+
+                RegisterSCPlusVariable(
+                    "zombies_this_turn",
+                    "Zombies last turn",
+                    "Number of new zombies last turn.");
+
+                RegisterSCPlusVariable(
+                    "infected_apes_this_turn",
+                    "Infected apes last turn",
+                    "Number of new infected apes last turn.");
             }
         }
 

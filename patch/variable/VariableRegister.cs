@@ -48,6 +48,38 @@ namespace SCPlus.patch.variable
                 .Complexity(ComplexityType.ADVANCED)
                 .AsNumber()
                 .Register();
+
+            new VariableBuilder("infected_this_turn", "World")
+                .Category(CategoryType.POPULATION)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .Condition()
+                .Expression()
+                .Register();
+
+            new VariableBuilder("dead_this_turn", "World")
+                .Category(CategoryType.POPULATION)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .Condition()
+                .Expression()
+                .Register();
+
+            new VariableBuilder("zombies_this_turn", "World")
+                .Category(CategoryType.ZOMBIE)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .Condition()
+                .Expression()
+                .Register();
+
+            new VariableBuilder("infected_apes_this_turn", "World")
+                .Category(CategoryType.APE)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .Condition()
+                .Expression()
+                .Register();
         }
     }
 }
