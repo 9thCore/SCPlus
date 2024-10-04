@@ -10,9 +10,7 @@ namespace SCPlus.patch.variable
                 .Category(CategoryType.CUSTOM)
                 .DefaultTranslation()
                 .Complexity(ComplexityType.SUPER_ADVANCED)
-                .Condition()
-                .Outcome()
-                .Expression()
+                .AsNumber()
                 .Register();
 
             new VariableBuilder("local_cure_research", "Country")

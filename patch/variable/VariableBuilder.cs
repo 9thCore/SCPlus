@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SCPlus.patch.variable
 {
@@ -92,6 +93,11 @@ namespace SCPlus.patch.variable
         {
             eventVariable.expression = 1;
             return this;
+        }
+
+        internal VariableBuilder AsNumber()
+        {
+            return Condition().Outcome().Expression();
         }
 
         internal void Register()
