@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
+using SCPlus.patch.lang;
 using SCPlus.patch.variable;
 
 namespace SCPlus;
@@ -16,9 +17,11 @@ public class Plugin : BaseUnityPlugin
         // Plugin startup logic
         Logger = base.Logger;
         Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
+        plugin.Config.Awake();
 
         harmony.PatchAll();
         VariableRegister.Awake();
         VariableUnrestrict.RemoveDiseaseTypes();
+        LanguageRegister.Awake();
     }
 }

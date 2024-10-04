@@ -13,6 +13,11 @@ namespace SCPlus.patch.lang
         {
             var codes = new List<CodeInstruction>(instructions);
 
+            if (!Config.patchTranslationLowercasing.Value)
+            {
+                return codes.AsEnumerable();
+            }
+
             for (int i = 0; i < codes.Count - 2; i++)
             {
                 CodeInstruction code1 = codes[i];
