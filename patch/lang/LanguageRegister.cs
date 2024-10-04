@@ -12,17 +12,17 @@ namespace SCPlus.patch.lang
                 RegisterSCPlusVariable(
                     "transmission_extra_cost",
                     "Transmission extra cost",
-                    "Additional cost of Transmission technology. Increases for every Transmission technology evolved, unless the gene [Trans-Stasis] is used.");
+                    "Additional cost of Transmission tech. Increases for every Transmission tech evolved, unless the gene [Trans-Stasis] is used.");
 
                 RegisterSCPlusVariable(
                     "symptom_extra_cost",
                     "Symptom extra cost",
-                    "Additional cost of Symptom technology. Increases for every Symptom technology evolved, unless the gene [Sympto-Stasis] is used.");
+                    "Additional cost of Symptom tech. Increases for every Symptom tech evolved, unless the gene [Sympto-Stasis] is used.");
 
                 RegisterSCPlusVariable(
                     "ability_extra_cost",
                     "Ability extra cost",
-                    "Additional cost of Ability technology. Increases for every Ability technology evolved, unless the gene [Patho-Stasis] is used.");
+                    "Additional cost of Ability tech. Increases for every Ability tech evolved, unless the gene [Patho-Stasis] is used.");
 
                 RegisterSCPlusVariable(
                     "infected_this_turn",
