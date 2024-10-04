@@ -58,7 +58,7 @@ namespace SCPlus.patch.lang
 
         internal static void RegisterVariable(string commonSuffix, string name, string tooltip, string language = CLocalisationManager.FALLBACK_LANGUAGE)
         {
-            RegisterLine($"UI_{commonSuffix}", name, language);
+            RegisterLine($"UI_{commonSuffix}", $"[+] {name}", language);
             RegisterLine($"Help_{commonSuffix}", tooltip, language);
         }
 
