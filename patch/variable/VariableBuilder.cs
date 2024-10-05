@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SCPlus.patch.variable
@@ -60,6 +61,7 @@ namespace SCPlus.patch.variable
                 CategoryType.APE => Category("Ape"),
                 CategoryType.ZOMBIE => Category("Zombie"),
                 CategoryType.GENERAL => Category("General"),
+                CategoryType.DISEASE_EFFECTS => Category("Disease Effects"),
                 _ => throw new Exception($"Invalid CategoryType {type}"),
             };
         }
@@ -122,6 +124,12 @@ namespace SCPlus.patch.variable
             return Condition().Outcome().Expression();
         }
 
+        internal VariableBuilder AsBoolean(BoolTypes types)
+        {
+            eventVariable.outcomeToggleDescription = JoinEnumFlags(typeof(BoolTypes), types);
+            return Condition(ConditionOps.EQUAL | ConditionOps.NOT_EQUAL).Outcome(OutcomeOps.SET).Appearance(AppearanceType.BOOL);
+        }
+
         internal VariableBuilder AsEnum(Type enumType)
         {
             if (!enumType.IsEnum)
@@ -130,9 +138,23 @@ namespace SCPlus.patch.variable
             }
 
             eventVariable.outcomeListData = GetEnumName(enumType);
-            Plugin.Logger.LogInfo(eventVariable.outcomeListData);
             Condition(ConditionOps.EQUAL | ConditionOps.NOT_EQUAL);
             return Outcome(OutcomeOps.SET);
+        }
+
+        internal VariableBuilder Appearance(AppearanceType type)
+        {
+            return type switch
+            {
+                AppearanceType.BOOL => Appearance("bool"),
+                _ => throw new Exception($"Invalid AppearanceType {type}"),
+            };
+        }
+
+        internal VariableBuilder Appearance(string apperance)
+        {
+            eventVariable.appearance = apperance;
+            return this;
         }
 
         internal void Register()
@@ -148,13 +170,13 @@ namespace SCPlus.patch.variable
             }
 
             Array allValues = enumType.GetEnumValues();
-            string[] values = new string[allValues.Length];
+            List<string> values = [];
 
             foreach (Enum item in allValues)
             {
                 if (enumValue.HasFlag(item))
                 {
-                    values[values.Length - 1] = item.ToString();
+                    values.Add(item.ToString());
                 }
             }
 
@@ -178,7 +200,8 @@ namespace SCPlus.patch.variable
             POPULATION,
             APE,
             ZOMBIE,
-            GENERAL
+            GENERAL,
+            DISEASE_EFFECTS
         }
 
         internal enum ComplexityType
@@ -186,6 +209,22 @@ namespace SCPlus.patch.variable
             BASIC,
             ADVANCED,
             SUPER_ADVANCED
+        }
+
+        internal enum AppearanceType
+        {
+            BOOL
+        }
+
+        // Violates naming convention, but this is the "Plague Inc." format regarding booleans
+        // and it's easier to write to variable directly than have a middleman convert them :p
+        [Flags]
+        internal enum BoolTypes
+        {
+            UI_True = 1,
+            UI_False = 2,
+            UI_On = 4,
+            UI_Off = 8
         }
 
         [Flags]
