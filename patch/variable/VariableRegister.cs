@@ -14,17 +14,17 @@ namespace SCPlus.patch.variable
 
             new VariableBuilder("custom_global_variable_6", "World")
                 .Category(CategoryType.CUSTOM)
-                .DefaultTranslation()
+                .DefaultSCPlusTranslation()
                 .Complexity(ComplexityType.SUPER_ADVANCED)
                 .AsNumber()
                 .Register();
 
             new VariableBuilder("local_cure_research", "Country")
                 .Category(CategoryType.HUMAN_RESPONSE)
-                .DefaultTranslation()
+                .DefaultSCPlusTranslation()
                 .Complexity(ComplexityType.ADVANCED)
                 .Condition()
-                // .Outcome() // Seems to be reset every day, so don't let it be settable (for now)
+                .Outcome()
                 .Expression()
                 .Register();
 

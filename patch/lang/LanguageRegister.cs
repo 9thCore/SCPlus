@@ -5,10 +5,19 @@ namespace SCPlus.patch.lang
 {
     internal class LanguageRegister
     {
+        private static readonly string SCPLUS_PREFIX = "[+]";
+
         internal static void Awake()
         {
             if (Config.exposeMoreVariables.Value)
             {
+                RegisterSCPlusVariableFromExisting(
+                    "custom_global_variable_6");
+
+                RegisterSCPlusVariableFromExisting(
+                    "local_cure_research",
+                    tooltipSuffix: $"\n{SCPLUS_PREFIX} Gets reset every turn, changes will not be kept");
+
                 RegisterSCPlusVariable(
                     "transmission_extra_cost",
                     "Transmission extra cost",
@@ -91,6 +100,15 @@ namespace SCPlus.patch.lang
             }
         }
 
+        internal static void RegisterSCPlusVariableFromExisting(string commonSuffix, string existingVariable = null, string namePrefix = "", string nameSuffix = "", string tooltipPrefix = "", string tooltipSuffix = "", string language = CLocalisationManager.FALLBACK_LANGUAGE)
+        {
+            RegisterSCPlusVariable(
+                commonSuffix,
+                $"{namePrefix}{CLocalisationManager.GetText($"UI_Event_Variable_{existingVariable ?? commonSuffix}")}{nameSuffix}",
+                $"{tooltipPrefix}{CLocalisationManager.GetText($"Help_Event_Variable_{existingVariable ?? commonSuffix}")}{tooltipSuffix}",
+                language);
+        }
+
         internal static void RegisterSCPlusVariable(string commonSuffix, string name, string tooltip, string language = CLocalisationManager.FALLBACK_LANGUAGE)
         {
             RegisterVariable($"SCPlus_Event_Variable_{commonSuffix}", name, tooltip, language);
@@ -103,7 +121,7 @@ namespace SCPlus.patch.lang
 
         internal static void RegisterVariable(string commonSuffix, string name, string tooltip, string language = CLocalisationManager.FALLBACK_LANGUAGE)
         {
-            RegisterLine($"UI_{commonSuffix}", $"[+] {name}", language);
+            RegisterLine($"UI_{commonSuffix}", $"{SCPLUS_PREFIX} {name}", language);
             RegisterLine($"Help_{commonSuffix}", tooltip, language);
         }
 
