@@ -7,6 +7,7 @@ using SCPlus.patch.variable;
 namespace SCPlus;
 
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
+[BepInProcess("PlagueIncSC.exe")]
 public class Plugin : BaseUnityPlugin
 {
     internal static new ManualLogSource Logger;
