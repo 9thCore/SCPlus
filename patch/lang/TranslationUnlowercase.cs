@@ -7,7 +7,7 @@ using System.Reflection.Emit;
 namespace SCPlus.patch.lang
 {
     [HarmonyPatch(typeof(CLocalisationManager), nameof(CLocalisationManager.GetText))]
-    internal class TranslationUnlowercase
+    internal static class TranslationUnlowercase
     {
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {

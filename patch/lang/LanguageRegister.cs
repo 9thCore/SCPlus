@@ -4,7 +4,7 @@ using System;
 
 namespace SCPlus.patch.lang
 {
-    internal class LanguageRegister
+    internal static class LanguageRegister
     {
         internal static readonly string SCPLUS_PREFIX = "[+]";
 

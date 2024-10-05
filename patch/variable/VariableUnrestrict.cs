@@ -7,7 +7,7 @@ using System.Linq;
 namespace SCPlus.patch.variable
 {
     [HarmonyPatch]
-    internal class VariableUnrestrict
+    internal static class VariableUnrestrict
     {
         private static readonly HashSet<Disease.EDiseaseType> ALL_TYPES = 
             new(Enum.GetValues(typeof(Disease.EDiseaseType)).Cast<Disease.EDiseaseType>());

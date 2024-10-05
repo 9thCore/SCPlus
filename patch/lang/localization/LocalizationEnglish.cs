@@ -1,6 +1,6 @@
 ﻿namespace SCPlus.patch.lang.localization
 {
-    internal class LocalizationEnglish
+    internal static class LocalizationEnglish
     {
         private static readonly string LANGUAGE = "English";
 

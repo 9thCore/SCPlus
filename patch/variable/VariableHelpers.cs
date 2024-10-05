@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace SCPlus.patch.variable
+﻿namespace SCPlus.patch.variable
 {
-    internal class VariableHelpers
+    internal static class VariableHelpers
     {
         // Update a variable by registering it in the correct dictionaries
         internal static void UpdateVariable(EventVariable variable)
