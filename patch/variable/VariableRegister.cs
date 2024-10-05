@@ -122,6 +122,20 @@ namespace SCPlus.patch.variable
                 .Complexity(ComplexityType.BASIC)
                 .AsNumber()
                 .Register();
+
+            new VariableBuilder("transmission_random_mutations", "World")
+                .Category(CategoryType.DISEASE_EFFECTS)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsBoolean(BoolTypes.UI_True | BoolTypes.UI_False)
+                .Register();
+
+            new VariableBuilder("ability_random_mutations", "World")
+                .Category(CategoryType.DISEASE_EFFECTS)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsBoolean(BoolTypes.UI_True | BoolTypes.UI_False)
+                .Register();
         }
     }
 }

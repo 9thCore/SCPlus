@@ -73,6 +73,16 @@ namespace SCPlus.patch.lang
                     "ability_devolve_cost_increase",
                     "Ability devolve cost increase",
                     "How much the cost penalty increases on Ability tech devolve. Defaults to 1, or 0 if the gene [Translesion +] is used.");
+
+                RegisterSCPlusVariable(
+                    "transmission_random_mutations",
+                    "Transmission random mutations",
+                    "Whether Transmission tech can randomly mutate like Symptom tech. False by default, true if the gene [Base Oxidisation] is used.");
+
+                RegisterSCPlusVariable(
+                    "ability_random_mutations",
+                    "Ability random mutations",
+                    "Whether Ability tech can randomly mutate like Symptom tech. False by default, true if the gene [Base Hydrolysis] is used.");
             }
         }
 
