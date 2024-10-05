@@ -136,6 +136,13 @@ namespace SCPlus.patch.variable
                 .Complexity(ComplexityType.ADVANCED)
                 .AsBoolean(BoolTypes.UI_True | BoolTypes.UI_False)
                 .Register();
+
+            new VariableBuilder("aa_cost_modifier", "World")
+                .Category(CategoryType.DISEASE_STATS)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
         }
     }
 }

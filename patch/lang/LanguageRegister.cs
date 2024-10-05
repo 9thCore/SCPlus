@@ -83,6 +83,11 @@ namespace SCPlus.patch.lang
                     "ability_random_mutations",
                     "Ability random mutations",
                     "Whether Ability tech can randomly mutate like Symptom tech. False by default, true if the gene [Base Hydrolysis] is used.");
+
+                RegisterSCPlusVariable(
+                    "aa_cost_modifier",
+                    "AA cost modifier",
+                    "Extra value applied to Active Ability costs. Positive values decrease cost, negative values increase. Cost cannot go below 1.");
             }
         }
 
