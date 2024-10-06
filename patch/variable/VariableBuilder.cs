@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SCPlus.patch.lang;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -47,7 +48,7 @@ namespace SCPlus.patch.variable
 
         internal VariableBuilder DefaultSCPlusTranslation()
         {
-            return Translation($"SCPlus_Event_Variable_{eventVariable.variable}");
+            return Translation($"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_Event_Variable_{eventVariable.variable}");
         }
 
         internal VariableBuilder Category(CategoryType type)
@@ -62,7 +63,7 @@ namespace SCPlus.patch.variable
                 CategoryType.ZOMBIE => Category("Zombie"),
                 CategoryType.GENERAL => Category("General"),
                 CategoryType.DISEASE_EFFECTS => Category("Disease Effects"),
-                _ => throw new Exception($"Invalid CategoryType {type}"),
+                _ => this,
             };
         }
 
@@ -79,7 +80,7 @@ namespace SCPlus.patch.variable
                 ComplexityType.BASIC => Complexity("Basic"),
                 ComplexityType.ADVANCED => Complexity("Advanced"),
                 ComplexityType.SUPER_ADVANCED => Complexity("Super Advanced"),
-                _ => throw new Exception($"Invalid ComplexityType {type}"),
+                _ => this,
             };
         }
 
@@ -134,7 +135,8 @@ namespace SCPlus.patch.variable
         {
             if (!enumType.IsEnum)
             {
-                throw new Exception($"{enumType} is not an enum");
+                Plugin.Logger.LogError($"{enumType} is not an enum");
+                return this;
             }
 
             eventVariable.outcomeListData = GetEnumName(enumType);
@@ -147,7 +149,7 @@ namespace SCPlus.patch.variable
             return type switch
             {
                 AppearanceType.BOOL => Appearance("bool"),
-                _ => throw new Exception($"Invalid AppearanceType {type}"),
+                _ => this,
             };
         }
 

@@ -7,6 +7,7 @@ namespace SCPlus.patch.lang
     internal static class LanguageRegister
     {
         internal static readonly string SCPLUS_PREFIX = "[+]";
+        internal static readonly string SCPLUS_TRANSLATION_KEY = "SCPlus";
 
         internal static void Awake()
         {
@@ -27,12 +28,12 @@ namespace SCPlus.patch.lang
 
         internal static void RegisterSCPlusVariable(string language, string commonSuffix, string name, string tooltip)
         {
-            RegisterVariable(language, $"SCPlus_Event_Variable_{commonSuffix}", name, tooltip);
+            RegisterVariable(language, $"{SCPLUS_TRANSLATION_KEY}_Event_Variable_{commonSuffix}", name, tooltip);
         }
 
         internal static void RegisterSCPlusLine(string language, string suffix, string line)
         {
-            RegisterLine(language, $"SCPlus_{suffix}", line);
+            RegisterLine(language, $"{SCPLUS_TRANSLATION_KEY}_{suffix}", line);
         }
 
         internal static void RegisterVariable(string language, string commonSuffix, string name, string tooltip)
@@ -45,7 +46,8 @@ namespace SCPlus.patch.lang
         {
             if (!CLocalisationManager.LanguageExists(language) || !CLocalisationManager.mpLocalisedTexts.ContainsKey(language))
             {
-                throw new Exception($"Invalid language {language}");
+                Plugin.Logger.LogError($"Invalid language {language}");
+                return;
             }
 
             CLocalisationManager.mpLocalisedTexts[language].Add(tag, line);
