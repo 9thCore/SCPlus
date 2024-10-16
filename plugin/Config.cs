@@ -10,6 +10,7 @@ namespace SCPlus.plugin
         internal static ConfigEntry<bool> patchTranslationLowercasing;
         internal static ConfigEntry<bool> liftVariableTypeCheck;
         internal static ConfigEntry<bool> exposeMoreVariables;
+        internal static ConfigEntry<bool> expandEventFunctionality;
 
         internal static void Awake()
         {
@@ -30,6 +31,12 @@ namespace SCPlus.plugin
                 nameof(exposeMoreVariables),
                 true,
                 "Expose variables to the Scenario Creator that are not usually accessible. Not all may be settable.");
+
+            expandEventFunctionality = config.Bind(
+                "Event",
+                nameof(expandEventFunctionality),
+                true,
+                "Expand possibilities with an event, exposing inaccessible functionality, even through outcomes.");
         }
     }
 }
