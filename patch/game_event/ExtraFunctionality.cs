@@ -75,7 +75,7 @@ namespace SCPlus.patch.game_event
 
             tooltip.localisationTag = EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "GlobalToggleTooltip");
 
-            if (!TryCreateTechScreen("Lock", out CTechLockOverlay lockOverlay)
+            if (!TryCreateTechLockScreen(out CTechLockOverlay lockOverlay)
                 || !TryCreateDragPanel(lockOverlay, out GameObject dragPanel))
             {
                 Plugin.Logger.LogError($"Could not create entire {nameof(UITable)} tree");
@@ -108,7 +108,12 @@ namespace SCPlus.patch.game_event
             modeToggle.SetActive(true);
         }
 
-        private static bool TryCreateTechScreen(string suffix, out CTechLockOverlay overlay)
+        private static bool TryCreateTechLockScreen(out CTechLockOverlay lockOverlay)
+        {
+            return TryCreateTechScreen("Lock", out lockOverlay);
+        }
+
+        private static bool TryCreateTechScreen<T>(string suffix, out T overlay) where T : CTechSelectionOverlay
         {
             GameObject techScreen = GameObject.Instantiate(EventHelper.techTriggerOverlay.gameObject);
             techScreen.SetActive(false);
