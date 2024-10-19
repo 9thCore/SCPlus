@@ -1,4 +1,5 @@
-﻿using SCPlus.patch.lang.localization;
+﻿using SCPlus.patch.game_event;
+using SCPlus.patch.lang.localization;
 using SCPlus.plugin;
 using System;
 
@@ -14,6 +15,11 @@ namespace SCPlus.patch.lang
             if (Config.exposeMoreVariables.Value)
             {
                 LocalizationEnglish.MoreVariableTranslations();
+            }
+
+            if (Config.expandEventFunctionality.Value)
+            {
+                LocalizationEnglish.ExtraFunctionalityTranslations();
             }
         }
 
@@ -40,6 +46,12 @@ namespace SCPlus.patch.lang
         {
             RegisterLine(language, $"UI_{commonSuffix}", $"{SCPLUS_PREFIX} {name}");
             RegisterLine(language, $"Help_{commonSuffix}", tooltip);
+        }
+
+        internal static void RegisterEventSetter(string language, EventHelper.TranslationKey key, string internalName, string name, string help)
+        {
+            RegisterLine(language, EventHelper.GetSetterTranslation(key, internalName), name);
+            RegisterLine(language, EventHelper.GetSetterHelpTranslation(key, internalName), help);
         }
 
         internal static void RegisterLine(string language, string tag, string line)

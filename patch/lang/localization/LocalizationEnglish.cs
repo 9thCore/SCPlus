@@ -1,4 +1,6 @@
-﻿namespace SCPlus.patch.lang.localization
+﻿using SCPlus.patch.game_event;
+
+namespace SCPlus.patch.lang.localization
 {
     internal static class LocalizationEnglish
     {
@@ -110,6 +112,69 @@
                 "aa_cost_modifier",
                 "AA cost modifier",
                 "Extra value applied to Active Ability costs. Positive values decrease cost, negative values increase. Cost cannot go below 1.");
+        }
+
+        internal static void ExtraFunctionalityTranslations()
+        {
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "GlobalToggleTooltip"),
+                "Show extra functionality available for events.");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "General"),
+                "General Event Settings");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetSetterTranslation(EventHelper.TranslationKey.ExtraFunc, "LockTech"),
+                "Trait Lock & Unlock");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetSetterHelpTranslation(EventHelper.TranslationKey.ExtraFunc, "LockTech"),
+                "Traits that will be locked/unlocked when this event fires.");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "LockTech_Button"),
+                "Configure");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Lock"),
+                "Trait Lock Settings");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Title_Lock"),
+                "Trait Lock");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Instruction_Lock"),
+                "The following traits will be locked when this event fires.");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Lock"),
+                "Existing trait(s) that will be locked.");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Title_Not_Lock"),
+                "Trait Unlock");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Instruction_Not_Lock"),
+                "The following traits will be unlocked when this event fires.");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Not_Lock"),
+                "Existing trait(s) that will be unlocked.");
         }
     }
 }
