@@ -131,6 +131,11 @@ namespace SCPlus.patch.variable
             return Condition(ConditionOps.EQUAL | ConditionOps.NOT_EQUAL).Outcome(OutcomeOps.SET).Appearance(AppearanceType.BOOL);
         }
 
+        internal VariableBuilder AsCheckableEnum(Type enumType)
+        {
+            return AsEnum(enumType).Condition(ConditionOps.EQUAL | ConditionOps.NOT_EQUAL);
+        }
+
         internal VariableBuilder AsEnum(Type enumType)
         {
             if (!enumType.IsEnum)
@@ -140,7 +145,6 @@ namespace SCPlus.patch.variable
             }
 
             eventVariable.outcomeListData = GetEnumName(enumType);
-            Condition(ConditionOps.EQUAL | ConditionOps.NOT_EQUAL);
             return Outcome(OutcomeOps.SET);
         }
 

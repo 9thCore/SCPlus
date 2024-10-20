@@ -143,6 +143,27 @@ namespace SCPlus.patch.variable
                 .Complexity(ComplexityType.ADVANCED)
                 .AsNumber()
                 .Register();
+
+            new VariableBuilder("Change_fort_state", "Country")
+                .Category(CategoryType.GENERAL)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsEnum(typeof(EFortState))
+                .Register();
+
+            new VariableBuilder("Change_ape_lab_state", "Country")
+                .Category(CategoryType.APE)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsEnum(typeof(EApeLabState))
+                .Register();
+
+            new VariableBuilder("Change_ape_colony_state", "Country")
+                .Category(CategoryType.APE)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsEnum(typeof(EApeColonyState))
+                .Register();
         }
     }
 }

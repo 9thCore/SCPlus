@@ -112,6 +112,24 @@ namespace SCPlus.patch.lang.localization
                 "aa_cost_modifier",
                 "AA cost modifier",
                 "Extra value applied to Active Ability costs. Positive values decrease cost, negative values increase. Cost cannot go below 1.");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "Change_fort_state",
+                "Change Fort State",
+                "Activate, destroy or remove the Z Com/Templar fort in the country.");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "Change_ape_lab_state",
+                "Change Ape Lab State",
+                "Activate, deactivate, destroy or remove the ape lab in the country.");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "Change_ape_colony_state",
+                "Change Ape Colony State",
+                "Activate, destroy or remove the ape colony in the country.");
         }
 
         internal static void ExtraFunctionalityTranslations()
