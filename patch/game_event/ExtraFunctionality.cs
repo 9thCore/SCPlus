@@ -5,6 +5,7 @@ using SCPlus.patch.lang;
 using System;
 using SCPlus.plugin;
 using System.Collections.Generic;
+using SCPlus.patch.game_event.tech_overlay;
 
 namespace SCPlus.patch.game_event
 {
@@ -76,7 +77,8 @@ namespace SCPlus.patch.game_event
             tooltip.localisationTag = EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "GlobalToggleTooltip");
 
             if (!TryCreateTechLockScreen(out CTechLockOverlay lockOverlay)
-                || !TryCreateDragPanel(lockOverlay, out GameObject dragPanel))
+                || !TryCreateTechRandomScreen(out CTechRandomOverlay randomOverlay)
+                || !TryCreateDragPanel(randomOverlay, lockOverlay, out GameObject dragPanel))
             {
                 Plugin.Logger.LogError($"Could not create entire {nameof(UITable)} tree");
                 return;
@@ -106,6 +108,22 @@ namespace SCPlus.patch.game_event
             boxCollider.size = new Vector3(TOGGLE_SIZE.x, TOGGLE_SIZE.y, 0f);
 
             modeToggle.SetActive(true);
+        }
+
+        private static bool TryCreateTechRandomScreen(out CTechRandomOverlay overlay)
+        {
+            if (!TryCreateTechScreen("Random", out overlay)
+                || !HierarchyHelper.TryFindComponentWithLogging(overlay.transform, out UITable table)
+                || !HierarchyHelper.TryFindWithLogging(table.transform, "03_Header_Event_Not_Triggered", out Transform header)
+                || !HierarchyHelper.TryFindWithLogging(table.transform, "04_Table_Events_Not_Triggered", out Transform techList))
+            {
+                return false;
+            }
+
+            header.gameObject.SetActive(false);
+            techList.gameObject.SetActive(false);
+
+            return true;
         }
 
         private static bool TryCreateTechLockScreen(out CTechLockOverlay lockOverlay)
@@ -159,7 +177,7 @@ namespace SCPlus.patch.game_event
             return true;
         }
 
-        private static bool TryCreateDragPanel(CTechLockOverlay lockTechOverlay, out GameObject dragPanel)
+        private static bool TryCreateDragPanel(CTechRandomOverlay randomTechOverlay, CTechLockOverlay lockTechOverlay, out GameObject dragPanel)
         {
             dragPanel = GameObject.Instantiate(EventHelper.tabAdvancedDragPanel.gameObject);
             dragPanel.SetActive(false);
@@ -187,6 +205,29 @@ namespace SCPlus.patch.game_event
 
             try
             {
+                CreateHeader(
+                    thisTable,
+                    headerTemplate,
+                    "RandomTech");
+
+                EventHelper.CreateCustomBoolSetter(
+                    thisTable,
+                    boolSetter,
+                    EventHelper.TranslationKey.ExtraFunc,
+                    "EvolveRandomTech",
+                    "evolveRandomTech",
+                    GenericRedirector);
+
+                EventHelper.CreateButton(
+                    thisTable,
+                    stringListSetter,
+                    EventHelper.TranslationKey.ExtraFunc,
+                    "RandomTech",
+                    () =>
+                    {
+                        CUIManager.instance.ShowOverlay(randomTechOverlay);
+                    });
+
                 CreateHeader(
                     thisTable,
                     headerTemplate,

@@ -126,6 +126,7 @@ namespace SCPlus.patch.lang.localization
                 EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "General"),
                 "General Event Settings");
 
+            // LockTech
             LanguageRegister.RegisterLine(
                 LANGUAGE,
                 EventHelper.GetSetterTranslation(EventHelper.TranslationKey.ExtraFunc, "LockTech"),
@@ -175,6 +176,57 @@ namespace SCPlus.patch.lang.localization
                 LANGUAGE,
                 EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Not_Lock"),
                 "Existing trait(s) that will be unlocked.");
+
+            // RandomTech
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "RandomTech"),
+                "Forced Mutation");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetSetterTranslation(EventHelper.TranslationKey.ExtraFunc, "EvolveRandomTech"),
+                "Enable");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetSetterHelpTranslation(EventHelper.TranslationKey.ExtraFunc, "EvolveRandomTech"),
+                "Whether one of the traits selected will be forcibly mutated.\nNote that it will pick one out of the traits that can mutate when the event fires (or none, if none can).");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetSetterTranslation(EventHelper.TranslationKey.ExtraFunc, "RandomTech"),
+                "Random Trait List");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetSetterHelpTranslation(EventHelper.TranslationKey.ExtraFunc, "RandomTech"),
+                "List of possible traits that will be evolved when this event fires.");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "RandomTech_Button"),
+                "Configure");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Random"),
+                "Random Trait List");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Title_Random"),
+                "Trait List");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Instruction_Random"),
+                "One of the following traits will be evolved when this event fires, if it can.");
+
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Random"),
+                "Possible trait that will be evolved.");
         }
     }
 }
