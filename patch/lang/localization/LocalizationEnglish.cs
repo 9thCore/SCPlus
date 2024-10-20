@@ -21,19 +21,19 @@ namespace SCPlus.patch.lang.localization
                 LANGUAGE,
                 "transmission_extra_cost",
                 "Transmission extra cost",
-                "Additional cost of Transmission tech. Increases for every Transmission tech evolved, unless the gene [Trans-Stasis] is used.");
+                "Additional cost of Transmission traits. Increases for every Transmission trait evolved, unless the gene [Trans-Stasis] is used.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
                 "symptom_extra_cost",
                 "Symptom extra cost",
-                "Additional cost of Symptom tech. Increases for every Symptom tech evolved, unless the gene [Sympto-Stasis] is used.");
+                "Additional cost of Symptom traits. Increases for every Symptom trait evolved, unless the gene [Sympto-Stasis] is used.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
                 "ability_extra_cost",
                 "Ability extra cost",
-                "Additional cost of Ability tech. Increases for every Ability tech evolved, unless the gene [Patho-Stasis] is used.");
+                "Additional cost of Ability traits. Increases for every Ability trait evolved, unless the gene [Patho-Stasis] is used.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
@@ -63,49 +63,49 @@ namespace SCPlus.patch.lang.localization
                 LANGUAGE,
                 "transmission_devolve_cost",
                 "Transmission devolve cost",
-                "Cost penalty applied when trying to devolve Transmission tech. Increases by [Transmission devolve cost increase] on Transmission tech devolve.");
+                "Cost penalty applied when trying to devolve Transmission trait. Increases by [Transmission devolve cost increase] on Transmission trait devolve.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
                 "transmission_devolve_cost_increase",
                 "Transmission devolve cost increase",
-                "How much the cost penalty increases on Transmission tech devolve. Defaults to 1, or 0 if the gene [Translesion +] is used.");
+                "How much the cost penalty increases on Transmission trait devolve. Defaults to 1, or 0 if the gene [Translesion +] is used.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
                 "symptom_devolve_cost",
                 "Symptom devolve cost",
-                "Cost penalty applied when trying to devolve Symptom tech. Increases by [Symptom devolve cost increase] on Symptom tech devolve.");
+                "Cost penalty applied when trying to devolve Symptom trait. Increases by [Symptom devolve cost increase] on Symptom trait devolve.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
                 "symptom_devolve_cost_increase",
                 "Symptom devolve cost increase",
-                "How much the cost penalty increases on Symptom tech devolve. Defaults to 1, or 0 if the gene [Translesion +] is used.");
+                "How much the cost penalty increases on Symptom trait devolve. Defaults to 1, or 0 if the gene [Translesion +] is used.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
                 "ability_devolve_cost",
                 "Ability devolve cost",
-                "Cost penalty applied when trying to devolve Ability tech. Increases by [Ability devolve cost increase] on Ability tech devolve.");
+                "Cost penalty applied when trying to devolve Ability trait. Increases by [Ability devolve cost increase] on Ability trait devolve.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
                 "ability_devolve_cost_increase",
                 "Ability devolve cost increase",
-                "How much the cost penalty increases on Ability tech devolve. Defaults to 1, or 0 if the gene [Translesion +] is used.");
+                "How much the cost penalty increases on Ability trait devolve. Defaults to 1, or 0 if the gene [Translesion +] is used.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
                 "transmission_random_mutations",
                 "Transmission random mutations",
-                "Whether Transmission tech can randomly mutate like Symptom tech. False by default, true if the gene [Base Oxidisation] is used.");
+                "Whether Transmission traits can randomly mutate like Symptom traits. False by default, true if the gene [Base Oxidisation] is used.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
                 "ability_random_mutations",
                 "Ability random mutations",
-                "Whether Ability tech can randomly mutate like Symptom tech. False by default, true if the gene [Base Hydrolysis] is used.");
+                "Whether Ability traits can randomly mutate like Symptom traits. False by default, true if the gene [Base Hydrolysis] is used.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
