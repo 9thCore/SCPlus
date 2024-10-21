@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SCPlus.patch.game
 {
-    internal static class EventHelper
+    internal static class SetterHelper
     {
         internal static bool exists = false;
         internal static CEventScreen eventScreen;

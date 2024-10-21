@@ -2,6 +2,7 @@
 using SCPlus.patch.hierarchy;
 using System.Collections.Generic;
 using System.Linq;
+using SCPlus.patch.game;
 
 namespace SCPlus.patch.game_event
 {
@@ -13,7 +14,7 @@ namespace SCPlus.patch.game_event
         public override void ClickedApply()
         {
             CUIManager.instance.HideOverlay(this);
-            EventHelper.eventScreen.SaveCurrentEvent();
+            SetterHelper.eventScreen.SaveCurrentEvent();
         }
 
         public override void ClickedClose()

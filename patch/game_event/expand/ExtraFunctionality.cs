@@ -6,6 +6,7 @@ using System;
 using SCPlus.plugin;
 using System.Collections.Generic;
 using SCPlus.patch.game_event.tech_overlay;
+using SCPlus.patch.game;
 
 namespace SCPlus.patch.game_event
 {
@@ -21,13 +22,13 @@ namespace SCPlus.patch.game_event
             UIButton conditionsOutcomesTabButton = null;
             Transform tabAdvancedDragPanel = null;
 
-            if (!EventHelper.EventScreenExists()
-                || !HierarchyHelper.TryFindWithLogging(EventHelper.eventDetails, "Conditions&Outcomes", out conditionsOutcomes)
-                || !HierarchyHelper.TryFindWithLogging(EventHelper.eventDetails, "Tab Buttons", out Transform tabButtons)
+            if (!SetterHelper.EventScreenExists()
+                || !HierarchyHelper.TryFindWithLogging(SetterHelper.eventDetails, "Conditions&Outcomes", out conditionsOutcomes)
+                || !HierarchyHelper.TryFindWithLogging(SetterHelper.eventDetails, "Tab Buttons", out Transform tabButtons)
                 || !HierarchyHelper.TryFindWithLogging(tabButtons, "Tab_01_Conditions_Outcomes", out conditionsOutcomesTab)
                 || !HierarchyHelper.TryFindComponentWithLogging(conditionsOutcomesTab, out conditionsOutcomesTabButton)
                 || !HierarchyHelper.TryFindWithLogging(tabButtons, "Tab_04_Advanced", out advancedTabButton)
-                || !HierarchyHelper.TryFindWithLogging(EventHelper.tabAdvancedScrollViews, "AdvancedDragPanel", out tabAdvancedDragPanel)
+                || !HierarchyHelper.TryFindWithLogging(SetterHelper.tabAdvancedScrollViews, "AdvancedDragPanel", out tabAdvancedDragPanel)
                 || !advancedTabButton.TryGetComponent(out advancedTabButtonSprite)
                 || !advancedTabButton.TryGetComponent(out advancedTabButtonSound)
                 || advancedTabButtonSprite.atlas == null)
@@ -41,7 +42,7 @@ namespace SCPlus.patch.game_event
 
             GameObject modeToggle = new($"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_Extra_Toggle");
             modeToggle.SetActive(false);
-            HierarchyHelper.Parent(modeToggle.transform, EventHelper.tabAdvancedScrollViews);
+            HierarchyHelper.Parent(modeToggle.transform, SetterHelper.tabAdvancedScrollViews);
             modeToggle.transform.localPosition = TOGGLE_BUTTON_POSITION;
 
             // what lack of unity editor inspector does to a mf
@@ -74,7 +75,7 @@ namespace SCPlus.patch.game_event
 
             button.tweenTarget = foregroundSprite.gameObject;
 
-            tooltip.localisationTag = EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "GlobalToggleTooltip");
+            tooltip.localisationTag = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "GlobalToggleTooltip");
 
             if (!TryCreateTechLockScreen(out CTechLockOverlay lockOverlay)
                 || !TryCreateTechRandomScreen(out CTechRandomOverlay randomOverlay)
@@ -101,7 +102,7 @@ namespace SCPlus.patch.game_event
             });
 
             toggled.activate = [offSprite.gameObject];
-            toggled.deactivate = [onSprite.gameObject, EventHelper.tabAdvancedDragPanel.gameObject];
+            toggled.deactivate = [onSprite.gameObject, SetterHelper.tabAdvancedDragPanel.gameObject];
 
             sound.audioClip = advancedTabButtonSound.audioClip;
 
@@ -133,10 +134,10 @@ namespace SCPlus.patch.game_event
 
         private static bool TryCreateTechScreen<T>(string suffix, out T overlay) where T : CTechSelectionOverlay
         {
-            GameObject techScreen = GameObject.Instantiate(EventHelper.techTriggerOverlay.gameObject);
+            GameObject techScreen = GameObject.Instantiate(SetterHelper.techTriggerOverlay.gameObject);
             techScreen.SetActive(false);
-            techScreen.name = $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{EventHelper.TranslationKey.ExtraFunc}_TechScreen_{suffix}";
-            HierarchyHelper.Parent(techScreen.transform, EventHelper.eventDetails);
+            techScreen.name = $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{SetterHelper.TranslationKey.ExtraFunc}_TechScreen_{suffix}";
+            HierarchyHelper.Parent(techScreen.transform, SetterHelper.eventDetails);
             techScreen.transform.position = Vector3.zero;
 
             if (!HierarchyHelper.TryFindComponentWithLogging(techScreen.transform, out CTechTriggerOverlay triggerOverlay)
@@ -158,9 +159,9 @@ namespace SCPlus.patch.game_event
 
             HierarchyHelper.SwitchComponentWithSub(true, false, triggerOverlay, out overlay);
 
-            overlay.tooltipPositiveText = EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, $"TechScreen_Help_{suffix}");
-            overlay.tooltipNegativeText = EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, $"TechScreen_Help_Not_{suffix}");
-            overlay.title.text = EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, $"TechScreen_{suffix}");
+            overlay.tooltipPositiveText = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_Help_{suffix}");
+            overlay.tooltipNegativeText = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_Help_Not_{suffix}");
+            overlay.title.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_{suffix}");
             HierarchyHelper.EnsureComponent<UILabelAutotranslate>(overlay.title.gameObject);
 
             overlay.paramRoot = new()
@@ -168,10 +169,10 @@ namespace SCPlus.patch.game_event
                 parameterConditions = []
             };
 
-            titleTriggeredLabel.text = EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, $"TechScreen_Title_{suffix}");
-            titleUntriggeredLabel.text = EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, $"TechScreen_Title_Not_{suffix}");
-            instructionTriggeredLabel.text = EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, $"TechScreen_Instruction_{suffix}");
-            instructionUntriggeredLabel.text = EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, $"TechScreen_Instruction_Not_{suffix}");
+            titleTriggeredLabel.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_Title_{suffix}");
+            titleUntriggeredLabel.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_Title_Not_{suffix}");
+            instructionTriggeredLabel.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_Instruction_{suffix}");
+            instructionUntriggeredLabel.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_Instruction_Not_{suffix}");
 
 
             return true;
@@ -179,16 +180,16 @@ namespace SCPlus.patch.game_event
 
         private static bool TryCreateDragPanel(CTechRandomOverlay randomTechOverlay, CTechLockOverlay lockTechOverlay, out GameObject dragPanel)
         {
-            dragPanel = GameObject.Instantiate(EventHelper.tabAdvancedDragPanel.gameObject);
+            dragPanel = GameObject.Instantiate(SetterHelper.tabAdvancedDragPanel.gameObject);
             dragPanel.SetActive(false);
-            dragPanel.name = $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{EventHelper.TranslationKey.ExtraFunc}_DragPanel";
-            HierarchyHelper.Parent(dragPanel.transform, EventHelper.eventDetails);
-            dragPanel.transform.localPosition = EventHelper.tabAdvancedDragPanel.localPosition;
-            dragPanel.transform.localRotation = EventHelper.tabAdvancedDragPanel.localRotation;
-            dragPanel.transform.localScale = EventHelper.tabAdvancedDragPanel.localScale;
+            dragPanel.name = $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{SetterHelper.TranslationKey.ExtraFunc}_DragPanel";
+            HierarchyHelper.Parent(dragPanel.transform, SetterHelper.eventDetails);
+            dragPanel.transform.localPosition = SetterHelper.tabAdvancedDragPanel.localPosition;
+            dragPanel.transform.localRotation = SetterHelper.tabAdvancedDragPanel.localRotation;
+            dragPanel.transform.localScale = SetterHelper.tabAdvancedDragPanel.localScale;
 
             if (!HierarchyHelper.TryFindComponentWithLogging(dragPanel.transform, out UITable thisTable)
-                || !HierarchyHelper.TryFindComponentWithLogging(EventHelper.tabAdvancedDragPanel, out UITable originalTable)
+                || !HierarchyHelper.TryFindComponentWithLogging(SetterHelper.tabAdvancedDragPanel, out UITable originalTable)
                 || !HierarchyHelper.TryFindWithLogging(originalTable.transform, "00_GENERAL_Header", out Transform headerTemplate)
                 || !HierarchyHelper.TryFindComponentWithLogging(originalTable.transform, out BoolSetterToggle boolSetter)
                 || !HierarchyHelper.TryFindComponentWithLogging(originalTable.transform, out IntSetter intSetter)
@@ -210,18 +211,18 @@ namespace SCPlus.patch.game_event
                     headerTemplate,
                     "RandomTech");
 
-                EventHelper.CreateCustomBoolSetter(
+                SetterHelper.CreateCustomBoolSetter(
                     thisTable,
                     boolSetter,
-                    EventHelper.TranslationKey.ExtraFunc,
+                    SetterHelper.TranslationKey.ExtraFunc,
                     "EvolveRandomTech",
                     "evolveRandomTech",
                     GenericRedirector);
 
-                EventHelper.CreateButton(
+                SetterHelper.CreateButton(
                     thisTable,
                     stringListSetter,
-                    EventHelper.TranslationKey.ExtraFunc,
+                    SetterHelper.TranslationKey.ExtraFunc,
                     "RandomTech",
                     () =>
                     {
@@ -233,10 +234,10 @@ namespace SCPlus.patch.game_event
                     headerTemplate,
                     "General");
 
-                EventHelper.CreateButton(
+                SetterHelper.CreateButton(
                     thisTable,
                     stringListSetter,
-                    EventHelper.TranslationKey.ExtraFunc,
+                    SetterHelper.TranslationKey.ExtraFunc,
                     "LockTech",
                     () =>
                     {
@@ -264,7 +265,7 @@ namespace SCPlus.patch.game_event
         private static void CreateHeader(UITable uiTable, Transform headerTemplate, string internalName)
         {
             Transform headerClone = Transform.Instantiate(headerTemplate);
-            headerClone.name = $"{EventHelper.currentIndex:D4}_{internalName}";
+            headerClone.name = $"{SetterHelper.currentIndex:D4}_{internalName}";
             HierarchyHelper.Parent(headerClone, uiTable.transform);
 
             if (!HierarchyHelper.TryFindComponentWithLogging(headerClone, out UILabel label)
@@ -275,11 +276,11 @@ namespace SCPlus.patch.game_event
                 throw new InvalidOperationException();
             }
 
-            label.text = EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, internalName);
+            label.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, internalName);
             translator.originalLabelText = label.text;
             translator.UseOriginalLabel();
 
-            EventHelper.currentIndex++;
+            SetterHelper.currentIndex++;
         }
 
         internal static void SetDimensions(UISprite sprite, Vector2Int size)
@@ -325,6 +326,15 @@ namespace SCPlus.patch.game_event
             public string[] randomTech = null;
             public string function = null;
             public EventLockTech[] eventLockTech = null;
+
+            internal bool IsDefault()
+            {
+                return evolveRandomTech == false
+                    && deEvolveRandomTech == false
+                    && randomTech == null
+                    && function == null
+                    && eventLockTech == null;
+            }
         }
 
         [HarmonyPatch(typeof(CEventScreen), nameof(CEventScreen.Initialise))]

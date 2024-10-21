@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SCPlus.patch.game;
 
 namespace SCPlus.patch.game_event.tech_overlay
 {
@@ -23,7 +24,7 @@ namespace SCPlus.patch.game_event.tech_overlay
                 randomTech.Add(child.Data);
             }
 
-            ExtraFunctionality.Data data = ExtraFunctionality.GetDataOrDefault(EventHelper.eventScreen.CurrentEvent);
+            ExtraFunctionality.Data data = ExtraFunctionality.GetDataOrDefault(SetterHelper.eventScreen.CurrentEvent);
             data.randomTech = [.. randomTech];
         }
 
@@ -31,7 +32,7 @@ namespace SCPlus.patch.game_event.tech_overlay
         {
             base.Enter();
 
-            if (!ExtraFunctionality.eventData.TryGetValue(EventHelper.eventScreen.CurrentEvent, out ExtraFunctionality.Data data)
+            if (!ExtraFunctionality.eventData.TryGetValue(SetterHelper.eventScreen.CurrentEvent, out ExtraFunctionality.Data data)
                 || data.randomTech is null)
             {
                 SetData(new()

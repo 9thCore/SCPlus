@@ -52,7 +52,8 @@ namespace SCPlus.patch.game_event
                 return;
             }
 
-            if (!ExtraFunctionality.eventData.TryGetValue(event_, out ExtraFunctionality.Data data))
+            if (!ExtraFunctionality.eventData.TryGetValue(event_, out ExtraFunctionality.Data data)
+                || data.IsDefault())
             {
                 return;
             }

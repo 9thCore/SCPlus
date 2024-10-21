@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SCPlus.patch.game;
 
 namespace SCPlus.patch.game_event
 {
@@ -32,7 +33,7 @@ namespace SCPlus.patch.game_event
                 });
             }
 
-            ExtraFunctionality.Data data = ExtraFunctionality.GetDataOrDefault(EventHelper.eventScreen.CurrentEvent);
+            ExtraFunctionality.Data data = ExtraFunctionality.GetDataOrDefault(SetterHelper.eventScreen.CurrentEvent);
             data.eventLockTech = [.. eventLock];
         }
 
@@ -40,7 +41,7 @@ namespace SCPlus.patch.game_event
         {
             base.Enter();
 
-            if (!ExtraFunctionality.eventData.TryGetValue(EventHelper.eventScreen.CurrentEvent, out ExtraFunctionality.Data data)
+            if (!ExtraFunctionality.eventData.TryGetValue(SetterHelper.eventScreen.CurrentEvent, out ExtraFunctionality.Data data)
                 || data.eventLockTech is null)
             {
                 SetData(new()
