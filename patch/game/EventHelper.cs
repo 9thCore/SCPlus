@@ -1,15 +1,17 @@
-﻿using SCPlus.patch.hierarchy;
+﻿using SCPlus.patch.game_event;
+using SCPlus.patch.hierarchy;
 using SCPlus.patch.lang;
 using System;
 using UnityEngine;
 
-namespace SCPlus.patch.game_event
+namespace SCPlus.patch.game
 {
     internal static class EventHelper
     {
         internal static bool exists = false;
         internal static CEventScreen eventScreen;
         internal static Transform anchor;
+        internal static Transform eventList;
         internal static Transform eventDetails;
         internal static Transform tabAdvanced;
         internal static Transform tabAdvancedScrollViews;
@@ -29,6 +31,7 @@ namespace SCPlus.patch.game_event
             if (!HierarchyHelper.TryFindComponentWithLogging(HierarchyHelper.Root.transform, out eventScreen)
                 || !HierarchyHelper.TryFindComponentWithLogging(HierarchyHelper.Root.transform, out techTriggerOverlay)
                 || !HierarchyHelper.TryFindWithLogging(eventScreen.transform, "Anchor Right", out anchor)
+                || !HierarchyHelper.TryFindWithLogging(anchor, "Event_List", out eventList)
                 || !HierarchyHelper.TryFindWithLogging(anchor, "Event_Details", out eventDetails)
                 || !HierarchyHelper.TryFindComponentWithLogging(eventDetails, out outcomePanel)
                 || !HierarchyHelper.TryFindWithLogging(eventDetails, "Advanced", out tabAdvanced)
@@ -60,7 +63,7 @@ namespace SCPlus.patch.game_event
                 return gameObject;
             }
 
-            GameObject labelClone = GameObject.Instantiate(labelTemplate.gameObject);
+            GameObject labelClone = UnityEngine.Object.Instantiate(labelTemplate.gameObject);
             HierarchyHelper.Parent(labelClone.transform, remove.transform);
 
             if (!HierarchyHelper.TryFindComponentWithLogging(labelClone.transform, out UILabel label)
@@ -89,12 +92,12 @@ namespace SCPlus.patch.game_event
             removeCollider.center = Vector3.zero;
             removeCollider.size = BUTTON_COLLIDER_SIZE;
 
-            EventHelper.tabAdvancedComponent.variableSetters.Remove(setter);
-            GameObject.DestroyImmediate(setter);
+            tabAdvancedComponent.variableSetters.Remove(setter);
+            UnityEngine.Object.DestroyImmediate(setter);
 
             UIDropdownPopupList.popups.Remove(dropdownPopupList);
 
-            GameObject.Destroy(dropdownPopupList.gameObject);
+            UnityEngine.Object.Destroy(dropdownPopupList.gameObject);
 
             gameObject.SetActive(true);
             return gameObject;
@@ -127,7 +130,7 @@ namespace SCPlus.patch.game_event
         {
             GameObject gameObject = CreateSetter(uiTable, setterTemplate, key, internalName, variable, out setter);
             gameObject.SetActive(false);
-            
+
             if (!HierarchyHelper.TryFindComponentWithLogging(gameObject.transform, out UIDropdownPopupList dropdownList)
                 || !HierarchyHelper.TryFindWithLogging(dropdownList.transform, "Remove_Button", out Transform removeButton)
                 || !HierarchyHelper.TryFindComponentWithLogging(removeButton, out UIButton button))
@@ -153,7 +156,7 @@ namespace SCPlus.patch.game_event
 
         internal static GameObject CreateSetter<T>(UITable uiTable, T setterTemplate, TranslationKey key, string internalName, string variable, out T setter) where T : VariableSetter
         {
-            Transform setterClone = Transform.Instantiate(setterTemplate.transform);
+            Transform setterClone = UnityEngine.Object.Instantiate(setterTemplate.transform);
             setterClone.name = $"{currentIndex:D4}_{internalName}";
             HierarchyHelper.Parent(setterClone, uiTable.transform);
 
@@ -163,7 +166,7 @@ namespace SCPlus.patch.game_event
                 || !HierarchyHelper.TryFindComponentWithLogging(setterClone, out TooltipObject tooltip))
             {
                 Plugin.Logger.LogError($"Could not clone setter {setterTemplate}");
-                GameObject.Destroy(setterClone.gameObject);
+                UnityEngine.Object.Destroy(setterClone.gameObject);
                 throw new InvalidOperationException();
             }
 
@@ -174,7 +177,7 @@ namespace SCPlus.patch.game_event
             tooltip.localisationTag = GetSetterHelpTranslation(key, internalName);
 
             setter.variable = variable;
-            EventHelper.tabAdvancedComponent.variableSetters.Add(setter);
+            tabAdvancedComponent.variableSetters.Add(setter);
 
             currentIndex++;
             return setterClone.gameObject;
@@ -197,7 +200,8 @@ namespace SCPlus.patch.game_event
 
         internal enum TranslationKey
         {
-            ExtraFunc
+            ExtraFunc,
+            PerCountry
         }
 
         // lol
