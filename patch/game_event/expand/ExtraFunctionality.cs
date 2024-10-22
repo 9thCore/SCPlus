@@ -75,7 +75,7 @@ namespace SCPlus.patch.game_event
 
             button.tweenTarget = foregroundSprite.gameObject;
 
-            tooltip.localisationTag = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "GlobalToggleTooltip");
+            tooltip.localisationTag = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "GlobalToggleTooltip");
 
             if (!TryCreateTechLockScreen(out CTechLockOverlay lockOverlay)
                 || !TryCreateTechRandomScreen(out CTechRandomOverlay randomOverlay)
@@ -136,7 +136,7 @@ namespace SCPlus.patch.game_event
         {
             GameObject techScreen = GameObject.Instantiate(SetterHelper.techTriggerOverlay.gameObject);
             techScreen.SetActive(false);
-            techScreen.name = $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{SetterHelper.TranslationKey.ExtraFunc}_TechScreen_{suffix}";
+            techScreen.name = $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{LanguageRegister.LocalizationKey.ExtraFunc}_TechScreen_{suffix}";
             HierarchyHelper.Parent(techScreen.transform, SetterHelper.eventDetails);
             techScreen.transform.position = Vector3.zero;
 
@@ -159,9 +159,9 @@ namespace SCPlus.patch.game_event
 
             HierarchyHelper.SwitchComponentWithSub(true, false, triggerOverlay, out overlay);
 
-            overlay.tooltipPositiveText = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_Help_{suffix}");
-            overlay.tooltipNegativeText = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_Help_Not_{suffix}");
-            overlay.title.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_{suffix}");
+            overlay.tooltipPositiveText = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_Help_{suffix}");
+            overlay.tooltipNegativeText = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_Help_Not_{suffix}");
+            overlay.title.text = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_{suffix}");
             HierarchyHelper.EnsureComponent<UILabelAutotranslate>(overlay.title.gameObject);
 
             overlay.paramRoot = new()
@@ -169,10 +169,10 @@ namespace SCPlus.patch.game_event
                 parameterConditions = []
             };
 
-            titleTriggeredLabel.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_Title_{suffix}");
-            titleUntriggeredLabel.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_Title_Not_{suffix}");
-            instructionTriggeredLabel.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_Instruction_{suffix}");
-            instructionUntriggeredLabel.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, $"TechScreen_Instruction_Not_{suffix}");
+            titleTriggeredLabel.text = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_Title_{suffix}");
+            titleUntriggeredLabel.text = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_Title_Not_{suffix}");
+            instructionTriggeredLabel.text = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_Instruction_{suffix}");
+            instructionUntriggeredLabel.text = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_Instruction_Not_{suffix}");
 
 
             return true;
@@ -182,7 +182,7 @@ namespace SCPlus.patch.game_event
         {
             dragPanel = GameObject.Instantiate(SetterHelper.tabAdvancedDragPanel.gameObject);
             dragPanel.SetActive(false);
-            dragPanel.name = $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{SetterHelper.TranslationKey.ExtraFunc}_DragPanel";
+            dragPanel.name = $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{LanguageRegister.LocalizationKey.ExtraFunc}_DragPanel";
             HierarchyHelper.Parent(dragPanel.transform, SetterHelper.eventDetails);
             dragPanel.transform.localPosition = SetterHelper.tabAdvancedDragPanel.localPosition;
             dragPanel.transform.localRotation = SetterHelper.tabAdvancedDragPanel.localRotation;
@@ -214,7 +214,7 @@ namespace SCPlus.patch.game_event
                 SetterHelper.CreateCustomBoolSetter(
                     thisTable,
                     boolSetter,
-                    SetterHelper.TranslationKey.ExtraFunc,
+                    LanguageRegister.LocalizationKey.ExtraFunc,
                     "EvolveRandomTech",
                     "evolveRandomTech",
                     GenericRedirector);
@@ -222,7 +222,7 @@ namespace SCPlus.patch.game_event
                 SetterHelper.CreateButton(
                     thisTable,
                     stringListSetter,
-                    SetterHelper.TranslationKey.ExtraFunc,
+                    LanguageRegister.LocalizationKey.ExtraFunc,
                     "RandomTech",
                     () =>
                     {
@@ -237,7 +237,7 @@ namespace SCPlus.patch.game_event
                 SetterHelper.CreateButton(
                     thisTable,
                     stringListSetter,
-                    SetterHelper.TranslationKey.ExtraFunc,
+                    LanguageRegister.LocalizationKey.ExtraFunc,
                     "LockTech",
                     () =>
                     {
@@ -276,7 +276,7 @@ namespace SCPlus.patch.game_event
                 throw new InvalidOperationException();
             }
 
-            label.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, internalName);
+            label.text = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, internalName);
             translator.originalLabelText = label.text;
             translator.UseOriginalLabel();
 

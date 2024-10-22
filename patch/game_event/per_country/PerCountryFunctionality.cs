@@ -41,7 +41,7 @@ namespace SCPlus.patch.game_event.per_country
                 return;
             }
 
-            label.text = SetterHelper.GetTranslation(SetterHelper.TranslationKey.PerCountry, "Button");
+            label.text = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.PerCountry, "Button");
             translator.SetInitialText(label.text);
 
             EventDelegate.Add(buttonCancelButton.onClick, () =>

@@ -47,7 +47,7 @@ namespace SCPlus.patch.game
             return true;
         }
 
-        internal static GameObject CreateButton(UITable uiTable, ListSetter setterTemplate, TranslationKey key, string internalName, EventDelegate.Callback callback)
+        internal static GameObject CreateButton(UITable uiTable, ListSetter setterTemplate, LanguageRegister.LocalizationKey key, string internalName, EventDelegate.Callback callback)
         {
             GameObject gameObject = CreateSetter(uiTable, setterTemplate, key, internalName, "", out ListSetter setter);
             gameObject.SetActive(false);
@@ -74,7 +74,7 @@ namespace SCPlus.patch.game
             }
 
             label.width = BUTTON_SIZE.x;
-            label.text = GetTranslation(key, $"{internalName}_Button");
+            label.text = LanguageRegister.GetLocalizationTag(key, $"{internalName}_Button");
             translator.originalLabelText = label.text;
             translator.UseOriginalLabel();
 
@@ -110,23 +110,23 @@ namespace SCPlus.patch.game
             return gameObject;
         }
 
-        internal static GameObject CreateCustomBoolSetter(UITable uiTable, BoolSetterToggle setterTemplate, TranslationKey key, string internalName, string variable, Func<object, object> redirectorFunc)
+        internal static GameObject CreateCustomBoolSetter(UITable uiTable, BoolSetterToggle setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, Func<object, object> redirectorFunc)
         {
             return Redirect(CreateBoolSetter(uiTable, setterTemplate, key, internalName, variable), redirectorFunc);
         }
 
-        internal static GameObject CreateBoolSetter(UITable uiTable, BoolSetterToggle setterTemplate, TranslationKey key, string internalName, string variable)
+        internal static GameObject CreateBoolSetter(UITable uiTable, BoolSetterToggle setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable)
         {
             CreateSetter(uiTable, setterTemplate, key, internalName, variable, out BoolSetterToggle setter);
             return setter.gameObject;
         }
 
-        internal static GameObject CreateCustomListSetter<T>(UITable uITable, T setterTemplate, TranslationKey key, string internalName, string variable, ListSetterElement[] elements, Func<object, object> redirectorFunc) where T : ListSetter
+        internal static GameObject CreateCustomListSetter<T>(UITable uITable, T setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, ListSetterElement[] elements, Func<object, object> redirectorFunc) where T : ListSetter
         {
             return Redirect(CreateListSetter(uITable, setterTemplate, key, internalName, variable, elements, out T setter), redirectorFunc);
         }
 
-        internal static GameObject CreateListSetter<T>(UITable uiTable, T setterTemplate, TranslationKey key, string internalName, string variable, ListSetterElement[] elements, out T setter) where T : ListSetter
+        internal static GameObject CreateListSetter<T>(UITable uiTable, T setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, ListSetterElement[] elements, out T setter) where T : ListSetter
         {
             GameObject gameObject = CreateSetter(uiTable, setterTemplate, key, internalName, variable, out setter);
             gameObject.SetActive(false);
@@ -154,7 +154,7 @@ namespace SCPlus.patch.game
             return setter.gameObject;
         }
 
-        internal static GameObject CreateSetter<T>(UITable uiTable, T setterTemplate, TranslationKey key, string internalName, string variable, out T setter) where T : VariableSetter
+        internal static GameObject CreateSetter<T>(UITable uiTable, T setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, out T setter) where T : VariableSetter
         {
             Transform setterClone = UnityEngine.Object.Instantiate(setterTemplate.transform);
             setterClone.name = $"{currentIndex:D4}_{internalName}";
@@ -170,38 +170,17 @@ namespace SCPlus.patch.game
                 throw new InvalidOperationException();
             }
 
-            label.text = GetSetterTranslation(key, internalName);
+            label.text = LanguageRegister.GetSetterLocalizationTag(key, internalName);
             translator.originalLabelText = label.text;
             translator.UseOriginalLabel();
 
-            tooltip.localisationTag = GetSetterHelpTranslation(key, internalName);
+            tooltip.localisationTag = LanguageRegister.GetSetterHelpLocalizationTag(key, internalName);
 
             setter.variable = variable;
             tabAdvancedComponent.variableSetters.Add(setter);
 
             currentIndex++;
             return setterClone.gameObject;
-        }
-
-        internal static string GetSetterHelpTranslation(TranslationKey key, string suffix)
-        {
-            return GetSetterTranslation(key, $"{suffix}_Help");
-        }
-
-        internal static string GetSetterTranslation(TranslationKey key, string suffix)
-        {
-            return GetTranslation(key, $"{suffix}_Setter");
-        }
-
-        internal static string GetTranslation(TranslationKey key, string suffix)
-        {
-            return $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{key}_{suffix}";
-        }
-
-        internal enum TranslationKey
-        {
-            ExtraFunc,
-            PerCountry
         }
 
         // lol

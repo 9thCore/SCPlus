@@ -136,114 +136,114 @@ namespace SCPlus.patch.lang.localization
         {
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "GlobalToggleTooltip"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "GlobalToggleTooltip"),
                 "Show extra functionality available for events.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "General"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "General"),
                 "General Event Settings");
 
             // LockTech
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetSetterTranslation(SetterHelper.TranslationKey.ExtraFunc, "LockTech"),
+                LanguageRegister.GetSetterLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "LockTech"),
                 "Trait Lock & Unlock");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetSetterHelpTranslation(SetterHelper.TranslationKey.ExtraFunc, "LockTech"),
+                LanguageRegister.GetSetterHelpLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "LockTech"),
                 "Traits that will be locked/unlocked when this event fires.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "LockTech_Button"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "LockTech_Button"),
                 "Configure");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Lock"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Lock"),
                 "Trait Lock Settings");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Title_Lock"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Title_Lock"),
                 "Trait Lock");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Instruction_Lock"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Instruction_Lock"),
                 "The following traits will be locked when this event fires.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Lock"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Help_Lock"),
                 "Existing trait(s) that will be locked.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Title_Not_Lock"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Title_Not_Lock"),
                 "Trait Unlock");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Instruction_Not_Lock"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Instruction_Not_Lock"),
                 "The following traits will be unlocked when this event fires.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Not_Lock"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Help_Not_Lock"),
                 "Existing trait(s) that will be unlocked.");
 
             // RandomTech
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "RandomTech"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "RandomTech"),
                 "Forced Mutation");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetSetterTranslation(SetterHelper.TranslationKey.ExtraFunc, "EvolveRandomTech"),
+                LanguageRegister.GetSetterLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "EvolveRandomTech"),
                 "Enable");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetSetterHelpTranslation(SetterHelper.TranslationKey.ExtraFunc, "EvolveRandomTech"),
+                LanguageRegister.GetSetterHelpLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "EvolveRandomTech"),
                 "Whether one of the traits selected will be forcibly mutated.\nNote that it will pick one out of the traits that can mutate when the event fires (or none, if none can).");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetSetterTranslation(SetterHelper.TranslationKey.ExtraFunc, "RandomTech"),
+                LanguageRegister.GetSetterLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "RandomTech"),
                 "Random Trait List");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetSetterHelpTranslation(SetterHelper.TranslationKey.ExtraFunc, "RandomTech"),
+                LanguageRegister.GetSetterHelpLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "RandomTech"),
                 "List of possible traits that will be evolved when this event fires.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "RandomTech_Button"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "RandomTech_Button"),
                 "Configure");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Random"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Random"),
                 "Random Trait List");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Title_Random"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Title_Random"),
                 "Trait List");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Instruction_Random"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Instruction_Random"),
                 "One of the following traits will be evolved when this event fires, if it can.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Random"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Help_Random"),
                 "Possible trait that will be evolved.");
         }
 
@@ -251,7 +251,7 @@ namespace SCPlus.patch.lang.localization
         {
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                SetterHelper.GetTranslation(SetterHelper.TranslationKey.PerCountry, "Button"),
+                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.PerCountry, "Button"),
                 "Create \"Per-Country\"");
         }
     }

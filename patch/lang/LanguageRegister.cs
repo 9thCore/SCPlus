@@ -53,10 +53,10 @@ namespace SCPlus.patch.lang
             RegisterLine(language, $"Help_{commonSuffix}", tooltip);
         }
 
-        internal static void RegisterEventSetter(string language, SetterHelper.TranslationKey key, string internalName, string name, string help)
+        internal static void RegisterEventSetter(string language, LanguageRegister.LocalizationKey key, string internalName, string name, string help)
         {
-            RegisterLine(language, SetterHelper.GetSetterTranslation(key, internalName), name);
-            RegisterLine(language, SetterHelper.GetSetterHelpTranslation(key, internalName), help);
+            RegisterLine(language, LanguageRegister.GetSetterLocalizationTag(key, internalName), name);
+            RegisterLine(language, LanguageRegister.GetSetterHelpLocalizationTag(key, internalName), help);
         }
 
         internal static void RegisterLine(string language, string tag, string line)
@@ -69,6 +69,27 @@ namespace SCPlus.patch.lang
 
             CLocalisationManager.mpLocalisedTexts[language].Add(tag, line);
             CLocalisationManager.mpLocalisedTexts[language].Add(tag.ToLower(), line);
+        }
+
+        internal static string GetSetterHelpLocalizationTag(LocalizationKey key, string suffix)
+        {
+            return GetSetterLocalizationTag(key, $"{suffix}_Help");
+        }
+
+        internal static string GetSetterLocalizationTag(LocalizationKey key, string suffix)
+        {
+            return GetLocalizationTag(key, $"{suffix}_Setter");
+        }
+
+        internal static string GetLocalizationTag(LocalizationKey key, string suffix)
+        {
+            return $"{SCPLUS_TRANSLATION_KEY}_{key}_{suffix}";
+        }
+
+        internal enum LocalizationKey
+        {
+            ExtraFunc,
+            PerCountry
         }
     }
 }
