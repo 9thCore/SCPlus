@@ -145,14 +145,11 @@ namespace SCPlus.patch.lang.localization
                 "General Event Settings");
 
             // LockTech
-            LanguageRegister.RegisterLine(
+            LanguageRegister.RegisterEventSetter(
                 LANGUAGE,
-                LanguageRegister.GetSetterLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "LockTech"),
-                "Trait Lock & Unlock");
-
-            LanguageRegister.RegisterLine(
-                LANGUAGE,
-                LanguageRegister.GetSetterHelpLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "LockTech"),
+                LanguageRegister.LocalizationKey.ExtraFunc,
+                "LockTech",
+                "Trait Lock & Unlock",
                 "Traits that will be locked/unlocked when this event fires.");
 
             LanguageRegister.RegisterLine(
@@ -201,24 +198,18 @@ namespace SCPlus.patch.lang.localization
                 LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "RandomTech"),
                 "Forced Mutation");
 
-            LanguageRegister.RegisterLine(
+            LanguageRegister.RegisterEventSetter(
                 LANGUAGE,
-                LanguageRegister.GetSetterLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "EvolveRandomTech"),
-                "Enable");
-
-            LanguageRegister.RegisterLine(
-                LANGUAGE,
-                LanguageRegister.GetSetterHelpLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "EvolveRandomTech"),
+                LanguageRegister.LocalizationKey.ExtraFunc,
+                "EvolveRandomTech",
+                "Enable",
                 "Whether one of the traits selected will be forcibly mutated.\nNote that it will pick one out of the traits that can mutate when the event fires (or none, if none can).");
 
-            LanguageRegister.RegisterLine(
+            LanguageRegister.RegisterEventSetter(
                 LANGUAGE,
-                LanguageRegister.GetSetterLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "RandomTech"),
-                "Random Trait List");
-
-            LanguageRegister.RegisterLine(
-                LANGUAGE,
-                LanguageRegister.GetSetterHelpLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "RandomTech"),
+                LanguageRegister.LocalizationKey.ExtraFunc,
+                "RandomTech",
+                "Random Trait List",
                 "List of possible traits that will be evolved when this event fires.");
 
             LanguageRegister.RegisterLine(

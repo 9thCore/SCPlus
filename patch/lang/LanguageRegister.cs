@@ -55,8 +55,8 @@ namespace SCPlus.patch.lang
 
         internal static void RegisterEventSetter(string language, LanguageRegister.LocalizationKey key, string internalName, string name, string help)
         {
-            RegisterLine(language, LanguageRegister.GetSetterLocalizationTag(key, internalName), name);
-            RegisterLine(language, LanguageRegister.GetSetterHelpLocalizationTag(key, internalName), help);
+            RegisterLine(language, GetSetterLocalizationTag(key, internalName), name);
+            RegisterLine(language, GetSetterHelpLocalizationTag(key, internalName), help);
         }
 
         internal static void RegisterLine(string language, string tag, string line)
