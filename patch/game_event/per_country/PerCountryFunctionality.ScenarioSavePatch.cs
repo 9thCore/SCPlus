@@ -19,6 +19,12 @@ namespace SCPlus.patch.game_event.per_country
                 {
                     __instance.GameEvents.Remove(gameEvent);
 
+                    ExtraFunctionality.Data data = null;
+                    if (Config.expandEventFunctionality.Value)
+                    {
+                        ExtraFunctionality.eventData.TryGetValue(gameEvent, out data);
+                    }
+
                     foreach (Country country in __instance.Countries)
                     {
                         GameEvent currentEvent = gameEvent.Clone();
@@ -37,6 +43,11 @@ namespace SCPlus.patch.game_event.per_country
                             sumOperation = EMapOp.SELF,
                             val = country.id
                         });
+
+                        if (data != null)
+                        {
+                            ExtraFunctionality.eventData[currentEvent] = data;
+                        }
 
                         currentEvent.name = GetSubEventName(gameEvent, country);
                         __instance.GameEvents.Add(currentEvent);
