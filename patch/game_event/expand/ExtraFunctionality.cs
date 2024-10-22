@@ -10,7 +10,7 @@ using SCPlus.patch.game;
 
 namespace SCPlus.patch.game_event
 {
-    internal static class ExtraFunctionality
+    internal static partial class ExtraFunctionality
     {
         private static void Register()
         {
