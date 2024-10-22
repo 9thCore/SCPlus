@@ -11,6 +11,7 @@ namespace SCPlus.plugin
         internal static ConfigEntry<bool> liftVariableTypeCheck;
         internal static ConfigEntry<bool> exposeMoreVariables;
         internal static ConfigEntry<bool> expandEventFunctionality;
+        internal static ConfigEntry<bool> perCountryEventFunctionality;
 
         internal static void Awake()
         {
@@ -37,6 +38,12 @@ namespace SCPlus.plugin
                 nameof(expandEventFunctionality),
                 true,
                 "Expand possibilities with an event, exposing inaccessible functionality, even through outcomes.");
+
+            perCountryEventFunctionality = config.Bind(
+                "Event",
+                nameof(perCountryEventFunctionality),
+                false,
+                "Allow creation of a special \"per-country\" event type, which will run every day for every country.\n/!\\ Not compatible with mobile clients. /!\\");
         }
     }
 }

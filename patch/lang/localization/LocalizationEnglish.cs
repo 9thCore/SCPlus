@@ -1,4 +1,4 @@
-﻿using SCPlus.patch.game_event;
+﻿using SCPlus.patch.game;
 
 namespace SCPlus.patch.lang.localization
 {
@@ -136,115 +136,123 @@ namespace SCPlus.patch.lang.localization
         {
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "GlobalToggleTooltip"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "GlobalToggleTooltip"),
                 "Show extra functionality available for events.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "General"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "General"),
                 "General Event Settings");
 
             // LockTech
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetSetterTranslation(EventHelper.TranslationKey.ExtraFunc, "LockTech"),
+                SetterHelper.GetSetterTranslation(SetterHelper.TranslationKey.ExtraFunc, "LockTech"),
                 "Trait Lock & Unlock");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetSetterHelpTranslation(EventHelper.TranslationKey.ExtraFunc, "LockTech"),
+                SetterHelper.GetSetterHelpTranslation(SetterHelper.TranslationKey.ExtraFunc, "LockTech"),
                 "Traits that will be locked/unlocked when this event fires.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "LockTech_Button"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "LockTech_Button"),
                 "Configure");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Lock"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Lock"),
                 "Trait Lock Settings");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Title_Lock"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Title_Lock"),
                 "Trait Lock");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Instruction_Lock"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Instruction_Lock"),
                 "The following traits will be locked when this event fires.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Lock"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Lock"),
                 "Existing trait(s) that will be locked.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Title_Not_Lock"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Title_Not_Lock"),
                 "Trait Unlock");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Instruction_Not_Lock"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Instruction_Not_Lock"),
                 "The following traits will be unlocked when this event fires.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Not_Lock"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Not_Lock"),
                 "Existing trait(s) that will be unlocked.");
 
             // RandomTech
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "RandomTech"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "RandomTech"),
                 "Forced Mutation");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetSetterTranslation(EventHelper.TranslationKey.ExtraFunc, "EvolveRandomTech"),
+                SetterHelper.GetSetterTranslation(SetterHelper.TranslationKey.ExtraFunc, "EvolveRandomTech"),
                 "Enable");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetSetterHelpTranslation(EventHelper.TranslationKey.ExtraFunc, "EvolveRandomTech"),
+                SetterHelper.GetSetterHelpTranslation(SetterHelper.TranslationKey.ExtraFunc, "EvolveRandomTech"),
                 "Whether one of the traits selected will be forcibly mutated.\nNote that it will pick one out of the traits that can mutate when the event fires (or none, if none can).");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetSetterTranslation(EventHelper.TranslationKey.ExtraFunc, "RandomTech"),
+                SetterHelper.GetSetterTranslation(SetterHelper.TranslationKey.ExtraFunc, "RandomTech"),
                 "Random Trait List");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetSetterHelpTranslation(EventHelper.TranslationKey.ExtraFunc, "RandomTech"),
+                SetterHelper.GetSetterHelpTranslation(SetterHelper.TranslationKey.ExtraFunc, "RandomTech"),
                 "List of possible traits that will be evolved when this event fires.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "RandomTech_Button"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "RandomTech_Button"),
                 "Configure");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Random"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Random"),
                 "Random Trait List");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Title_Random"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Title_Random"),
                 "Trait List");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Instruction_Random"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Instruction_Random"),
                 "One of the following traits will be evolved when this event fires, if it can.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
-                EventHelper.GetTranslation(EventHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Random"),
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.ExtraFunc, "TechScreen_Help_Random"),
                 "Possible trait that will be evolved.");
+        }
+
+        internal static void PerCountryTranslations()
+        {
+            LanguageRegister.RegisterLine(
+                LANGUAGE,
+                SetterHelper.GetTranslation(SetterHelper.TranslationKey.PerCountry, "Button"),
+                "Create \"Per-Country\"");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using SCPlus.patch.game_event;
+﻿using SCPlus.patch.game;
 using SCPlus.patch.lang.localization;
 using SCPlus.plugin;
 using System;
@@ -20,6 +20,11 @@ namespace SCPlus.patch.lang
             if (Config.expandEventFunctionality.Value)
             {
                 LocalizationEnglish.ExtraFunctionalityTranslations();
+            }
+
+            if (Config.perCountryEventFunctionality.Value)
+            {
+                LocalizationEnglish.PerCountryTranslations();
             }
         }
 
@@ -48,10 +53,10 @@ namespace SCPlus.patch.lang
             RegisterLine(language, $"Help_{commonSuffix}", tooltip);
         }
 
-        internal static void RegisterEventSetter(string language, EventHelper.TranslationKey key, string internalName, string name, string help)
+        internal static void RegisterEventSetter(string language, SetterHelper.TranslationKey key, string internalName, string name, string help)
         {
-            RegisterLine(language, EventHelper.GetSetterTranslation(key, internalName), name);
-            RegisterLine(language, EventHelper.GetSetterHelpTranslation(key, internalName), help);
+            RegisterLine(language, SetterHelper.GetSetterTranslation(key, internalName), name);
+            RegisterLine(language, SetterHelper.GetSetterHelpTranslation(key, internalName), help);
         }
 
         internal static void RegisterLine(string language, string tag, string line)
