@@ -78,6 +78,18 @@ namespace SCPlus.patch.game_event
 
                 event_.eventOutcomes = event_.eventOutcomes.AddToArray(outcome);
             }
+
+            [HarmonyPatch(nameof(CEventScreen.Exit))]
+            [HarmonyPrefix]
+            private static void ExitPatch()
+            {
+                if (!Config.expandEventFunctionality.Value)
+                {
+                    return;
+                }
+
+                ExitExtraFunctionalityTab();
+            }
         }
     }
 }

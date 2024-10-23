@@ -87,10 +87,8 @@ namespace SCPlus.patch.game_event
 
             UITable table = dragPanel.GetComponentInChildren<UITable>();
 
-            EventDelegate.Add(conditionsOutcomesTabButton.onClick, () =>
-            {
-                toggle.Set(false);
-            });
+            tabToggle = toggle;
+            EventDelegate.Add(conditionsOutcomesTabButton.onClick, ExitExtraFunctionalityTab);
 
             EventDelegate.Add(toggle.onChange, () =>
             {
@@ -300,6 +298,18 @@ namespace SCPlus.patch.game_event
             return data;
         }
 
+        internal static void ExitExtraFunctionalityTab()
+        {
+            if (tabToggle == null)
+            {
+                Plugin.Logger.LogError($"{nameof(ExitExtraFunctionalityTab)} called without {tabToggle} being set");
+                return;
+            }
+
+            tabToggle.Set(false);
+        }
+
+        internal static UIToggle tabToggle = null;
         internal static readonly Dictionary<GameEvent, Data> eventData = [];
 
         // lol
