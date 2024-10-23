@@ -20,6 +20,9 @@ namespace SCPlus.patch.game_event.per_country
                 if (creatingPerCountryEvent || perCountryEvents.Contains(eventElement.Event))
                 {
                     EmphasizeEvent(eventElement);
+                } else
+                {
+                    DeEmphasizeEvent(eventElement);
                 }
 
                 if (creatingPerCountryEvent)

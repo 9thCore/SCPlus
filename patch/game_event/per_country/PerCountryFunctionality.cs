@@ -142,6 +142,15 @@ namespace SCPlus.patch.game_event.per_country
             }
         }
 
+        internal static void DeEmphasizeEvent(EventListElement element)
+        {
+            if (HierarchyHelper.TryFindWithLogging(element.transform, "Text", out Transform text)
+                    && HierarchyHelper.TryFindComponentWithLogging(text, out UILabel label))
+            {
+                label.color = Color.white;
+            }
+        }
+
         internal static HashSet<GameEvent> perCountryEvents = [];
         internal static HashSet<GameEvent> subEvents = [];
         internal static bool creatingPerCountryEvent = false;
