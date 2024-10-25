@@ -26,6 +26,11 @@ namespace SCPlus.patch.lang
             {
                 LocalizationEnglish.PerCountryTranslations();
             }
+
+            if (Config.expandTraitFunctionality.Value)
+            {
+                LocalizationEnglish.TechExtraFunctionalityTranslations();
+            }
         }
 
         internal static void RegisterSCPlusVariableFromExisting(string language, string commonSuffix, string existingVariable = null, string namePrefix = "", string nameSuffix = "", string tooltipPrefix = "", string tooltipSuffix = "")
@@ -53,7 +58,7 @@ namespace SCPlus.patch.lang
             RegisterLine(language, $"Help_{commonSuffix}", tooltip);
         }
 
-        internal static void RegisterEventSetter(string language, LanguageRegister.LocalizationKey key, string internalName, string name, string help)
+        internal static void RegisterSetter(string language, LanguageRegister.LocalizationKey key, string internalName, string name, string help)
         {
             RegisterLine(language, GetSetterLocalizationTag(key, internalName), name);
             RegisterLine(language, GetSetterHelpLocalizationTag(key, internalName), help);
@@ -89,7 +94,8 @@ namespace SCPlus.patch.lang
         internal enum LocalizationKey
         {
             ExtraFunc,
-            PerCountry
+            PerCountry,
+            TechExtraFunc
         }
     }
 }

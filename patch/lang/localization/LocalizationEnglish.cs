@@ -1,4 +1,4 @@
-﻿using SCPlus.patch.game;
+﻿using SCPlus.plugin;
 
 namespace SCPlus.patch.lang.localization
 {
@@ -137,7 +137,7 @@ namespace SCPlus.patch.lang.localization
             LanguageRegister.RegisterLine(
                 LANGUAGE,
                 LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "GlobalToggleTooltip"),
-                "Show extra functionality available for events.");
+                $"{LanguageRegister.SCPLUS_PREFIX} Show extra functionality available for events.");
 
             LanguageRegister.RegisterLine(
                 LANGUAGE,
@@ -145,7 +145,7 @@ namespace SCPlus.patch.lang.localization
                 "General Event Settings");
 
             // LockTech
-            LanguageRegister.RegisterEventSetter(
+            LanguageRegister.RegisterSetter(
                 LANGUAGE,
                 LanguageRegister.LocalizationKey.ExtraFunc,
                 "LockTech",
@@ -198,14 +198,14 @@ namespace SCPlus.patch.lang.localization
                 LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "RandomTech"),
                 "Forced Mutation");
 
-            LanguageRegister.RegisterEventSetter(
+            LanguageRegister.RegisterSetter(
                 LANGUAGE,
                 LanguageRegister.LocalizationKey.ExtraFunc,
                 "EvolveRandomTech",
                 "Enable",
                 "Whether one of the traits selected will be forcibly mutated.\nNote that it will pick one out of the traits that can mutate when the event fires (or none, if none can).");
 
-            LanguageRegister.RegisterEventSetter(
+            LanguageRegister.RegisterSetter(
                 LANGUAGE,
                 LanguageRegister.LocalizationKey.ExtraFunc,
                 "RandomTech",
@@ -243,7 +243,17 @@ namespace SCPlus.patch.lang.localization
             LanguageRegister.RegisterLine(
                 LANGUAGE,
                 LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.PerCountry, "Button"),
-                "Create \"Per-Country\"");
+                $"{LanguageRegister.SCPLUS_PREFIX} Create \"Per-Country\"");
+        }
+
+        internal static void TechExtraFunctionalityTranslations()
+        {
+            LanguageRegister.RegisterSetter(
+                LANGUAGE,
+                LanguageRegister.LocalizationKey.TechExtraFunc,
+                "EventLocked",
+                $"{LanguageRegister.SCPLUS_PREFIX} Event Lock",
+                $"Determines whether a trait is event locked on start.\nWill not be visible or evolvable until unlocked through an event.{(Config.expandEventFunctionality.Value ? "\nCheck expanded event functionality for more information." : "\nEnable expanded event functionality for ability through the UI.")}");
         }
     }
 }

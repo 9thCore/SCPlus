@@ -12,6 +12,7 @@ namespace SCPlus.plugin
         internal static ConfigEntry<bool> exposeMoreVariables;
         internal static ConfigEntry<bool> expandEventFunctionality;
         internal static ConfigEntry<bool> perCountryEventFunctionality;
+        internal static ConfigEntry<bool> expandTraitFunctionality;
 
         internal static void Awake()
         {
@@ -44,6 +45,12 @@ namespace SCPlus.plugin
                 nameof(perCountryEventFunctionality),
                 false,
                 "Allow creation of a special \"per-country\" event type, which will run every day for every country.\n/!\\ Not compatible with mobile clients. /!\\");
+
+            expandTraitFunctionality = config.Bind(
+                "Trait",
+                nameof(expandTraitFunctionality),
+                true,
+                $"Expand possibilities with a trait, exposing inaccessible functionality. Synergies with {nameof(expandEventFunctionality)} (Trait Lock)");
         }
     }
 }

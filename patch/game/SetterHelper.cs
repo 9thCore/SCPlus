@@ -49,7 +49,7 @@ namespace SCPlus.patch.game
 
         internal static GameObject CreateButton(UITable uiTable, ListSetter setterTemplate, LanguageRegister.LocalizationKey key, string internalName, EventDelegate.Callback callback)
         {
-            GameObject gameObject = CreateSetter(uiTable, setterTemplate, key, internalName, "", out ListSetter setter);
+            GameObject gameObject = CreateSetter(uiTable, setterTemplate, key, internalName, "", out ListSetter setter, false);
             gameObject.SetActive(false);
 
             if (!HierarchyHelper.TryFindComponentWithLogging(gameObject.transform, out UIDropdownPopupList dropdownPopupList)
@@ -92,7 +92,6 @@ namespace SCPlus.patch.game
             removeCollider.center = Vector3.zero;
             removeCollider.size = BUTTON_COLLIDER_SIZE;
 
-            tabAdvancedComponent.variableSetters.Remove(setter);
             UnityEngine.Object.DestroyImmediate(setter);
 
             UIDropdownPopupList.popups.Remove(dropdownPopupList);
@@ -110,25 +109,25 @@ namespace SCPlus.patch.game
             return gameObject;
         }
 
-        internal static GameObject CreateCustomBoolSetter(UITable uiTable, BoolSetterToggle setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, Func<object, object> redirectorFunc)
+        internal static GameObject CreateCustomBoolSetter<T>(UITable uiTable, T setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, Func<object, object> redirectorFunc, bool eventVariable = true) where T : BoolSetter
         {
-            return Redirect(CreateBoolSetter(uiTable, setterTemplate, key, internalName, variable), redirectorFunc);
+            return Redirect(CreateBoolSetter(uiTable, setterTemplate, key, internalName, variable, eventVariable), redirectorFunc);
         }
 
-        internal static GameObject CreateBoolSetter(UITable uiTable, BoolSetterToggle setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable)
+        internal static GameObject CreateBoolSetter<T>(UITable uiTable, T setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, bool eventVariable = true) where T : BoolSetter
         {
-            CreateSetter(uiTable, setterTemplate, key, internalName, variable, out BoolSetterToggle setter);
+            CreateSetter(uiTable, setterTemplate, key, internalName, variable, out T setter, eventVariable);
             return setter.gameObject;
         }
 
-        internal static GameObject CreateCustomListSetter<T>(UITable uITable, T setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, ListSetterElement[] elements, Func<object, object> redirectorFunc) where T : ListSetter
+        internal static GameObject CreateCustomListSetter<T>(UITable uITable, T setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, ListSetterElement[] elements, Func<object, object> redirectorFunc, bool eventVariable = true) where T : ListSetter
         {
-            return Redirect(CreateListSetter(uITable, setterTemplate, key, internalName, variable, elements, out T setter), redirectorFunc);
+            return Redirect(CreateListSetter(uITable, setterTemplate, key, internalName, variable, elements, out T setter, eventVariable), redirectorFunc);
         }
 
-        internal static GameObject CreateListSetter<T>(UITable uiTable, T setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, ListSetterElement[] elements, out T setter) where T : ListSetter
+        internal static GameObject CreateListSetter<T>(UITable uiTable, T setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, ListSetterElement[] elements, out T setter, bool eventVariable = true) where T : ListSetter
         {
-            GameObject gameObject = CreateSetter(uiTable, setterTemplate, key, internalName, variable, out setter);
+            GameObject gameObject = CreateSetter(uiTable, setterTemplate, key, internalName, variable, out setter, eventVariable);
             gameObject.SetActive(false);
 
             if (!HierarchyHelper.TryFindComponentWithLogging(gameObject.transform, out UIDropdownPopupList dropdownList)
@@ -154,7 +153,7 @@ namespace SCPlus.patch.game
             return setter.gameObject;
         }
 
-        internal static GameObject CreateSetter<T>(UITable uiTable, T setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, out T setter) where T : VariableSetter
+        internal static GameObject CreateSetter<T>(UITable uiTable, T setterTemplate, LanguageRegister.LocalizationKey key, string internalName, string variable, out T setter, bool eventVariable) where T : VariableSetter
         {
             Transform setterClone = UnityEngine.Object.Instantiate(setterTemplate.transform);
             setterClone.name = $"{currentIndex:D4}_{internalName}";
@@ -177,7 +176,11 @@ namespace SCPlus.patch.game
             tooltip.localisationTag = LanguageRegister.GetSetterHelpLocalizationTag(key, internalName);
 
             setter.variable = variable;
-            tabAdvancedComponent.variableSetters.Add(setter);
+
+            if (eventVariable)
+            {
+                tabAdvancedComponent.variableSetters.Add(setter);
+            }
 
             currentIndex++;
             return setterClone.gameObject;

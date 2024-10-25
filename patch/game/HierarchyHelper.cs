@@ -122,5 +122,38 @@ namespace SCPlus.patch.hierarchy
 
             GameObject.DestroyImmediate(oldComponent);
         }
+
+        internal static void SwitchComponentWithSuper<TParent, TChild>(bool addFields, bool addProperties, TChild oldComponent, out TParent component) where TParent : MonoBehaviour where TChild : TParent
+        {
+            GameObject gameObject = oldComponent.gameObject;
+            component = gameObject.AddComponent<TParent>();
+
+            Type parentType = typeof(TParent);
+
+            if (addFields)
+            {
+                FieldInfo[] fields = parentType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                foreach (FieldInfo field in fields)
+                {
+                    field.SetValue(component, field.GetValue(oldComponent));
+                }
+            }
+
+            if (addProperties)
+            {
+                PropertyInfo[] properties = parentType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                foreach (PropertyInfo property in properties)
+                {
+                    if (!property.CanWrite || !property.CanRead)
+                    {
+                        continue;
+                    }
+
+                    property.SetValue(component, property.GetValue(oldComponent));
+                }
+            }
+
+            GameObject.DestroyImmediate(oldComponent);
+        }
     }
 }
