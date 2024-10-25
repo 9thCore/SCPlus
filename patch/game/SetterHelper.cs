@@ -186,6 +186,52 @@ namespace SCPlus.patch.game
             return setterClone.gameObject;
         }
 
+        internal static bool TryCreateTechScreen<T>(LanguageRegister.LocalizationKey key, string suffix, out T overlay) where T : CTechSelectionOverlay
+        {
+            GameObject techScreen = GameObject.Instantiate(SetterHelper.techTriggerOverlay.gameObject);
+            techScreen.SetActive(false);
+            techScreen.name = $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{key}_TechScreen_{suffix}";
+            HierarchyHelper.Parent(techScreen.transform, SetterHelper.eventDetails);
+            techScreen.transform.position = Vector3.zero;
+
+            if (!HierarchyHelper.TryFindComponentWithLogging(techScreen.transform, out CTechTriggerOverlay triggerOverlay)
+                || !HierarchyHelper.TryFindComponentWithLogging(triggerOverlay.transform, out UITable table)
+                || !HierarchyHelper.TryFindWithLogging(table.transform, "03_Header_Event_Not_Triggered", out Transform headerUntriggered)
+                || !HierarchyHelper.TryFindWithLogging(table.transform, "00_Header_Event_Triggered", out Transform headerTriggered)
+                || !HierarchyHelper.TryFindWithLogging(headerUntriggered, "Title_Events_Not_Triggered", out Transform titleUntriggered)
+                || !HierarchyHelper.TryFindWithLogging(headerTriggered, "Title_Event_Triggered", out Transform titleTriggered)
+                || !HierarchyHelper.TryFindWithLogging(headerUntriggered, "Instructions", out Transform instructionUntriggered)
+                || !HierarchyHelper.TryFindWithLogging(headerTriggered, "Instruction", out Transform instructionTriggered)
+                || !HierarchyHelper.TryFindComponentWithLogging(titleUntriggered, out UILabel titleUntriggeredLabel)
+                || !HierarchyHelper.TryFindComponentWithLogging(titleTriggered, out UILabel titleTriggeredLabel)
+                || !HierarchyHelper.TryFindComponentWithLogging(instructionUntriggered, out UILabel instructionUntriggeredLabel)
+                || !HierarchyHelper.TryFindComponentWithLogging(instructionTriggered, out UILabel instructionTriggeredLabel))
+            {
+                overlay = null;
+                return false;
+            }
+
+            HierarchyHelper.SwitchComponentWithSub(true, false, triggerOverlay, out overlay);
+
+            overlay.tooltipPositiveText = LanguageRegister.GetLocalizationTag(key, $"TechScreen_Help_{suffix}");
+            overlay.tooltipNegativeText = LanguageRegister.GetLocalizationTag(key, $"TechScreen_Help_Not_{suffix}");
+            overlay.title.text = LanguageRegister.GetLocalizationTag(key, $"TechScreen_{suffix}");
+            HierarchyHelper.EnsureComponent<UILabelAutotranslate>(overlay.title.gameObject);
+
+            overlay.paramRoot = new()
+            {
+                parameterConditions = []
+            };
+
+            titleTriggeredLabel.text = LanguageRegister.GetLocalizationTag(key, $"TechScreen_Title_{suffix}");
+            titleUntriggeredLabel.text = LanguageRegister.GetLocalizationTag(key, $"TechScreen_Title_Not_{suffix}");
+            instructionTriggeredLabel.text = LanguageRegister.GetLocalizationTag(key, $"TechScreen_Instruction_{suffix}");
+            instructionUntriggeredLabel.text = LanguageRegister.GetLocalizationTag(key, $"TechScreen_Instruction_Not_{suffix}");
+
+
+            return true;
+        }
+
         // lol
         private static readonly Vector3 LIST_SETTER_POSITION = new(591f, 0f, 0f);
         private static readonly Vector3 BUTTON_POSITION = new(784f, 0f, 0f);

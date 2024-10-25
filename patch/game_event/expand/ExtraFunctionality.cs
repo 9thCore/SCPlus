@@ -111,7 +111,7 @@ namespace SCPlus.patch.game_event
 
         private static bool TryCreateTechRandomScreen(out CTechRandomOverlay overlay)
         {
-            if (!TryCreateTechScreen("Random", out overlay)
+            if (!SetterHelper.TryCreateTechScreen(LanguageRegister.LocalizationKey.ExtraFunc, "Random", out overlay)
                 || !HierarchyHelper.TryFindComponentWithLogging(overlay.transform, out UITable table)
                 || !HierarchyHelper.TryFindWithLogging(table.transform, "03_Header_Event_Not_Triggered", out Transform header)
                 || !HierarchyHelper.TryFindWithLogging(table.transform, "04_Table_Events_Not_Triggered", out Transform techList))
@@ -127,53 +127,7 @@ namespace SCPlus.patch.game_event
 
         private static bool TryCreateTechLockScreen(out CTechLockOverlay lockOverlay)
         {
-            return TryCreateTechScreen("Lock", out lockOverlay);
-        }
-
-        private static bool TryCreateTechScreen<T>(string suffix, out T overlay) where T : CTechSelectionOverlay
-        {
-            GameObject techScreen = GameObject.Instantiate(SetterHelper.techTriggerOverlay.gameObject);
-            techScreen.SetActive(false);
-            techScreen.name = $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{LanguageRegister.LocalizationKey.ExtraFunc}_TechScreen_{suffix}";
-            HierarchyHelper.Parent(techScreen.transform, SetterHelper.eventDetails);
-            techScreen.transform.position = Vector3.zero;
-
-            if (!HierarchyHelper.TryFindComponentWithLogging(techScreen.transform, out CTechTriggerOverlay triggerOverlay)
-                || !HierarchyHelper.TryFindComponentWithLogging(triggerOverlay.transform, out UITable table)
-                || !HierarchyHelper.TryFindWithLogging(table.transform, "03_Header_Event_Not_Triggered", out Transform headerUntriggered)
-                || !HierarchyHelper.TryFindWithLogging(table.transform, "00_Header_Event_Triggered", out Transform headerTriggered)
-                || !HierarchyHelper.TryFindWithLogging(headerUntriggered, "Title_Events_Not_Triggered", out Transform titleUntriggered)
-                || !HierarchyHelper.TryFindWithLogging(headerTriggered, "Title_Event_Triggered", out Transform titleTriggered)
-                || !HierarchyHelper.TryFindWithLogging(headerUntriggered, "Instructions", out Transform instructionUntriggered)
-                || !HierarchyHelper.TryFindWithLogging(headerTriggered, "Instruction", out Transform instructionTriggered)
-                || !HierarchyHelper.TryFindComponentWithLogging(titleUntriggered, out UILabel titleUntriggeredLabel)
-                || !HierarchyHelper.TryFindComponentWithLogging(titleTriggered, out UILabel titleTriggeredLabel)
-                || !HierarchyHelper.TryFindComponentWithLogging(instructionUntriggered, out UILabel instructionUntriggeredLabel)
-                || !HierarchyHelper.TryFindComponentWithLogging(instructionTriggered, out UILabel instructionTriggeredLabel))
-            {
-                overlay = null;
-                return false;
-            }
-
-            HierarchyHelper.SwitchComponentWithSub(true, false, triggerOverlay, out overlay);
-
-            overlay.tooltipPositiveText = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_Help_{suffix}");
-            overlay.tooltipNegativeText = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_Help_Not_{suffix}");
-            overlay.title.text = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_{suffix}");
-            HierarchyHelper.EnsureComponent<UILabelAutotranslate>(overlay.title.gameObject);
-
-            overlay.paramRoot = new()
-            {
-                parameterConditions = []
-            };
-
-            titleTriggeredLabel.text = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_Title_{suffix}");
-            titleUntriggeredLabel.text = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_Title_Not_{suffix}");
-            instructionTriggeredLabel.text = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_Instruction_{suffix}");
-            instructionUntriggeredLabel.text = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, $"TechScreen_Instruction_Not_{suffix}");
-
-
-            return true;
+            return SetterHelper.TryCreateTechScreen(LanguageRegister.LocalizationKey.ExtraFunc, "Lock", out lockOverlay);
         }
 
         private static bool TryCreateDragPanel(CTechRandomOverlay randomTechOverlay, CTechLockOverlay lockTechOverlay, out GameObject dragPanel)
