@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using SCPlus.plugin;
+using System.Collections.Generic;
 
 namespace SCPlus.patch.game_event.per_country
 {
@@ -8,16 +9,24 @@ namespace SCPlus.patch.game_event.per_country
         [HarmonyPatch(typeof(ScenarioCreatorAPI), nameof(ScenarioCreatorAPI.LocalExport))]
         private static class ScenarioSavePatch
         {
-            private static void Prefix(ScenarioCreatorAPI __instance)
+            private static void Prefix(ScenarioCreatorAPI __instance, ref List<GameEvent> __state)
             {
                 if (!Config.perCountryEventFunctionality.Value)
                 {
                     return;
                 }
 
+                __state = [];
+
                 foreach (GameEvent gameEvent in perCountryEvents)
                 {
+                    if (!__instance.GameEvents.Contains(gameEvent))
+                    {
+                        continue;
+                    }
+
                     __instance.GameEvents.Remove(gameEvent);
+                    __state.Add(gameEvent);
 
                     ExtraFunctionality.Data data = null;
                     if (Config.expandEventFunctionality.Value)
@@ -56,7 +65,7 @@ namespace SCPlus.patch.game_event.per_country
                 }
             }
 
-            private static void Postfix(ScenarioCreatorAPI __instance)
+            private static void Postfix(ScenarioCreatorAPI __instance, List<GameEvent> __state)
             {
                 if (!Config.perCountryEventFunctionality.Value)
                 {
@@ -68,7 +77,7 @@ namespace SCPlus.patch.game_event.per_country
                     __instance.GameEvents.Remove(gameEvent);
                 }
 
-                foreach (GameEvent gameEvent in perCountryEvents)
+                foreach (GameEvent gameEvent in __state)
                 {
                     __instance.GameEvents.Add(gameEvent);
                 }
