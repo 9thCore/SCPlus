@@ -20,7 +20,7 @@
 - Force *mutation* of one of selected traits in an event
 
  Features are categorised and toggleable in the config.
- For more details, see the wiki.
+ For more details, see the [wiki](https://github.com/9thCore/SCPlus/wiki).
 
 # Installation
 
