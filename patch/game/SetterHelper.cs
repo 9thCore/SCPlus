@@ -197,7 +197,7 @@ namespace SCPlus.patch.game
             GameObject techScreen = GameObject.Instantiate(SetterHelper.techTriggerOverlay.gameObject);
             techScreen.SetActive(false);
             techScreen.name = $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{key}_TechScreen_{suffix}";
-            HierarchyHelper.Parent(techScreen.transform, HierarchyHelper.Root.transform);
+            HierarchyHelper.Parent(techScreen.transform, HierarchyHelper.Camera.transform);
             techScreen.transform.position = Vector3.zero;
 
             if (!HierarchyHelper.TryFindComponentWithLogging(techScreen.transform, out CTechTriggerOverlay triggerOverlay)

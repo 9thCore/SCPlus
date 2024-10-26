@@ -11,6 +11,9 @@ namespace SCPlus.patch.hierarchy
         internal static GameObject root;
         internal static GameObject Root => root ??= GameObject.Find("UI Root (2D)");
 
+        internal static GameObject camera;
+        internal static GameObject Camera => camera ??= Root.transform.Find("Camera").gameObject;
+
         internal static bool TryFindWithLogging(Transform transform, string name, out Transform result)
         {
             if (!TryFind(transform, name, out result))
