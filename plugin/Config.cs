@@ -52,7 +52,7 @@ namespace SCPlus.plugin
                 "Event",
                 nameof(perCountryEventFunctionality),
                 false,
-                "Allow creation of a special \"per-country\" event type, which will run every day for every country.\n/!\\ Not compatible with mobile clients. /!\\");
+                "Allow creation of a special \"per-country\" event type, which will run for every country.\n/!\\ Not compatible with mobile clients. /!\\");
 
             expandTraitFunctionality = config.Bind(
                 "Trait",
