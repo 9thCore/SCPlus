@@ -157,40 +157,23 @@ namespace SCPlus.patch.lang.localization
                 LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "LockTech_Button"),
                 "Configure");
 
-            LanguageRegister.RegisterLine(
+            LanguageRegister.RegisterTechScreen(
                 LANGUAGE,
-                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Lock"),
-                "Trait Lock Settings");
-
-            LanguageRegister.RegisterLine(
-                LANGUAGE,
-                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Title_Lock"),
-                "Trait Lock");
-
-            LanguageRegister.RegisterLine(
-                LANGUAGE,
-                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Instruction_Lock"),
-                "The following traits will be locked when this event fires.");
-
-            LanguageRegister.RegisterLine(
-                LANGUAGE,
-                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Help_Lock"),
-                "Existing trait(s) that will be locked.");
-
-            LanguageRegister.RegisterLine(
-                LANGUAGE,
-                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Title_Not_Lock"),
-                "Trait Unlock");
-
-            LanguageRegister.RegisterLine(
-                LANGUAGE,
-                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Instruction_Not_Lock"),
-                "The following traits will be unlocked when this event fires.");
-
-            LanguageRegister.RegisterLine(
-                LANGUAGE,
-                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Help_Not_Lock"),
-                "Existing trait(s) that will be unlocked.");
+                LanguageRegister.LocalizationKey.ExtraFunc,
+                "Lock",
+                "Trait Lock Settings",
+                new()
+                {
+                    title = "Trait Lock",
+                    instruction = "The following traits will be locked when this event fires.",
+                    help = "Existing trait(s) that will be locked."
+                },
+                new()
+                {
+                    title = "Trait Unlock",
+                    instruction = "The following traits will be unlocked when this event fires.",
+                    help = "Existing trait(s) that will be unlocked."
+                });
 
             // RandomTech
             LanguageRegister.RegisterLine(
@@ -217,25 +200,17 @@ namespace SCPlus.patch.lang.localization
                 LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "RandomTech_Button"),
                 "Configure");
 
-            LanguageRegister.RegisterLine(
+            LanguageRegister.RegisterTechScreen(
                 LANGUAGE,
-                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Random"),
-                "Random Trait List");
-
-            LanguageRegister.RegisterLine(
-                LANGUAGE,
-                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Title_Random"),
-                "Trait List");
-
-            LanguageRegister.RegisterLine(
-                LANGUAGE,
-                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Instruction_Random"),
-                "One of the following traits will be evolved when this event fires, if it can.");
-
-            LanguageRegister.RegisterLine(
-                LANGUAGE,
-                LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "TechScreen_Help_Random"),
-                "Possible trait that will be evolved.");
+                LanguageRegister.LocalizationKey.ExtraFunc,
+                "Random",
+                "Random Trait List",
+                new()
+                {
+                    title = "Trait List",
+                    instruction = "One of the following traits will be evolved when this event fires, if it can.",
+                    help = "Possible trait that will be evolved."
+                });
         }
 
         internal static void PerCountryTranslations()

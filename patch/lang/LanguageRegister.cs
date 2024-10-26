@@ -58,10 +58,28 @@ namespace SCPlus.patch.lang
             RegisterLine(language, $"Help_{commonSuffix}", tooltip);
         }
 
-        internal static void RegisterSetter(string language, LanguageRegister.LocalizationKey key, string internalName, string name, string help)
+        internal static void RegisterSetter(string language, LocalizationKey key, string internalName, string name, string help)
         {
             RegisterLine(language, GetSetterLocalizationTag(key, internalName), name);
             RegisterLine(language, GetSetterHelpLocalizationTag(key, internalName), help);
+        }
+
+        internal static void RegisterTechScreen(string language, LocalizationKey key, string suffix, string overlayTitle, TechScreenListTranslations positive = null, TechScreenListTranslations negative = null)
+        {
+            RegisterLine(language, GetLocalizationTag(key, $"TechScreen_{suffix}"), overlayTitle);
+            if (positive != null)
+            {
+                RegisterLine(language, GetLocalizationTag(key, $"TechScreen_Title_{suffix}"), positive.title);
+                RegisterLine(language, GetLocalizationTag(key, $"TechScreen_Instruction_{suffix}"), positive.instruction);
+                RegisterLine(language, GetLocalizationTag(key, $"TechScreen_Help_{suffix}"), positive.help);
+            }
+
+            if (negative != null)
+            {
+                RegisterLine(language, GetLocalizationTag(key, $"TechScreen_Title_Not_{suffix}"), negative.title);
+                RegisterLine(language, GetLocalizationTag(key, $"TechScreen_Instruction_Not_{suffix}"), negative.instruction);
+                RegisterLine(language, GetLocalizationTag(key, $"TechScreen_Help_Not_{suffix}"), negative.help);
+            }
         }
 
         internal static void RegisterLine(string language, string tag, string line)
@@ -96,6 +114,13 @@ namespace SCPlus.patch.lang
             ExtraFunc,
             PerCountry,
             TechExtraFunc
+        }
+
+        internal class TechScreenListTranslations
+        {
+            internal string title = "";
+            internal string instruction = "";
+            internal string help = "";
         }
     }
 }
