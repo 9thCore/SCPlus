@@ -229,6 +229,69 @@ namespace SCPlus.patch.lang.localization
                 "EventLocked",
                 $"{LanguageRegister.SCPLUS_PREFIX} Event Lock",
                 $"Determines whether a trait is event locked on start.\nWill not be visible or evolvable until unlocked through an event.{(Config.expandEventFunctionality.Value ? "\nCheck expanded event functionality for more information." : "\nEnable expanded event functionality for ability through the UI.")}");
+
+            if (Config.replaceTraitRequirement.Value)
+            {
+                LanguageRegister.RegisterSetter(
+                    LANGUAGE,
+                    LanguageRegister.LocalizationKey.TechExtraFunc,
+                    "Requirement",
+                    $"{LanguageRegister.SCPLUS_PREFIX} Requirements",
+                    $"Traits that have to be evolved before this trait becomes available.\nCombines the \"And\" and \"Or\" lists.");
+
+                LanguageRegister.RegisterLine(
+                    LANGUAGE,
+                    LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.TechExtraFunc, "Requirement_Button"),
+                    "Configure");
+
+                LanguageRegister.RegisterTechScreen(
+                    LANGUAGE,
+                    LanguageRegister.LocalizationKey.TechExtraFunc,
+                    "Requirement",
+                    "Tech Requirement Configuration",
+                    new()
+                    {
+                        title = "Requires all of",
+                        instruction = "Every following trait must be evolved before this trait becomes available.",
+                        help = "Required trait before this trait becomes available."
+                    },
+                    new()
+                    {
+                        title = "Requires either",
+                        instruction = "One of the following traits must be evolved before this trait becomes available.",
+                        help = "One of the required traits before this trait becomes available."
+                    });
+
+                LanguageRegister.RegisterSetter(
+                    LANGUAGE,
+                    LanguageRegister.LocalizationKey.TechExtraFunc,
+                    "RequirementNot",
+                    $"{LanguageRegister.SCPLUS_PREFIX} Inverted Requirements",
+                    $"Traits that have to not be evolved before this trait becomes available.\nCombines the \"And\" and \"Or\" lists.");
+
+                LanguageRegister.RegisterLine(
+                    LANGUAGE,
+                    LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.TechExtraFunc, "RequirementNot_Button"),
+                    "Configure");
+
+                LanguageRegister.RegisterTechScreen(
+                    LANGUAGE,
+                    LanguageRegister.LocalizationKey.TechExtraFunc,
+                    "RequirementNot",
+                    "Tech Requirement Configuration",
+                    new()
+                    {
+                        title = "Requires none of",
+                        instruction = "Every following trait must not be evolved before this trait becomes available.",
+                        help = "Required to be unevolved trait before this trait becomes available."
+                    },
+                    new()
+                    {
+                        title = "Requires neither",
+                        instruction = "One of the following traits must not be evolved before this trait becomes available.",
+                        help = "One of the required traits to be unevolved before this trait becomes available."
+                    });
+            }
         }
     }
 }

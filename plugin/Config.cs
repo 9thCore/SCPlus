@@ -13,6 +13,7 @@ namespace SCPlus.plugin
         internal static ConfigEntry<bool> expandEventFunctionality;
         internal static ConfigEntry<bool> perCountryEventFunctionality;
         internal static ConfigEntry<bool> expandTraitFunctionality;
+        internal static ConfigEntry<bool> replaceTraitRequirement;
 
         internal static void Awake()
         {
@@ -51,6 +52,12 @@ namespace SCPlus.plugin
                 nameof(expandTraitFunctionality),
                 true,
                 $"Expand possibilities with a trait, exposing inaccessible functionality. Synergies with {nameof(expandEventFunctionality)} (Trait Lock)");
+
+            replaceTraitRequirement = config.Bind(
+                "Trait",
+                nameof(replaceTraitRequirement),
+                true,
+                $"Subtype of {nameof(expandTraitFunctionality)} (will not work without), replaces trait requirement selection with custom implementation and adds \"not\" variants (allows more than 3 traits per type)");
         }
     }
 }
