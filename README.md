@@ -9,14 +9,14 @@
 
 # Feature list
 
-	- Patch translation to fix the infamous trait lowercasing bug!
-	- Patch the Disease Shape option so they're ordered like in the base game
-	- Expose more variables to the event outcome/condition editor
-	- Allow reading/writing of all variables, regardless of disease type
-	- Expose "Event lock" on traits, and locking/unlocking functionality on events
-	- Expose the Not requirements of traits (will become unavailable if selected traits are evolved), and remove the limit of 3 requirements per trait
-	- Allow creation of a convenient "Per Country" event type, which will run for every country if conditions match
-		- Disabled by default, as it is not supported on mobile builds (they can only run one event a turn)
+- Patch translation to fix the infamous trait lowercasing bug!
+- Patch the Disease Shape option so they're ordered like in the base game
+- Expose more variables to the event outcome/condition editor
+- Allow reading/writing of all variables, regardless of disease type
+- Expose "Event lock" on traits, and locking/unlocking functionality on events
+- Expose the Not requirements of traits (will become unavailable if selected traits are evolved), and remove the limit of 3 requirements per trait
+- Allow creation of a convenient "Per Country" event type, which will run for every country if conditions match
+	- Disabled by default, as it is not supported on mobile builds (they can only run one event a turn)
 	- Force *mutation* of one of selected traits in an event
 
  Features are categorised and toggleable in the config.
@@ -24,9 +24,9 @@
 
 # Installation
 
-	1. [Install BepInEx](https://docs.bepinex.dev/articles/user_guide/installation/index.html) (I use 5.4.21 myself, latest 5.4.X.X should work fine)
-	2. Obtain a copy of the compiled dll (whether this is through building the mod yourself, or through [Releases](https://github.com/9thCore/SCPlus/releases), your choice)
-	3. Drop plugin into Scenario Creator files: `PlagueInc/ScenarioCreator/BepInEx/plugins/SCPlus/the_mod_file.dll`
-	4. Run game
-	5. Check existence of `PlagueInc/ScenarioCreator/BepInEx/config/SCPlus.cfg`
-	6. If it exists, the mod has been correctly installed! This is the config through which you can choose what features to use
+1. [Install BepInEx](https://docs.bepinex.dev/articles/user_guide/installation/index.html) (I use 5.4.21 myself, latest 5.4.X.X should work fine)
+2. Obtain a copy of the compiled dll (whether this is through building the mod yourself, or through [Releases](https://github.com/9thCore/SCPlus/releases), your choice)
+3. Drop plugin into Scenario Creator files: `PlagueInc/ScenarioCreator/BepInEx/plugins/SCPlus/the_mod_file.dll`
+4. Run game
+5. Check existence of `PlagueInc/ScenarioCreator/BepInEx/config/SCPlus.cfg`
+6. If it exists, the mod has been correctly installed! This is the config through which you can choose what features to use
