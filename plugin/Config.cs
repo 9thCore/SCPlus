@@ -8,6 +8,7 @@ namespace SCPlus.plugin
     {
         internal static readonly ConfigFile config = new(Path.Combine(Paths.ConfigPath, "SCPlus.cfg"), true);
         internal static ConfigEntry<bool> patchTranslationLowercasing;
+        internal static ConfigEntry<bool> diseaseShapeNameFix;
         internal static ConfigEntry<bool> liftVariableTypeCheck;
         internal static ConfigEntry<bool> exposeMoreVariables;
         internal static ConfigEntry<bool> expandEventFunctionality;
@@ -22,6 +23,12 @@ namespace SCPlus.plugin
                 nameof(patchTranslationLowercasing),
                 true,
                 "Patch translation code to return un-lowercased text, if the string is not localised.");
+
+            diseaseShapeNameFix = config.Bind(
+                "QOL",
+                nameof(diseaseShapeNameFix),
+                true,
+                "Patch the \"Disease shape\" setting to be ordered like basegame plague type ordering and remove the erronous \"empty\" setting.");
 
             liftVariableTypeCheck = config.Bind(
                 "Variable",
