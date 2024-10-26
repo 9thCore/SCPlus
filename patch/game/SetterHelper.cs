@@ -188,10 +188,16 @@ namespace SCPlus.patch.game
 
         internal static bool TryCreateTechScreen<T>(LanguageRegister.LocalizationKey key, string suffix, out T overlay) where T : CTechSelectionOverlay
         {
+            if (!EventScreenExists())
+            {
+                overlay = null;
+                return false;
+            }
+
             GameObject techScreen = GameObject.Instantiate(SetterHelper.techTriggerOverlay.gameObject);
             techScreen.SetActive(false);
             techScreen.name = $"{LanguageRegister.SCPLUS_TRANSLATION_KEY}_{key}_TechScreen_{suffix}";
-            HierarchyHelper.Parent(techScreen.transform, SetterHelper.eventDetails);
+            HierarchyHelper.Parent(techScreen.transform, HierarchyHelper.Root.transform);
             techScreen.transform.position = Vector3.zero;
 
             if (!HierarchyHelper.TryFindComponentWithLogging(techScreen.transform, out CTechTriggerOverlay triggerOverlay)
