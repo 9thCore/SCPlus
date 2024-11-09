@@ -7,7 +7,7 @@
  Nothing stops a mobile client from downloading and playing the scenario, but using *anything* added in SCPlus is probably not going to work as expected.  
  (Tested on an unmodded, real mobile client)
 
- If bugs which cannot be reproduced without the mod crop up, please do post them in [issues](https://github.com/9thCore/SCPlus/issues)!
+ If bugs which cannot be reproduced without the mod crop up, please do post them in [the issue tracker](https://github.com/9thCore/SCPlus/issues)!
 
 # Feature list
 
