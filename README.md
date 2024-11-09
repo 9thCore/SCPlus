@@ -18,7 +18,7 @@
 - Expose "Event lock" on traits, and locking/unlocking functionality on events
 - Expose the Not requirements of traits (will become unavailable if selected traits are evolved), and remove the limit of 3 requirements per trait
 - Allow creation of a convenient "Per Country" event type, which will run for every country if conditions match
-	- Disabled by default, as it is not supported on mobile builds (they can only run one event a turn)
+	- Disabled by default
 - Force *mutation* of one of selected traits in an event
 
  Features are categorised and toggleable in the config.
