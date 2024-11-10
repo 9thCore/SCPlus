@@ -27,8 +27,10 @@
 # Installation
 
 1. [Install BepInEx](https://docs.bepinex.dev/articles/user_guide/installation/index.html) (I use 5.4.21 myself, latest 5.4.X.X should work fine)
-2. Obtain a copy of the compiled dll (whether this is through building the mod yourself, or through [Releases](https://github.com/9thCore/SCPlus/releases), your choice)
-3. Drop plugin into Scenario Creator files: `PlagueInc/ScenarioCreator/BepInEx/plugins/SCPlus/the_mod_file.dll`
-4. Run game
-5. Check existence of `PlagueInc/ScenarioCreator/BepInEx/config/SCPlus.cfg`
-6. If it exists, the mod has been correctly installed! This is the config through which you can choose what features to use
+2. Run the Scenario Creator
+3. Check existence of `PlagueInc/ScenarioCreator/BepInEx`
+4. Obtain a copy of the compiled dll (whether this is through building the mod yourself, or through [Releases](https://github.com/9thCore/SCPlus/releases), your choice)
+5. Drop plugin into Scenario Creator files: `PlagueInc/ScenarioCreator/BepInEx/plugins/SCPlus/the_mod_file.dll`
+6. Run the Scenario Creator
+7. Check existence of `PlagueInc/ScenarioCreator/BepInEx/config/SCPlus.cfg`
+8. If it exists, the mod has been correctly installed! This is the config through which you can choose what features to use
