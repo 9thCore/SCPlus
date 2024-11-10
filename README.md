@@ -4,7 +4,7 @@
  Most patches are used in events: that is, to say, some general knowledge of events is required in order to truly leverage the mod.
 
  All features are compatible with the latest, unmodded build of Plague Inc. Evolved (PC). Full support for console builds *is not guaranteed*, and mobile is *declared unsupported*.  
- Nothing stops a mobile client from downloading and playing the scenario, but using *anything* added in SCPlus is probably not going to work as expected.  
+ Nothing stops a mobile client from downloading and playing the scenario, but using *anything* added in SCPlus is probably not going to work as expected. Simply having SCPlus installed without using any of its features, though, is perfectly fine.  
  (Tested on an unmodded, real mobile client)
 
  If bugs which cannot be reproduced without the mod crop up, please do post them in [the issue tracker](https://github.com/9thCore/SCPlus/issues)!
