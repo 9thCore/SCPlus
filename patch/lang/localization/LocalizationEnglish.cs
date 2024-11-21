@@ -293,5 +293,56 @@ namespace SCPlus.patch.lang.localization
                     });
             }
         }
+
+        internal static void PatchedVariableNamesTranslations()
+        {
+            LanguageRegister.RegisterVariable(
+                    LANGUAGE,
+                    "Event_Variable_wealthy_country",
+                    "Is wealthy country",
+                    "Whether the country is wealthy");
+
+            LanguageRegister.RegisterVariable(
+                    LANGUAGE,
+                    "Event_Variable_poverty_country",
+                    "Is poor country",
+                    "Whether the country is poor");
+
+            LanguageRegister.RegisterVariable(
+                    LANGUAGE,
+                    "Event_Variable_urban_country",
+                    "Is urban country",
+                    "Whether the country is urban");
+
+            LanguageRegister.RegisterVariable(
+                    LANGUAGE,
+                    "Event_Variable_rural_country",
+                    "Is rural country",
+                    "Whether the country is rural");
+
+            LanguageRegister.RegisterVariable(
+                    LANGUAGE,
+                    "Event_Variable_hot_country",
+                    "Is hot country",
+                    "Whether the country is hot");
+
+            LanguageRegister.RegisterVariable(
+                    LANGUAGE,
+                    "Event_Variable_cold_country",
+                    "Is cold country",
+                    "Whether the country is cold");
+
+            LanguageRegister.RegisterVariable(
+                    LANGUAGE,
+                    "Event_Variable_humid_country",
+                    "Is humid country",
+                    "Whether the country is humid");
+
+            LanguageRegister.RegisterVariable(
+                    LANGUAGE,
+                    "Event_Variable_arid_country",
+                    "Is arid country",
+                    "Whether the country is arid");
+        }
     }
 }

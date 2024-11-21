@@ -31,6 +31,11 @@ namespace SCPlus.patch.lang
             {
                 LocalizationEnglish.TechExtraFunctionalityTranslations();
             }
+            
+            if (Config.patchVariableName.Value)
+            {
+                LocalizationEnglish.PatchedVariableNamesTranslations();
+            }
         }
 
         internal static void RegisterSCPlusVariableFromExisting(string language, string commonSuffix, string existingVariable = null, string namePrefix = "", string nameSuffix = "", string tooltipPrefix = "", string tooltipSuffix = "")
