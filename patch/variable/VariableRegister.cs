@@ -164,6 +164,14 @@ namespace SCPlus.patch.variable
                 .Complexity(ComplexityType.ADVANCED)
                 .AsEnum(typeof(EApeColonyState))
                 .Register();
+
+            new VariableBuilder("country_number", "Country")
+                .Category(CategoryType.COUNTRY_DATA)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.SUPER_ADVANCED)
+                .Condition()
+                .Expression()
+                .Register();
         }
     }
 }

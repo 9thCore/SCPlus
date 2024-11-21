@@ -130,6 +130,12 @@ namespace SCPlus.patch.lang.localization
                 "Change_ape_colony_state",
                 "Change Ape Colony State",
                 "Activate, destroy or remove the ape colony in the country.");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "country_number",
+                "Country ID",
+                "Numerical ID used to represent the current country.\nUseful for reliably picking a country randomly, by rolling a number between 1 and 58 (and checking equality with this variable).");
         }
 
         internal static void ExtraFunctionalityTranslations()

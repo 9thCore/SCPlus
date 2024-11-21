@@ -63,6 +63,7 @@ namespace SCPlus.patch.variable
                 CategoryType.ZOMBIE => Category("Zombie"),
                 CategoryType.GENERAL => Category("General"),
                 CategoryType.DISEASE_EFFECTS => Category("Disease Effects"),
+                CategoryType.COUNTRY_DATA => Category("Country Data"),
                 _ => this,
             };
         }
@@ -207,7 +208,8 @@ namespace SCPlus.patch.variable
             APE,
             ZOMBIE,
             GENERAL,
-            DISEASE_EFFECTS
+            DISEASE_EFFECTS,
+            COUNTRY_DATA
         }
 
         internal enum ComplexityType
