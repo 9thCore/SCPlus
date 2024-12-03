@@ -137,6 +137,60 @@ namespace SCPlus.patch.lang.localization
                 "country_number",
                 "Country ID",
                 "Numerical ID used to represent the current country.\nUseful for reliably picking a country randomly, by rolling a number between 1 and 58 (and checking equality with this variable).");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "D2ZOverride",
+                "Additional zombies (dead)",
+                "Extra number of people that will be moved from dead population to zombie population in a country that turn. Does nothing if plague is not Necroa");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "I2ZOverride",
+                "Additional zombies (infected)",
+                "Extra number of people that will be moved from infected population to zombie population in a country that turn.  Does nothing if plague is not Necroa");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "H2ZOverride",
+                "Additional zombies (healthy)",
+                "Extra number of people that will be moved from healthy population to zombie population in a country that turn.  Does nothing if plague is not Necroa");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "Z2DOverride",
+                "Additional deaths (zombie)",
+                "Extra number of people that will be moved from zombie population to dead population in a country that turn. Does nothing if plague is not Necroa");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "H2DOverride",
+                "Additional deaths (healthy)",
+                "Extra number of people that will be moved from healthy population to dead population in a country that turn");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "flask_broken",
+                "Broken flasks",
+                "Number of broken research flasks in the country. In the range [0, 10]. Gets set every turn.");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "flask_researched",
+                "Active flasks",
+                "Number of active research flasks in the country. In the range [0, 10]. Gets set every turn.");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "flask_empty",
+                "Inactive flasks",
+                "Number of inactive research flasks in the country. In the range [0, 10]. Gets set every turn.");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "vampire_obituary_count",
+                "Vampire obituary count",
+                "Local vampire death count. Increases by 1 when a vampire dies, but gets reset to 0 by a main-game event and causes a pop-up (cannot be disabled). A custom event that resets this should run before the main-game event, though");
         }
 
         internal static void ExtraFunctionalityTranslations()

@@ -172,6 +172,69 @@ namespace SCPlus.patch.variable
                 .Condition()
                 .Expression()
                 .Register();
+
+            new VariableBuilder("D2ZOverride", "Country")
+                .Category(CategoryType.POPULATION)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("I2ZOverride", "Country")
+                .Category(CategoryType.POPULATION)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("H2ZOverride", "Country")
+                .Category(CategoryType.POPULATION)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("Z2DOverride", "Country")
+                .Category(CategoryType.POPULATION)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("H2DOverride", "Country")
+                .Category(CategoryType.POPULATION)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("flask_broken", "Country")
+                .Category(CategoryType.HUMAN_RESPONSE)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("flask_researched", "Country")
+                .Category(CategoryType.HUMAN_RESPONSE)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("flask_empty", "Country")
+                .Category(CategoryType.HUMAN_RESPONSE)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
+
+            new VariableBuilder("vampire_obituary_count", "Country")
+                .Category(CategoryType.VAMPIRE)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsNumber()
+                .Register();
         }
     }
 }

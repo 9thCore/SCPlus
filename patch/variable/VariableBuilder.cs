@@ -61,6 +61,7 @@ namespace SCPlus.patch.variable
                 CategoryType.POPULATION => Category("Population"),
                 CategoryType.APE => Category("Ape"),
                 CategoryType.ZOMBIE => Category("Zombie"),
+                CategoryType.VAMPIRE => Category("Vampire"),
                 CategoryType.GENERAL => Category("General"),
                 CategoryType.DISEASE_EFFECTS => Category("Disease Effects"),
                 CategoryType.COUNTRY_DATA => Category("Country Data"),
@@ -207,6 +208,7 @@ namespace SCPlus.patch.variable
             POPULATION,
             APE,
             ZOMBIE,
+            VAMPIRE,
             GENERAL,
             DISEASE_EFFECTS,
             COUNTRY_DATA
