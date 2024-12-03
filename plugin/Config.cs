@@ -12,6 +12,7 @@ namespace SCPlus.plugin
         internal static ConfigEntry<bool> patchVariableName;
         internal static ConfigEntry<bool> liftVariableTypeCheck;
         internal static ConfigEntry<bool> exposeMoreVariables;
+        internal static ConfigEntry<bool> widenVariableAccessibility;
         internal static ConfigEntry<bool> expandEventFunctionality;
         internal static ConfigEntry<bool> perCountryEventFunctionality;
         internal static ConfigEntry<bool> expandTraitFunctionality;
@@ -48,6 +49,12 @@ namespace SCPlus.plugin
                 nameof(exposeMoreVariables),
                 true,
                 "Expose variables to the Scenario Creator that are not usually accessible. Not all may be settable.");
+
+            widenVariableAccessibility = config.Bind(
+                "Variable",
+                nameof(widenVariableAccessibility),
+                true,
+                "Widen the accessibility of some variables.");
 
             expandEventFunctionality = config.Bind(
                 "Event",

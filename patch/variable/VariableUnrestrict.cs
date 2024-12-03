@@ -42,5 +42,28 @@ namespace SCPlus.patch.variable
                 variable.diseaseType = ""; // Just clear it out
             }
         }
+
+        internal static void WidenAccessibility()
+        {
+            if (!Config.widenVariableAccessibility.Value)
+            {
+                return;
+            }
+
+            VariableHelpers.WidenAccess(
+                "localZCombatStrength",
+                VariableHelpers.File.LOCALDISEASE,
+                VariableHelpers.AccessModifier.CONDITION);
+
+            VariableHelpers.WidenAccess(
+                "localHCombatStrength",
+                VariableHelpers.File.COUNTRY,
+                VariableHelpers.AccessModifier.CONDITION);
+
+            VariableHelpers.WidenAccess(
+                "cureRequirements",
+                VariableHelpers.File.DISEASE,
+                VariableHelpers.AccessModifier.OUTCOME | VariableHelpers.AccessModifier.EXPRESSION);
+        }
     }
 }

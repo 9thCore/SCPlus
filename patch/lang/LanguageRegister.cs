@@ -36,6 +36,11 @@ namespace SCPlus.patch.lang
             {
                 LocalizationEnglish.PatchedVariableNamesTranslations();
             }
+
+            if (Config.widenVariableAccessibility.Value)
+            {
+                LocalizationEnglish.WidenedAccessVariableTranslations();
+            }
         }
 
         internal static void RegisterSCPlusVariableFromExisting(string language, string commonSuffix, string existingVariable = null, string namePrefix = "", string nameSuffix = "", string tooltipPrefix = "", string tooltipSuffix = "")
@@ -55,6 +60,12 @@ namespace SCPlus.patch.lang
         internal static void RegisterSCPlusLine(string language, string suffix, string line)
         {
             RegisterLine(language, $"{SCPLUS_TRANSLATION_KEY}_{suffix}", line);
+        }
+
+        internal static void ModifyVariable(string language, string commonSuffix, string namePrefix = "", string nameSuffix = "", string tooltipPrefix = "", string tooltipSuffix = "")
+        {
+            ModifyLine(language, $"UI_Event_Variable_{commonSuffix}", namePrefix, nameSuffix);
+            ModifyLine(language, $"Help_Event_Variable_{commonSuffix}", tooltipPrefix, tooltipSuffix);
         }
 
         internal static void RegisterVariable(string language, string commonSuffix, string name, string tooltip)
@@ -85,6 +96,24 @@ namespace SCPlus.patch.lang
                 RegisterLine(language, GetLocalizationTag(key, $"TechScreen_Instruction_Not_{suffix}"), negative.instruction);
                 RegisterLine(language, GetLocalizationTag(key, $"TechScreen_Help_Not_{suffix}"), negative.help);
             }
+        }
+
+        internal static void ModifyLine(string language, string tag, string prefix = "", string suffix = "")
+        {
+            if (!CLocalisationManager.LanguageExists(language) || !CLocalisationManager.mpLocalisedTexts.ContainsKey(language))
+            {
+                Plugin.Logger.LogError($"Invalid language {language}");
+                return;
+            }
+
+            tag = tag.ToLower();
+            if (!CLocalisationManager.mpLocalisedTexts[language].ContainsKey(tag))
+            {
+                Plugin.Logger.LogError($"Invalid tag {tag} - cannot modify something that does not exist");
+                return;
+            }
+
+            CLocalisationManager.mpLocalisedTexts[language][tag] = $"{prefix}{CLocalisationManager.mpLocalisedTexts[language][tag]}{suffix}";
         }
 
         internal static void RegisterLine(string language, string tag, string line)

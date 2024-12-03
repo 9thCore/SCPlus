@@ -1,4 +1,5 @@
-﻿using SCPlus.plugin;
+﻿using SCPlus.patch.variable;
+using SCPlus.plugin;
 
 namespace SCPlus.patch.lang.localization
 {
@@ -349,6 +350,17 @@ namespace SCPlus.patch.lang.localization
                     "Event_Variable_arid_country",
                     "Is arid country",
                     "Whether the country is arid");
+        }
+
+        internal static void WidenedAccessVariableTranslations()
+        {
+            foreach (EventVariable variable in VariableHelpers.widenedAccessVariables)
+            {
+                LanguageRegister.ModifyLine(
+                    LANGUAGE,
+                    $"Help_Event_Variable_{variable.variable}",
+                    suffix: $"\n{LanguageRegister.SCPLUS_PREFIX} Widened access");
+            }
         }
     }
 }

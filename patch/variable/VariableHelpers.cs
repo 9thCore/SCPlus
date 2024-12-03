@@ -1,7 +1,12 @@
-﻿namespace SCPlus.patch.variable
+﻿using System;
+using System.Collections.Generic;
+
+namespace SCPlus.patch.variable
 {
     internal static class VariableHelpers
     {
+        internal static List<EventVariable> widenedAccessVariables = [];
+
         // Update a variable by registering it in the correct dictionaries
         internal static void UpdateVariable(EventVariable variable)
         {
@@ -76,6 +81,40 @@
         internal static string GetFullVariableKey(EventVariable variable)
         {
             return variable.diseaseType.Length > 0 ? $"{GetVariableKey(variable)}/{variable.diseaseType}" : GetVariableKey(variable);
+        }
+
+        internal static void WidenAccess(string name, File file, AccessModifier modifier)
+        {
+            EventVariable variable = ScenarioCreatorAPI.Instance.GetEventVariable(name, file.ToString());
+            if (variable == null)
+            {
+                return;
+            }
+
+            variable.condition = modifier.HasFlag(AccessModifier.CONDITION) ? 1 : variable.condition;
+            variable.expression = modifier.HasFlag(AccessModifier.EXPRESSION) ? 1 : variable.expression;
+            variable.outcome = modifier.HasFlag(AccessModifier.OUTCOME) ? 1 : variable.outcome;
+
+            if (modifier != 0)
+            {
+                UpdateVariable(variable);
+                widenedAccessVariables.Add(variable);
+            }
+        }
+
+        internal enum File
+        {
+            LOCALDISEASE,
+            COUNTRY,
+            DISEASE
+        }
+
+        [Flags]
+        internal enum AccessModifier
+        {
+            CONDITION = 1,
+            EXPRESSION = 2,
+            OUTCOME = 4
         }
     }
 }
