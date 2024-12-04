@@ -64,6 +64,11 @@ namespace SCPlus.patch.variable
                 "cureRequirements",
                 VariableHelpers.File.DISEASE,
                 VariableHelpers.AccessModifier.OUTCOME | VariableHelpers.AccessModifier.EXPRESSION);
+
+            VariableHelpers.WidenAccess(
+                "cureFlag",
+                VariableHelpers.File.DISEASE,
+                VariableHelpers.AccessModifier.OUTCOME);
         }
     }
 }
