@@ -1,7 +1,8 @@
-﻿using SCPlus.patch.game;
+﻿using HarmonyLib;
 using SCPlus.patch.lang.localization;
 using SCPlus.plugin;
 using System;
+using System.Collections.Generic;
 
 namespace SCPlus.patch.lang
 {
@@ -9,6 +10,8 @@ namespace SCPlus.patch.lang
     {
         internal static readonly string SCPLUS_PREFIX = "[+]";
         internal static readonly string SCPLUS_TRANSLATION_KEY = "SCPlus";
+
+        internal static HashSet<string> TYPE_MODIFIED_LANGUAGES = [];
 
         internal static void Awake()
         {
@@ -40,6 +43,15 @@ namespace SCPlus.patch.lang
             if (Config.widenVariableAccessibility.Value)
             {
                 LocalizationEnglish.WidenedAccessVariableTranslations();
+            }
+
+            if (Config.describeVariableType.Value)
+            {
+                // this actually kinda sucks but whatever
+                // avoid all those pesky warnings and such by accessing .Type
+                UnityEngine.Debug.unityLogger.logEnabled = false;
+                LocalizationEnglish.DescribeVariableTypeTranslations();
+                UnityEngine.Debug.unityLogger.logEnabled = true;
             }
         }
 
@@ -98,18 +110,24 @@ namespace SCPlus.patch.lang
             }
         }
 
-        internal static void ModifyLine(string language, string tag, string prefix = "", string suffix = "")
+        internal static void ModifyLine(string language, string tag, string prefix = "", string suffix = "", bool silentError = false)
         {
             if (!CLocalisationManager.LanguageExists(language) || !CLocalisationManager.mpLocalisedTexts.ContainsKey(language))
             {
-                Plugin.Logger.LogError($"Invalid language {language}");
+                if (!silentError)
+                {
+                    Plugin.Logger.LogError($"Invalid language {language}");
+                }
                 return;
             }
 
             tag = tag.ToLower();
             if (!CLocalisationManager.mpLocalisedTexts[language].ContainsKey(tag))
             {
-                Plugin.Logger.LogError($"Invalid tag {tag} - cannot modify something that does not exist");
+                if (!silentError)
+                {
+                    Plugin.Logger.LogError($"Invalid tag {tag} - cannot modify something that does not exist");
+                }
                 return;
             }
 
@@ -141,6 +159,54 @@ namespace SCPlus.patch.lang
         internal static string GetLocalizationTag(LocalizationKey key, string suffix)
         {
             return $"{SCPLUS_TRANSLATION_KEY}_{key}_{suffix}";
+        }
+
+        internal static void DefaultDescribeVariableTypes(string language, string suffixFormat = "Type: {0}")
+        {
+            TYPE_MODIFIED_LANGUAGES.Add(language);
+
+            foreach (EventVariable variable in ScenarioCreatorAPI.Instance.sortedEventVariables)
+            {
+                if (variable.Type == null)
+                {
+                    continue;
+                }
+
+                string rep = !string.IsNullOrWhiteSpace(variable.outcomeListData) ? variable.outcomeListData :
+                    Type.GetTypeCode(variable.Type).ToString();
+
+                ModifyLine(
+                    language,
+                    variable.tooltip,
+                    suffix: $"\n{SCPLUS_PREFIX} {String.Format(suffixFormat, rep)}",
+                    silentError: true);
+            }
+        }
+
+        internal static void FillDescribeVariableTypes(string language)
+        {
+            if (!Config.describeVariableType.Value)
+            {
+                return;
+            }
+
+            if (TYPE_MODIFIED_LANGUAGES.Contains(language))
+            {
+                return;
+            }
+
+            DefaultDescribeVariableTypes(language);
+        }
+
+        [HarmonyPatch(typeof(CLocalisationManager), nameof(CLocalisationManager.InitialiseLanguage))]
+        private static class Patch
+        {
+            private static void Postfix(string languageName)
+            {
+                UnityEngine.Debug.unityLogger.logEnabled = false;
+                FillDescribeVariableTypes(languageName);
+                UnityEngine.Debug.unityLogger.logEnabled = true;
+            }
         }
 
         internal enum LocalizationKey

@@ -13,6 +13,7 @@ namespace SCPlus.plugin
         internal static ConfigEntry<bool> liftVariableTypeCheck;
         internal static ConfigEntry<bool> exposeMoreVariables;
         internal static ConfigEntry<bool> widenVariableAccessibility;
+        internal static ConfigEntry<bool> describeVariableType;
         internal static ConfigEntry<bool> expandEventFunctionality;
         internal static ConfigEntry<bool> perCountryEventFunctionality;
         internal static ConfigEntry<bool> expandTraitFunctionality;
@@ -55,6 +56,12 @@ namespace SCPlus.plugin
                 nameof(widenVariableAccessibility),
                 true,
                 "Widen the accessibility of some variables.");
+
+            describeVariableType = config.Bind(
+                "Variable",
+                nameof(describeVariableType),
+                true,
+                "Mention the type of the variable chosen. Useful if an integer is to be desired (for, say, floor-ing or such)");
 
             expandEventFunctionality = config.Bind(
                 "Event",

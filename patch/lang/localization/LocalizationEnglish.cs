@@ -416,5 +416,10 @@ namespace SCPlus.patch.lang.localization
                     suffix: $"\n{LanguageRegister.SCPLUS_PREFIX} Widened access");
             }
         }
+
+        internal static void DescribeVariableTypeTranslations()
+        {
+            LanguageRegister.DefaultDescribeVariableTypes(LANGUAGE);
+        }
     }
 }
