@@ -408,13 +408,7 @@ namespace SCPlus.patch.lang.localization
 
         internal static void WidenedAccessVariableTranslations()
         {
-            foreach (EventVariable variable in VariableHelpers.widenedAccessVariables)
-            {
-                LanguageRegister.ModifyLine(
-                    LANGUAGE,
-                    $"Help_Event_Variable_{variable.variable}",
-                    suffix: $"\n{LanguageRegister.SCPLUS_PREFIX} Widened access");
-            }
+            LanguageRegister.DefaultWidenAccess(LANGUAGE);
         }
 
         internal static void DescribeVariableTypeTranslations()

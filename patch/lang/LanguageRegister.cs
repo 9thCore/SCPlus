@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using SCPlus.patch.lang.localization;
+using SCPlus.patch.variable;
 using SCPlus.plugin;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace SCPlus.patch.lang
         internal static readonly string SCPLUS_PREFIX = "[+]";
         internal static readonly string SCPLUS_TRANSLATION_KEY = "SCPlus";
 
+        internal static HashSet<string> WIDEN_ACCESS_MODIFIED_LANGUAGES = [];
         internal static HashSet<string> TYPE_MODIFIED_LANGUAGES = [];
 
         internal static void Awake()
@@ -161,6 +163,34 @@ namespace SCPlus.patch.lang
             return $"{SCPLUS_TRANSLATION_KEY}_{key}_{suffix}";
         }
 
+        internal static void DefaultWidenAccess(string language, string suffix = "Widened access")
+        {
+            WIDEN_ACCESS_MODIFIED_LANGUAGES.Add(language);
+
+            foreach (EventVariable variable in VariableHelpers.widenedAccessVariables)
+            {
+                LanguageRegister.ModifyLine(
+                    language,
+                    $"Help_Event_Variable_{variable.variable}",
+                    suffix: $"\n{LanguageRegister.SCPLUS_PREFIX} {suffix}");
+            }
+        }
+
+        internal static void FillWidenAccess(string language)
+        {
+            if (!Config.widenVariableAccessibility.Value)
+            {
+                return;
+            }
+
+            if (WIDEN_ACCESS_MODIFIED_LANGUAGES.Contains(language))
+            {
+                return;
+            }
+
+            DefaultWidenAccess(language);
+        }
+
         internal static void DefaultDescribeVariableTypes(string language, string suffixFormat = "Type: {0}")
         {
             TYPE_MODIFIED_LANGUAGES.Add(language);
@@ -195,7 +225,9 @@ namespace SCPlus.patch.lang
                 return;
             }
 
+            UnityEngine.Debug.unityLogger.logEnabled = false;
             DefaultDescribeVariableTypes(language);
+            UnityEngine.Debug.unityLogger.logEnabled = true;
         }
 
         [HarmonyPatch(typeof(CLocalisationManager), nameof(CLocalisationManager.InitialiseLanguage))]
@@ -203,9 +235,8 @@ namespace SCPlus.patch.lang
         {
             private static void Postfix(string languageName)
             {
-                UnityEngine.Debug.unityLogger.logEnabled = false;
+                FillWidenAccess(languageName);
                 FillDescribeVariableTypes(languageName);
-                UnityEngine.Debug.unityLogger.logEnabled = true;
             }
         }
 
