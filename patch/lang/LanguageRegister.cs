@@ -171,7 +171,7 @@ namespace SCPlus.patch.lang
             {
                 LanguageRegister.ModifyLine(
                     language,
-                    $"Help_Event_Variable_{variable.variable}",
+                    variable.tooltip,
                     suffix: $"\n{LanguageRegister.SCPLUS_PREFIX} {suffix}");
             }
         }
