@@ -1,11 +1,19 @@
-﻿using SCPlus.patch.variable;
-using SCPlus.plugin;
+﻿using SCPlus.plugin;
 
 namespace SCPlus.patch.lang.localization
 {
+    [LocalizationHandler(
+        language: LANGUAGE,
+        moreVariables: nameof(MoreVariableTranslations),
+        extraFunctionality: nameof(ExtraFunctionalityTranslations),
+        perCountry: nameof(PerCountryTranslations),
+        techExtraFunctionality: nameof(TechExtraFunctionalityTranslations),
+        patchedVariables: nameof(PatchedVariableNamesTranslations),
+        widenedAccess: nameof(WidenedAccessVariableTranslations),
+        describeVariableType: nameof(DescribeVariableTypeTranslations))]
     internal static class LocalizationEnglish
     {
-        private static readonly string LANGUAGE = "English";
+        private const string LANGUAGE = "English";
 
         internal static void MoreVariableTranslations()
         {

@@ -4,6 +4,8 @@ using SCPlus.patch.variable;
 using SCPlus.plugin;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace SCPlus.patch.lang
 {
@@ -15,36 +17,47 @@ namespace SCPlus.patch.lang
         internal static HashSet<string> WIDEN_ACCESS_MODIFIED_LANGUAGES = [];
         internal static HashSet<string> TYPE_MODIFIED_LANGUAGES = [];
 
-        internal static void Awake()
+        internal static Dictionary<string, Tuple<LocalizationHandlerAttribute, Type>> LANGUAGE_HANDLERS = [];
+
+        internal static void Init(string language)
         {
+            if (!LANGUAGE_HANDLERS.ContainsKey(language))
+            {
+                Plugin.Logger.LogWarning($"Could not find localisations for {language}, skipping initialisation");
+                return;
+            }
+
+            LocalizationHandlerAttribute attribute = LANGUAGE_HANDLERS[language].Item1;
+            Type localisator = LANGUAGE_HANDLERS[language].Item2;
+
             if (Config.exposeMoreVariables.Value)
             {
-                LocalizationEnglish.MoreVariableTranslations();
+                RunMethod(localisator, attribute.moreVariables);
             }
 
             if (Config.expandEventFunctionality.Value)
             {
-                LocalizationEnglish.ExtraFunctionalityTranslations();
+                RunMethod(localisator, attribute.extraFunctionality);
             }
 
             if (Config.perCountryEventFunctionality.Value)
             {
-                LocalizationEnglish.PerCountryTranslations();
+                RunMethod(localisator, attribute.perCountry);
             }
 
             if (Config.expandTraitFunctionality.Value)
             {
-                LocalizationEnglish.TechExtraFunctionalityTranslations();
+                RunMethod(localisator, attribute.techExtraFunctionality);
             }
             
             if (Config.patchVariableName.Value)
             {
-                LocalizationEnglish.PatchedVariableNamesTranslations();
+                RunMethod(localisator, attribute.patchedVariables);
             }
 
             if (Config.widenVariableAccessibility.Value)
             {
-                LocalizationEnglish.WidenedAccessVariableTranslations();
+                RunMethod(localisator, attribute.widenedAccess);
             }
 
             if (Config.describeVariableType.Value)
@@ -52,9 +65,51 @@ namespace SCPlus.patch.lang
                 // this actually kinda sucks but whatever
                 // avoid all those pesky warnings and such by accessing .Type
                 UnityEngine.Debug.unityLogger.logEnabled = false;
-                LocalizationEnglish.DescribeVariableTypeTranslations();
+                RunMethod(localisator, attribute.describeVariableType);
                 UnityEngine.Debug.unityLogger.logEnabled = true;
             }
+        }
+
+        internal static void Awake()
+        {
+            var handlers =
+                from type in Assembly.GetCallingAssembly().GetTypes()
+                where type.IsDefined(typeof(LocalizationHandlerAttribute), false)
+                select type;
+
+            foreach (Type type in handlers)
+            {
+                LocalizationHandlerAttribute attribute = Attribute.GetCustomAttribute(type, typeof(LocalizationHandlerAttribute))
+                    as LocalizationHandlerAttribute;
+
+                if (LANGUAGE_HANDLERS.ContainsKey(attribute.language))
+                {
+                    Plugin.Logger.LogError($"Handler with language {attribute.language} already exists, skipping {type.Name}");
+                    continue;
+                }
+
+                LANGUAGE_HANDLERS[attribute.language] = Tuple.Create(attribute, type);
+            }
+
+            Init("English");
+        }
+
+        internal static void RunMethod(Type type, string name)
+        {
+            if (String.IsNullOrEmpty(name))
+            {
+                Plugin.Logger.LogError($"Invalid method name in {type.Name}, must be both non-null and non-empty");
+                return;
+            }
+
+            MethodInfo info = type.GetMethod(name, BindingFlags.NonPublic | BindingFlags.Static);
+            if (info == null)
+            {
+                Plugin.Logger.LogError($"Could not find {name} in {type.Name}; did not apply translation");
+                return;
+            }
+
+            info.Invoke(null, []);
         }
 
         internal static void RegisterSCPlusVariableFromExisting(string language, string commonSuffix, string existingVariable = null, string namePrefix = "", string nameSuffix = "", string tooltipPrefix = "", string tooltipSuffix = "")
@@ -235,6 +290,7 @@ namespace SCPlus.patch.lang
         {
             private static void Postfix(string languageName)
             {
+                Init(languageName);
                 FillWidenAccess(languageName);
                 FillDescribeVariableTypes(languageName);
             }
