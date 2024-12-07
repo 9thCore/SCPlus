@@ -54,20 +54,6 @@ namespace SCPlus.patch.lang
             {
                 RunMethod(localisator, attribute.patchedVariables);
             }
-
-            if (Config.widenVariableAccessibility.Value)
-            {
-                RunMethod(localisator, attribute.widenedAccess);
-            }
-
-            if (Config.describeVariableType.Value)
-            {
-                // this actually kinda sucks but whatever
-                // avoid all those pesky warnings and such by accessing .Type
-                UnityEngine.Debug.unityLogger.logEnabled = false;
-                RunMethod(localisator, attribute.describeVariableType);
-                UnityEngine.Debug.unityLogger.logEnabled = true;
-            }
         }
 
         internal static void Awake()
@@ -110,6 +96,29 @@ namespace SCPlus.patch.lang
             }
 
             info.Invoke(null, []);
+        }
+
+        internal static void InitSuffixes()
+        {
+            foreach (Tuple<LocalizationHandlerAttribute, Type> pair in LANGUAGE_HANDLERS.Values)
+            {
+                LocalizationHandlerAttribute attribute = pair.Item1;
+                Type localisator = pair.Item2;
+
+                if (Config.widenVariableAccessibility.Value)
+                {
+                    RunMethod(localisator, attribute.widenedAccess);
+                }
+
+                if (Config.describeVariableType.Value)
+                {
+                    // this actually kinda sucks but whatever
+                    // avoid all those pesky warnings and such by accessing .Type
+                    UnityEngine.Debug.unityLogger.logEnabled = false;
+                    RunMethod(localisator, attribute.describeVariableType);
+                    UnityEngine.Debug.unityLogger.logEnabled = true;
+                }
+            }
         }
 
         internal static void RegisterSCPlusVariableFromExisting(string language, string commonSuffix, string existingVariable = null, string namePrefix = "", string nameSuffix = "", string tooltipPrefix = "", string tooltipSuffix = "")

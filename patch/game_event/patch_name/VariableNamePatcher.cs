@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using SCPlus.patch.lang;
 using SCPlus.plugin;
 
 namespace SCPlus.patch.game_event.patch_name
@@ -45,6 +46,7 @@ namespace SCPlus.patch.game_event.patch_name
                 }
 
                 Register();
+                LanguageRegister.InitSuffixes();
             }
         }
     }
