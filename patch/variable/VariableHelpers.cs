@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SCPlus.plugin;
+using System;
 using System.Collections.Generic;
 
 namespace SCPlus.patch.variable
