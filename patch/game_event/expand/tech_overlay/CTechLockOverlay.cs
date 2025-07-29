@@ -10,6 +10,7 @@ namespace SCPlus.patch.game_event
         {
             base.ClickedApply();
 
+#if (!USE_32_COMPAT)
             List<EventLockTech> eventLock = [];
 
             EventNode techLock = SyntaxTree.Children[0];
@@ -35,12 +36,14 @@ namespace SCPlus.patch.game_event
 
             ExtraFunctionality.Data data = ExtraFunctionality.GetDataOrDefault(SetterHelper.eventScreen.CurrentEvent);
             data.eventLockTech = [.. eventLock];
+#endif
         }
 
         public override void Enter()
         {
             base.Enter();
 
+#if (!USE_32_COMPAT)
             if (!ExtraFunctionality.eventData.TryGetValue(SetterHelper.eventScreen.CurrentEvent, out ExtraFunctionality.Data data)
                 || data.eventLockTech is null)
             {
@@ -70,6 +73,7 @@ namespace SCPlus.patch.game_event
             {
                 parameterConditions = [.. conditions]
             });
+#endif
         }
     }
 }

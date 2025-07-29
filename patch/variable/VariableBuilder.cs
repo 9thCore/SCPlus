@@ -1,4 +1,5 @@
 ﻿using SCPlus.patch.lang;
+using SCPlus.plugin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,7 +95,7 @@ namespace SCPlus.patch.variable
 
         internal VariableBuilder Condition(ConditionOps operations)
         {
-            eventVariable.conditionOperations = JoinEnumFlags(typeof(ConditionOps), operations);
+            eventVariable.conditionOperations = JoinEnumFlags<ConditionOps>(operations);
             return Condition();
         }
 
@@ -106,7 +107,7 @@ namespace SCPlus.patch.variable
 
         internal VariableBuilder Outcome(OutcomeOps operators)
         {
-            eventVariable.outcomeOperations = JoinEnumFlags(typeof(OutcomeOps), operators);
+            eventVariable.outcomeOperations = JoinEnumFlags<OutcomeOps>(operators);
             return Outcome();
         }
 
@@ -129,7 +130,7 @@ namespace SCPlus.patch.variable
 
         internal VariableBuilder AsBoolean(BoolTypes types)
         {
-            eventVariable.outcomeToggleDescription = JoinEnumFlags(typeof(BoolTypes), types);
+            eventVariable.outcomeToggleDescription = JoinEnumFlags<BoolTypes>(types);
             return Condition(ConditionOps.EQUAL | ConditionOps.NOT_EQUAL).Outcome(OutcomeOps.SET).Appearance(AppearanceType.BOOL);
         }
 
@@ -170,25 +171,19 @@ namespace SCPlus.patch.variable
             VariableHelpers.RegisterVariable(eventVariable);
         }
 
-        private static string JoinEnumFlags(Type enumType, Enum enumValue)
+        private static string JoinEnumFlags<TEnum>(Enum value) where TEnum : Enum
         {
-            if (!enumType.IsEnum)
-            {
-                return "";
-            }
-
-            Array allValues = enumType.GetEnumValues();
             List<string> values = [];
 
-            foreach (Enum item in allValues)
+            foreach (Enum item in Util.GetValues<TEnum>())
             {
-                if (enumValue.HasFlag(item))
+                if (value.HasFlag(item))
                 {
                     values.Add(item.ToString());
                 }
             }
 
-            return String.Join(",", values);
+            return String.Join(",", [.. values]);
         }
 
         private static string GetEnumName(Type enumType)

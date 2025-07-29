@@ -3,6 +3,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using SCPlus.patch.lang;
 using SCPlus.patch.variable;
+using System;
 
 namespace SCPlus;
 
@@ -15,8 +16,24 @@ public class Plugin : BaseUnityPlugin
         
     private void Awake()
     {
-        // Plugin startup logic
         Logger = base.Logger;
+
+        bool x86Version = IntPtr.Size == 4;
+
+#if(!USE_32_COMPAT)
+        if (x86Version)
+        {
+            Logger.LogError($"Cannot start plugin - must use the 32-bit compatibility build on the win32beta branch!");
+            return;
+        }
+#else
+        if (!x86Version)
+        {
+            Logger.LogWarning($"Using the 32-bit compatibility build on the stable branch! Some features will be unavailable, use the 64-bit version of the mod to unlock them.");
+        }
+#endif
+
+        // Plugin startup logic
         Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
         plugin.Config.Awake();
 

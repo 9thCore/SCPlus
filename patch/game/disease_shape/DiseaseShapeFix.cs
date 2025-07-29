@@ -11,6 +11,9 @@ namespace SCPlus.patch.game.disease_shape
     {
         private static void Register(CDiseaseScreen screen)
         {
+#if (USE_32_COMPAT)
+            Plugin.Logger.LogWarning($"Cannot apply {nameof(DiseaseShapeFix)}, for the mod has been built on the 32-bit compatibility patch.");
+#else
             if (screen.DiseaseModelTypeList == null
                 || screen.DiseaseModelTypeList.elements == null)
             {
@@ -36,6 +39,7 @@ namespace SCPlus.patch.game.disease_shape
                 int ordinal = (int)type;
                 element.gameObject.name = $"{ordinal:D4}_{element.gameObject.name}_{LanguageRegister.SCPLUS_TRANSLATION_KEY}";
             }
+#endif
         }
 
         [HarmonyPatch(typeof(CDiseaseScreen), nameof(CDiseaseScreen.Initialise))]

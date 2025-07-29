@@ -17,7 +17,8 @@ namespace SCPlus.patch.game_event
                 return;
             }
 
-            if (__instance.TryGetComponent(out VariableSetterRedirector redirector))
+            VariableSetterRedirector redirector = __instance.GetComponent<VariableSetterRedirector>();
+            if (redirector != null)
             {
                 to = redirector.Apply(to);
             }

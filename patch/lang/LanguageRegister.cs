@@ -1,11 +1,14 @@
 ﻿using HarmonyLib;
-using SCPlus.patch.lang.localization;
 using SCPlus.patch.variable;
 using SCPlus.plugin;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+#if(USE_32_COMPAT)
+using SCPlus.patch.lang.localization;
+#else
+using System.Linq;
+#endif
 
 namespace SCPlus.patch.lang
 {
@@ -17,7 +20,7 @@ namespace SCPlus.patch.lang
         internal static HashSet<string> WIDEN_ACCESS_MODIFIED_LANGUAGES = [];
         internal static HashSet<string> TYPE_MODIFIED_LANGUAGES = [];
 
-        internal static Dictionary<string, Tuple<LocalizationHandlerAttribute, Type>> LANGUAGE_HANDLERS = [];
+        internal static Dictionary<string, Handler> LANGUAGE_HANDLERS = [];
 
         internal static void Init(string language)
         {
@@ -27,8 +30,8 @@ namespace SCPlus.patch.lang
                 return;
             }
 
-            LocalizationHandlerAttribute attribute = LANGUAGE_HANDLERS[language].Item1;
-            Type localisator = LANGUAGE_HANDLERS[language].Item2;
+            LocalizationHandlerAttribute attribute = LANGUAGE_HANDLERS[language].Attribute;
+            Type localisator = LANGUAGE_HANDLERS[language].Type;
 
             if (Config.exposeMoreVariables.Value)
             {
@@ -49,19 +52,23 @@ namespace SCPlus.patch.lang
             {
                 RunMethod(localisator, attribute.techExtraFunctionality);
             }
-            
+
             if (Config.patchVariableName.Value)
             {
                 RunMethod(localisator, attribute.patchedVariables);
             }
         }
-
+        
         internal static void Awake()
         {
+#if (USE_32_COMPAT)
+            var handlers = new Type[] { typeof(LocalizationEnglish) };
+#else
             var handlers =
                 from type in Assembly.GetCallingAssembly().GetTypes()
                 where type.IsDefined(typeof(LocalizationHandlerAttribute), false)
                 select type;
+#endif
 
             foreach (Type type in handlers)
             {
@@ -74,7 +81,7 @@ namespace SCPlus.patch.lang
                     continue;
                 }
 
-                LANGUAGE_HANDLERS[attribute.language] = Tuple.Create(attribute, type);
+                LANGUAGE_HANDLERS[attribute.language] = new Handler(attribute, type);
             }
 
             Init("English");
@@ -100,10 +107,10 @@ namespace SCPlus.patch.lang
 
         internal static void InitSuffixes()
         {
-            foreach (Tuple<LocalizationHandlerAttribute, Type> pair in LANGUAGE_HANDLERS.Values)
+            foreach (Handler pair in LANGUAGE_HANDLERS.Values)
             {
-                LocalizationHandlerAttribute attribute = pair.Item1;
-                Type localisator = pair.Item2;
+                LocalizationHandlerAttribute attribute = pair.Attribute;
+                Type localisator = pair.Type;
 
                 if (Config.widenVariableAccessibility.Value)
                 {
@@ -114,9 +121,17 @@ namespace SCPlus.patch.lang
                 {
                     // this actually kinda sucks but whatever
                     // avoid all those pesky warnings and such by accessing .Type
+#if(USE_32_COMPAT)
+                    UnityEngine.Debug.logger.logEnabled = false;
+#else
                     UnityEngine.Debug.unityLogger.logEnabled = false;
+#endif
                     RunMethod(localisator, attribute.describeVariableType);
+#if(USE_32_COMPAT)
+                    UnityEngine.Debug.logger.logEnabled = true;
+#else
                     UnityEngine.Debug.unityLogger.logEnabled = true;
+#endif
                 }
             }
         }
@@ -266,7 +281,7 @@ namespace SCPlus.patch.lang
                     continue;
                 }
 
-                string rep = !string.IsNullOrWhiteSpace(variable.outcomeListData) ? variable.outcomeListData :
+                string rep = !string.IsNullOrEmpty(variable.outcomeListData) ? variable.outcomeListData :
                     Type.GetTypeCode(variable.Type).ToString();
 
                 ModifyLine(
@@ -289,9 +304,17 @@ namespace SCPlus.patch.lang
                 return;
             }
 
+#if (USE_32_COMPAT)
+                    UnityEngine.Debug.logger.logEnabled = false;
+#else
             UnityEngine.Debug.unityLogger.logEnabled = false;
+#endif
             DefaultDescribeVariableTypes(language);
+#if (USE_32_COMPAT)
+                    UnityEngine.Debug.logger.logEnabled = true;
+#else
             UnityEngine.Debug.unityLogger.logEnabled = true;
+#endif
         }
 
         [HarmonyPatch(typeof(CLocalisationManager), nameof(CLocalisationManager.InitialiseLanguage))]
@@ -318,5 +341,7 @@ namespace SCPlus.patch.lang
             internal string instruction = "";
             internal string help = "";
         }
+
+        internal record struct Handler(LocalizationHandlerAttribute Attribute, Type Type);
     }
 }

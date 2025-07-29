@@ -31,13 +31,17 @@ namespace SCPlus.patch.tech.expand
 
             try
             {
+#if (USE_32_COMPAT)
+            Plugin.Logger.LogWarning($"Could not create tech lock variable, because the mod is on the 32-bit compatibility patch. Switch to the 64-bit Plague Inc build and 64-bit version of the mod to use it.");
+#else
                 CreateBoolSetter(
                     bottomTableComponent,
                     boolToIntSetter,
                     "EventLocked",
                     "eventLocked",
                     $"40D_{LanguageRegister.SCPLUS_TRANSLATION_KEY}_EventLocked",
-                    advancedSettingsHeaderToggle);                
+                    advancedSettingsHeaderToggle);  
+#endif              
 
                 if (Config.replaceTraitRequirement.Value)
                 {

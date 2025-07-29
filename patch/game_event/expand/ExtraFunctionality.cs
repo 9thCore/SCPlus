@@ -28,15 +28,28 @@ namespace SCPlus.patch.game_event
                 || !HierarchyHelper.TryFindWithLogging(tabButtons, "Tab_01_Conditions_Outcomes", out conditionsOutcomesTab)
                 || !HierarchyHelper.TryFindComponentWithLogging(conditionsOutcomesTab, out conditionsOutcomesTabButton)
                 || !HierarchyHelper.TryFindWithLogging(tabButtons, "Tab_04_Advanced", out advancedTabButton)
-                || !HierarchyHelper.TryFindWithLogging(SetterHelper.tabAdvancedScrollViews, "AdvancedDragPanel", out tabAdvancedDragPanel)
-                || !advancedTabButton.TryGetComponent(out advancedTabButtonSprite)
-                || !advancedTabButton.TryGetComponent(out advancedTabButtonSound)
-                || advancedTabButtonSprite.atlas == null)
+                || !HierarchyHelper.TryFindWithLogging(SetterHelper.tabAdvancedScrollViews, "AdvancedDragPanel", out tabAdvancedDragPanel))
+            {
+                return;
+            }
+
+            advancedTabButtonSprite = advancedTabButton.GetComponent<UISprite>();
+            if (advancedTabButtonSprite == null)
             {
                 Plugin.Logger.LogError($"Could not create extra functionality toggle");
-                Plugin.Logger.LogError($"{nameof(advancedTabButtonSprite)} exists: {advancedTabButtonSprite != null}");
-                Plugin.Logger.LogError($"{nameof(advancedTabButtonSound)} exists: {advancedTabButtonSound != null}");
-                Plugin.Logger.LogError($"{nameof(advancedTabButtonSprite.atlas)} exists: {(advancedTabButtonSprite != null && advancedTabButtonSprite.atlas != null)}");
+                return;
+            }
+
+            advancedTabButtonSound = advancedTabButton.GetComponent<UIPlaySound>();
+            if (advancedTabButtonSound == null)
+            {
+                Plugin.Logger.LogError($"Could not create extra functionality toggle");
+                return;
+            }
+
+            if (advancedTabButtonSprite.atlas == null)
+            {
+                Plugin.Logger.LogError($"Could not create extra functionality toggle");
                 return;
             }
 
@@ -77,6 +90,16 @@ namespace SCPlus.patch.game_event
 
             tooltip.localisationTag = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "GlobalToggleTooltip");
 
+#if (USE_32_COMPAT)
+            Plugin.Logger.LogWarning($"Could not create tech lock screen, because the mod is on the 32-bit compatibility patch. Switch to the 64-bit Plague Inc build and 64-bit version of the mod to use it.");
+
+            if (!TryCreateTechRandomScreen(out CTechRandomOverlay randomOverlay)
+                || !TryCreateDragPanel(randomOverlay, null, out GameObject dragPanel))
+            {
+                Plugin.Logger.LogError($"Could not create entire {nameof(UITable)} tree");
+                return;
+            }
+#else
             if (!TryCreateTechLockScreen(out CTechLockOverlay lockOverlay)
                 || !TryCreateTechRandomScreen(out CTechRandomOverlay randomOverlay)
                 || !TryCreateDragPanel(randomOverlay, lockOverlay, out GameObject dragPanel))
@@ -84,6 +107,7 @@ namespace SCPlus.patch.game_event
                 Plugin.Logger.LogError($"Could not create entire {nameof(UITable)} tree");
                 return;
             }
+#endif
 
             UITable table = dragPanel.GetComponentInChildren<UITable>();
 
@@ -121,7 +145,6 @@ namespace SCPlus.patch.game_event
 
             header.gameObject.SetActive(false);
             techList.gameObject.SetActive(false);
-
             return true;
         }
 
@@ -186,6 +209,7 @@ namespace SCPlus.patch.game_event
                     headerTemplate,
                     "General");
 
+#if (!USE_32_COMPAT)
                 SetterHelper.CreateButton(
                     thisTable,
                     stringListSetter,
@@ -195,9 +219,11 @@ namespace SCPlus.patch.game_event
                     {
                         CUIManager.instance.ShowOverlay(lockTechOverlay);
                     });
+#endif
             }
             catch (Exception ex)
             {
+                ex.StackTrace.Trim(); // remove the "declared but never used" annoying warning
                 return false;
             }
 
@@ -235,10 +261,10 @@ namespace SCPlus.patch.game_event
             SetterHelper.currentIndex++;
         }
 
-        internal static void SetDimensions(UISprite sprite, Vector2Int size)
+        internal static void SetDimensions(UISprite sprite, Vector2 size)
         {
-            sprite.width = size.x;
-            sprite.height = size.y;
+            sprite.width = (int)size.x;
+            sprite.height = (int)size.y;
         }
 
         internal static Data GetDataOrDefault(GameEvent gameEvent)
@@ -269,10 +295,8 @@ namespace SCPlus.patch.game_event
         // lol
         private static readonly Vector3 TOGGLE_BUTTON_POSITION = new(1345f, -185f, 0f);
         private const int TOGGLE_DEPTH = 5;
-        private static readonly Vector2Int TOGGLE_SIZE = new(60, 60);
-        private static readonly Vector2Int TOGGLE_ON_SIZE = new(20, 20);
-        private static readonly Vector2Int TOGGLE_OFF_SIZE = new(20, 6);
-        private static readonly Vector2Int TOGGLE_POSITION = new(28, 28);
+        private static readonly Vector2 TOGGLE_SIZE = new(60, 60);
+        private static readonly Vector2 TOGGLE_POSITION = new(28, 28);
         private static readonly Vector3 TOGGLE_SPRITE_ONOFF_OFFSET = new(
             (TOGGLE_SIZE.x - TOGGLE_POSITION.x) * 0.5f,
             -(TOGGLE_SIZE.y - TOGGLE_POSITION.y) * 0.5f,
@@ -289,7 +313,9 @@ namespace SCPlus.patch.game_event
             public bool deEvolveRandomTech = false;
             public string[] randomTech = null;
             public string function = null;
+#if (!USE_32_COMPAT)
             public EventLockTech[] eventLockTech = null;
+#endif
 
             internal bool IsDefault()
             {
@@ -297,7 +323,11 @@ namespace SCPlus.patch.game_event
                     && deEvolveRandomTech == false
                     && randomTech == null
                     && function == null
+#if (USE_32_COMPAT)
+;
+#else
                     && eventLockTech == null;
+#endif
             }
         }
 

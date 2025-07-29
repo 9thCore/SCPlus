@@ -1,6 +1,6 @@
 .vs
 bin
-lib
+lib*
 obj
 copy.bat
 *.csproj

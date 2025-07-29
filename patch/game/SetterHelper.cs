@@ -73,7 +73,7 @@ namespace SCPlus.patch.game
                 return gameObject;
             }
 
-            label.width = BUTTON_SIZE.x;
+            label.width = (int)BUTTON_SIZE.x;
             label.text = LanguageRegister.GetLocalizationTag(key, $"{internalName}_Button");
             translator.originalLabelText = label.text;
             translator.UseOriginalLabel();
@@ -87,7 +87,7 @@ namespace SCPlus.patch.game
 
             removeSprite.type = UIBasicSprite.Type.Sliced;
             removeSprite.rawPivot = UIWidget.Pivot.Center;
-            removeSprite.SetDimensions(BUTTON_SIZE.x, BUTTON_SIZE.y);
+            removeSprite.SetDimensions((int)BUTTON_SIZE.x, (int)BUTTON_SIZE.y);
 
             removeCollider.center = Vector3.zero;
             removeCollider.size = BUTTON_COLLIDER_SIZE;
@@ -241,7 +241,7 @@ namespace SCPlus.patch.game
         // lol
         private static readonly Vector3 LIST_SETTER_POSITION = new(591f, 0f, 0f);
         private static readonly Vector3 BUTTON_POSITION = new(784f, 0f, 0f);
-        private static readonly Vector2Int BUTTON_SIZE = new(384, 64);
+        private static readonly Vector2 BUTTON_SIZE = new(384, 64);
         private static readonly Vector3 BUTTON_COLLIDER_SIZE = new(BUTTON_SIZE.x, BUTTON_SIZE.y, 0f);
     }
 }

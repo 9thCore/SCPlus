@@ -38,7 +38,9 @@ namespace SCPlus.patch.game_event
                 data.deEvolveRandomTech = effect.deEvolveRandomTech;
                 data.randomTech = effect.randomTech;
                 data.function = effect.function;
+#if (!USE_32_COMPAT)
                 data.eventLockTech = effect.eventLockTech;
+#endif
 
                 EventOutcome[] array = event_.eventOutcomes;
                 Array.Resize(ref array, event_.eventOutcomes.Length - 1);
@@ -67,7 +69,9 @@ namespace SCPlus.patch.game_event
                     deEvolveRandomTech = data.deEvolveRandomTech,
                     randomTech = data.randomTech,
                     function = data.function,
+#if (!USE_32_COMPAT)
                     eventLockTech = data.eventLockTech
+#endif
                 };
 
                 EventOutcome outcome = new()

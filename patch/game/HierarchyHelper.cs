@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SCPlus.plugin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -38,32 +39,15 @@ namespace SCPlus.patch.hierarchy
 
         internal static bool TryFindComponent<T>(Transform root, out T result)
         {
-            Queue<Transform> queue = new();
-            queue.Enqueue(root);
-
-            while (queue.Count > 0)
-            {
-                Transform current = queue.Dequeue();
-                if (current.TryGetComponent(out result))
-                {
-                    return true;
-                }
-
-                foreach (Transform child in current)
-                {
-                    queue.Enqueue(child);
-                }
-            }
-
-            result = default;
-            return false;
+            result = root.gameObject.GetComponentInChildren<T>(true);
+            return result != null;
         }
 
         internal static bool TryFindComponentWithLogging<T>(Transform root, out T result)
         {
             if (!TryFindComponent(root, out result))
             {
-                Plugin.Logger.LogError($"Could not find component {nameof(T)} in {root}");
+                Plugin.Logger.LogError($"Could not find component {typeof(T).Name} in {root}");
                 return false;
             }
 
@@ -85,7 +69,8 @@ namespace SCPlus.patch.hierarchy
                 return null;
             }
 
-            if (!gameObject.TryGetComponent(out T component))
+            T component = gameObject.GetComponent<T>();
+            if (component == null)
             {
                 component = gameObject.AddComponent<T>();
             }
@@ -119,7 +104,7 @@ namespace SCPlus.patch.hierarchy
                         continue;
                     }
 
-                    property.SetValue(component, property.GetValue(oldComponent));
+                    property.SetValue(component, property.GetValue(oldComponent, []), []);
                 }
             }
 
@@ -152,7 +137,7 @@ namespace SCPlus.patch.hierarchy
                         continue;
                     }
 
-                    property.SetValue(component, property.GetValue(oldComponent));
+                    property.SetValue(component, property.GetValue(oldComponent, []), []);
                 }
             }
 
