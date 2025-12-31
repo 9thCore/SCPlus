@@ -12,7 +12,7 @@ namespace SCPlus.patch.tech.expand.tech_overlay
 
             if (!Valid())
             {
-                Plugin.Logger.LogError($"{nameof(ClickedApply)}: Missing screen");
+                Plugin.LogError($"{nameof(ClickedApply)}: Missing screen");
                 return;
             }
 
@@ -34,7 +34,7 @@ namespace SCPlus.patch.tech.expand.tech_overlay
 
             if (!Valid())
             {
-                Plugin.Logger.LogError($"{nameof(Enter)}: Missing screen");
+                Plugin.LogError($"{nameof(Enter)}: Missing screen");
                 return;
             }
 
@@ -56,7 +56,7 @@ namespace SCPlus.patch.tech.expand.tech_overlay
 
             if (!Valid())
             {
-                Plugin.Logger.LogError($"{nameof(Exit)}: Missing screen");
+                Plugin.LogError($"{nameof(Exit)}: Missing screen");
                 return;
             }
 

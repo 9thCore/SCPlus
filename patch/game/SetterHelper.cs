@@ -39,7 +39,7 @@ namespace SCPlus.patch.game
                 || !HierarchyHelper.TryFindWithLogging(tabAdvanced, "Scroll Views", out tabAdvancedScrollViews)
                 || !HierarchyHelper.TryFindWithLogging(tabAdvancedScrollViews, "AdvancedDragPanel", out tabAdvancedDragPanel))
             {
-                Plugin.Logger.LogError($"Could not find required GameObjects");
+                Plugin.LogError($"Could not find required GameObjects");
                 return false;
             }
 
@@ -59,7 +59,7 @@ namespace SCPlus.patch.game
                 || !HierarchyHelper.TryFindComponentWithLogging(remove, out BoxCollider removeCollider)
                 || !HierarchyHelper.TryFindComponentWithLogging(gameObject.transform, out UILabel labelTemplate))
             {
-                Plugin.Logger.LogError($"Could not setup button");
+                Plugin.LogError($"Could not setup button");
                 return gameObject;
             }
 
@@ -69,7 +69,7 @@ namespace SCPlus.patch.game
             if (!HierarchyHelper.TryFindComponentWithLogging(labelClone.transform, out UILabel label)
                 || !HierarchyHelper.TryFindComponentWithLogging(labelClone.transform, out UILabelAutotranslate translator))
             {
-                Plugin.Logger.LogError($"Could not setup button");
+                Plugin.LogError($"Could not setup button");
                 return gameObject;
             }
 
@@ -134,7 +134,7 @@ namespace SCPlus.patch.game
                 || !HierarchyHelper.TryFindWithLogging(dropdownList.transform, "Remove_Button", out Transform removeButton)
                 || !HierarchyHelper.TryFindComponentWithLogging(removeButton, out UIButton button))
             {
-                Plugin.Logger.LogError($"Could not setup {nameof(ListSetter)}");
+                Plugin.LogError($"Could not setup {nameof(ListSetter)}");
                 throw new InvalidOperationException();
             }
 
@@ -164,7 +164,7 @@ namespace SCPlus.patch.game
                 || !HierarchyHelper.TryFindComponentWithLogging(setterClone, out UILabelAutotranslate translator)
                 || !HierarchyHelper.TryFindComponentWithLogging(setterClone, out TooltipObject tooltip))
             {
-                Plugin.Logger.LogError($"Could not clone setter {setterTemplate}");
+                Plugin.LogError($"Could not clone setter {setterTemplate}");
                 UnityEngine.Object.Destroy(setterClone.gameObject);
                 throw new InvalidOperationException();
             }

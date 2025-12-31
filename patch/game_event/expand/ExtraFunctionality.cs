@@ -36,20 +36,20 @@ namespace SCPlus.patch.game_event
             advancedTabButtonSprite = advancedTabButton.GetComponent<UISprite>();
             if (advancedTabButtonSprite == null)
             {
-                Plugin.Logger.LogError($"Could not create extra functionality toggle");
+                Plugin.LogError($"Could not create extra functionality toggle");
                 return;
             }
 
             advancedTabButtonSound = advancedTabButton.GetComponent<UIPlaySound>();
             if (advancedTabButtonSound == null)
             {
-                Plugin.Logger.LogError($"Could not create extra functionality toggle");
+                Plugin.LogError($"Could not create extra functionality toggle");
                 return;
             }
 
             if (advancedTabButtonSprite.atlas == null)
             {
-                Plugin.Logger.LogError($"Could not create extra functionality toggle");
+                Plugin.LogError($"Could not create extra functionality toggle");
                 return;
             }
 
@@ -91,12 +91,12 @@ namespace SCPlus.patch.game_event
             tooltip.localisationTag = LanguageRegister.GetLocalizationTag(LanguageRegister.LocalizationKey.ExtraFunc, "GlobalToggleTooltip");
 
 #if (USE_32_COMPAT)
-            Plugin.Logger.LogWarning($"Could not create tech lock screen, because the mod is on the 32-bit compatibility patch. Switch to the 64-bit Plague Inc build and 64-bit version of the mod to use it.");
+            Plugin.LogWarning($"Could not create tech lock screen, because the mod is on the 32-bit compatibility patch. Switch to the 64-bit Plague Inc build and 64-bit version of the mod to use it.");
 
             if (!TryCreateTechRandomScreen(out CTechRandomOverlay randomOverlay)
                 || !TryCreateDragPanel(randomOverlay, null, out GameObject dragPanel))
             {
-                Plugin.Logger.LogError($"Could not create entire {nameof(UITable)} tree");
+                Plugin.LogError($"Could not create entire {nameof(UITable)} tree");
                 return;
             }
 #else
@@ -104,7 +104,7 @@ namespace SCPlus.patch.game_event
                 || !TryCreateTechRandomScreen(out CTechRandomOverlay randomOverlay)
                 || !TryCreateDragPanel(randomOverlay, lockOverlay, out GameObject dragPanel))
             {
-                Plugin.Logger.LogError($"Could not create entire {nameof(UITable)} tree");
+                Plugin.LogError($"Could not create entire {nameof(UITable)} tree");
                 return;
             }
 #endif
@@ -249,7 +249,7 @@ namespace SCPlus.patch.game_event
             if (!HierarchyHelper.TryFindComponentWithLogging(headerClone, out UILabel label)
                 || !HierarchyHelper.TryFindComponentWithLogging(headerClone, out UILabelAutotranslate translator))
             {
-                Plugin.Logger.LogError($"Could not clone header {headerTemplate}");
+                Plugin.LogError($"Could not clone header {headerTemplate}");
                 GameObject.Destroy(headerClone.gameObject);
                 throw new InvalidOperationException();
             }
@@ -282,7 +282,7 @@ namespace SCPlus.patch.game_event
         {
             if (tabToggle == null)
             {
-                Plugin.Logger.LogError($"{nameof(ExitExtraFunctionalityTab)} called without {tabToggle} being set");
+                Plugin.LogError($"{nameof(ExitExtraFunctionalityTab)} called without {tabToggle} being set");
                 return;
             }
 

@@ -29,7 +29,7 @@ namespace SCPlus.patch.game_event
             TriggerList component = list.Last();
             if (component == null)
             {
-                Plugin.Logger.LogError($"Invalid: no last {nameof(TriggerList)} in list");
+                Plugin.LogError($"Invalid: no last {nameof(TriggerList)} in list");
                 return;
             }
             EditDescription(component, isTriggered);
@@ -42,7 +42,7 @@ namespace SCPlus.patch.game_event
             TriggerList component = list.Last();
             if (component == null)
             {
-                Plugin.Logger.LogError($"Invalid: no last {nameof(TriggerList)} in list");
+                Plugin.LogError($"Invalid: no last {nameof(TriggerList)} in list");
                 return;
             }
             EditDescription(component, isTriggered);
@@ -52,7 +52,7 @@ namespace SCPlus.patch.game_event
         {
             if (!HierarchyHelper.TryFindComponentWithLogging(component.transform, out TooltipObject tooltip))
             {
-                Plugin.Logger.LogError($"Could not edit description of {component}");
+                Plugin.LogError($"Could not edit description of {component}");
                 return;
             }
 

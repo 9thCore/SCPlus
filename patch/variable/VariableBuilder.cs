@@ -143,7 +143,7 @@ namespace SCPlus.patch.variable
         {
             if (!enumType.IsEnum)
             {
-                Plugin.Logger.LogError($"{enumType} is not an enum");
+                Plugin.LogError($"{enumType} is not an enum");
                 return this;
             }
 

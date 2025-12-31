@@ -32,7 +32,7 @@ namespace SCPlus.patch.tech.expand
             try
             {
 #if (USE_32_COMPAT)
-            Plugin.Logger.LogWarning($"Could not create tech lock variable, because the mod is on the 32-bit compatibility patch. Switch to the 64-bit Plague Inc build and 64-bit version of the mod to use it.");
+            Plugin.LogWarning($"Could not create tech lock variable, because the mod is on the 32-bit compatibility patch. Switch to the 64-bit Plague Inc build and 64-bit version of the mod to use it.");
 #else
                 CreateBoolSetter(
                     bottomTableComponent,
@@ -49,7 +49,7 @@ namespace SCPlus.patch.tech.expand
                 }
             } catch (Exception ex)
             {
-                Plugin.Logger.LogError($"Caught error while creating {nameof(tech)}.{nameof(ExtraFunctionality)}: {ex}");
+                Plugin.LogError($"Caught error while creating {nameof(tech)}.{nameof(ExtraFunctionality)}: {ex}");
                 return;
             }
         }
@@ -60,7 +60,7 @@ namespace SCPlus.patch.tech.expand
                 || !TryCreateRequirementScreen(screen, "", out CTechRequirementOverlay requirementOverlay)
                 || !TryCreateRequirementScreen(screen, "Not", out CTechRequirementNotOverlay requirementNotOverlay))
             {
-                Plugin.Logger.LogError($"Could not replace tech requirements");
+                Plugin.LogError($"Could not replace tech requirements");
                 return;
             }
 

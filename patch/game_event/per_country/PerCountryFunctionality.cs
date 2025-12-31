@@ -20,7 +20,7 @@ namespace SCPlus.patch.game_event.per_country
                 || !HierarchyHelper.TryFindWithLogging(buttonsList, "Button_Cancel", out Transform buttonCancel)
                 || !HierarchyHelper.TryFindComponentWithLogging(buttonCancel, out UIButton buttonCancelButton))
             {
-                Plugin.Logger.LogError($"Could not create per-country functionality button");
+                Plugin.LogError($"Could not create per-country functionality button");
                 return;
             }
 
@@ -37,7 +37,7 @@ namespace SCPlus.patch.game_event.per_country
                 || !HierarchyHelper.TryFindComponentWithLogging(text, out UILabelAutotranslate translator))
             {
                 GameObject.DestroyImmediate(perCountryCreate.gameObject);
-                Plugin.Logger.LogError($"Invalid tree on per-country functionality button");
+                Plugin.LogError($"Invalid tree on per-country functionality button");
                 return;
             }
 

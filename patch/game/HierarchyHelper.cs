@@ -19,7 +19,7 @@ namespace SCPlus.patch.hierarchy
         {
             if (!TryFind(transform, name, out result))
             {
-                Plugin.Logger.LogError($"Could not find \"{name}\" in {transform}");
+                Plugin.LogError($"Could not find \"{name}\" in {transform}");
                 return false;
             }
 
@@ -47,7 +47,7 @@ namespace SCPlus.patch.hierarchy
         {
             if (!TryFindComponent(root, out result))
             {
-                Plugin.Logger.LogError($"Could not find component {typeof(T).Name} in {root}");
+                Plugin.LogError($"Could not find component {typeof(T).Name} in {root}");
                 return false;
             }
 

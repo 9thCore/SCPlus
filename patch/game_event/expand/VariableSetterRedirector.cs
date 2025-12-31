@@ -22,7 +22,7 @@ namespace SCPlus.patch.game_event
             }
             catch (Exception ex)
             {
-                Plugin.Logger.LogError($"Encountered error while redirecting: {ex}");
+                Plugin.LogError($"Encountered error while redirecting: {ex}");
                 return value;
             }
         }

@@ -2,6 +2,6 @@
 bin
 lib*
 obj
-copy.bat
+copy*bat
 *.csproj
 *.sln

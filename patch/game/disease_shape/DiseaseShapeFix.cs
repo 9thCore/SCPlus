@@ -2,7 +2,6 @@
 using SCPlus.patch.lang;
 using SCPlus.plugin;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SCPlus.patch.game.disease_shape
@@ -12,12 +11,12 @@ namespace SCPlus.patch.game.disease_shape
         private static void Register(CDiseaseScreen screen)
         {
 #if (USE_32_COMPAT)
-            Plugin.Logger.LogWarning($"Cannot apply {nameof(DiseaseShapeFix)}, for the mod has been built on the 32-bit compatibility patch.");
+            Plugin.LogWarning($"Cannot apply {nameof(DiseaseShapeFix)}, for the mod has been built on the 32-bit compatibility patch.");
 #else
             if (screen.DiseaseModelTypeList == null
                 || screen.DiseaseModelTypeList.elements == null)
             {
-                Plugin.Logger.LogError($"Could not run patch: {nameof(Config.diseaseShapeNameFix)}");
+                Plugin.LogError($"Could not run patch: {nameof(Config.diseaseShapeNameFix)}");
                 return;
             }
 
@@ -32,7 +31,7 @@ namespace SCPlus.patch.game.disease_shape
             {
                 if (!Enum.TryParse(element.Value, true, out Disease.EDiseaseType type))
                 {
-                    Plugin.Logger.LogWarning($"{nameof(Config.diseaseShapeNameFix)}: element {element} [{element.Value}] is not part of the enum");
+                    Plugin.LogWarning($"{nameof(Config.diseaseShapeNameFix)}: element {element} [{element.Value}] is not part of the enum");
                     continue;
                 }
 
