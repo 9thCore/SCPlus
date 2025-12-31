@@ -1,6 +1,6 @@
 # SCPlus
 
- ### NOTE: For the time being, only Windows is supported for the mod, because Unix systems require additional commands in order to run modloaders, commands which cannot be used to open the Scenario Creator under normal circumstances.
+ ### NOTE: Unix systems require opening through Proton by adding Unix-specific commands (See: [BepInEx](https://docs.bepinex.dev/articles/advanced/proton_wine.html), [Melonloader](https://melonwiki.xyz/#/README?id=linux-launch-instructions)), which will only allow you to access scenarios created while loading with Proton.
 
  Plugin for [Plague Inc. Evolved](https://www.ndemiccreations.com/en/25-plague-inc-evolved)'s Scenario Creator that unlocks more functionality in the UI, intended for advanced use.
  Most patches are used in events: that is, to say, some general knowledge of events is required in order to truly leverage the mod.
