@@ -28,6 +28,21 @@ Some features may not be available on the `x86` build of the mod. They will be m
  For more details, see the [wiki](https://github.com/9thCore/SCPlus/wiki).
 
 # Installation
+
+## Melonloader installation
+- [Download "Melonloader x64"](https://github.com/LavaGang/MelonLoader/releases/tag/v0.7.1)
+- Extract it into Plague Inc. Evolved's files, such that `version.dll` and `MelonLoader` are in the same folder as `PlagueIncSC.exe`
+- Run the Scenario Creator, either from in-game or from the files (`PlagueIncSC.exe`)
+- Melonloader automatically comes with a *console* that opens when the Scenario Creator is opened.
+- Check existence of `PlagueInc/ScenarioCreator/Mods` and `PlagueInc/ScenarioCreator/UserData`
+- Obtain a copy of the compiled dll (whether this is through building the mod yourself, or through [Releases](https://github.com/9thCore/SCPlus/releases), your choice)
+- Download the `x64` Melonloader mod build, or build on the `Melon` configuration **with `x64` platform configuration**
+- Drop mod into Scenario Creator files: `PlagueInc/ScenarioCreator/Mods/SCPlus/the_mod_file.dll`
+- Run the Scenario Creator, either from in-game or from the files (`PlagueIncSC.exe`)
+- Check existence of `PlagueInc/ScenarioCreator/UserData/SCPlus.cfg`
+- If it exists, the mod has been correctly installed! This is the config through which you can choose what features to use
+
+## BepInEx installation
 Some steps may vary between the `x86` and `x64` mod builds. They will be marked by their version.
 
 - [Install BepInEx](https://docs.bepinex.dev/articles/user_guide/installation/index.html) (Any 5.4.* should work just fine, even latest)
@@ -35,10 +50,14 @@ Some steps may vary between the `x86` and `x64` mod builds. They will be marked 
 - `(x86)` Run `PlagueIncSC.exe` from the files
 - Check existence of `PlagueInc/ScenarioCreator/BepInEx`
 - Obtain a copy of the compiled dll (whether this is through building the mod yourself, or through [Releases](https://github.com/9thCore/SCPlus/releases), your choice)
-- `(x86)` Download the `x86` mod build, or build on the `Release32` configuration.
-- `(x64)` Download the `x64` mod build, or build on the `Release` configuration.
+- `(x86)` Download the `x86` BepInEx mod build, or build on the `Release32` configuration.
+- `(x64)` Download the `x64` BepInEx mod build, or build on the `Release` configuration.
 - Drop plugin into Scenario Creator files: `PlagueInc/ScenarioCreator/BepInEx/plugins/SCPlus/the_mod_file.dll`
 - `(x64)` Run the Scenario Creator, either from in-game or from the files (`PlagueIncSC.exe`)
 - `(x86)` Run `PlagueIncSC.exe` from the files
 - Check existence of `PlagueInc/ScenarioCreator/BepInEx/config/SCPlus.cfg`
 - If it exists, the mod has been correctly installed! This is the config through which you can choose what features to use
+
+## Changing modloaders
+- Disabling BepInEx requires just renaming the `winhttp.dll` file into something else, like `bepinex_winhttp.dll`
+- Disabling Melonloader requires just renaming the `version.dll` file into something else, like `melon_version.dll`
