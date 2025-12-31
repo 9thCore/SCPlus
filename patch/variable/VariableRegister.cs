@@ -35,6 +35,13 @@ namespace SCPlus.patch.variable
                 .AsNumber()
                 .Register();
 
+            new VariableBuilder("transmission_cost_increase", "World")
+                .Category(CategoryType.DISEASE_STATS)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsBoolean(BoolTypes.UI_True | BoolTypes.UI_False)
+                .Register();
+
             new VariableBuilder("symptom_extra_cost", "World")
                 .Category(CategoryType.DISEASE_STATS)
                 .DefaultSCPlusTranslation()
@@ -42,11 +49,25 @@ namespace SCPlus.patch.variable
                 .AsNumber()
                 .Register();
 
+            new VariableBuilder("symptom_cost_increase", "World")
+                .Category(CategoryType.DISEASE_STATS)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsBoolean(BoolTypes.UI_True | BoolTypes.UI_False)
+                .Register();
+
             new VariableBuilder("ability_extra_cost", "World")
                 .Category(CategoryType.DISEASE_STATS)
                 .DefaultSCPlusTranslation()
                 .Complexity(ComplexityType.ADVANCED)
                 .AsNumber()
+                .Register();
+
+            new VariableBuilder("ability_cost_increase", "World")
+                .Category(CategoryType.DISEASE_STATS)
+                .DefaultSCPlusTranslation()
+                .Complexity(ComplexityType.ADVANCED)
+                .AsBoolean(BoolTypes.UI_True | BoolTypes.UI_False)
                 .Register();
 
             new VariableBuilder("infected_this_turn", "World")

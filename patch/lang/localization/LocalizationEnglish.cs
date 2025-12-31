@@ -34,15 +34,33 @@ namespace SCPlus.patch.lang.localization
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
+                "transmission_cost_increase",
+                "Transmission cost increase",
+                "Whether Transmissions will increase in cost after being bought. False if the gene [Trans-Stasis] is used, true otherwise.");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
                 "symptom_extra_cost",
                 "Symptom extra cost",
                 "Additional cost of Symptom traits. Increases for every Symptom trait evolved, unless the gene [Sympto-Stasis] is used.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
+                "symptom_cost_increase",
+                "Symptom cost increase",
+                "Whether Symptoms will increase in cost after being bought. False if the gene [Sympto-Stasis] is used, true otherwise.");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
                 "ability_extra_cost",
                 "Ability extra cost",
                 "Additional cost of Ability traits. Increases for every Ability trait evolved, unless the gene [Patho-Stasis] is used.");
+
+            LanguageRegister.RegisterSCPlusVariable(
+                LANGUAGE,
+                "ability_cost_increase",
+                "Ability cost increase",
+                "Whether Ability will increase in cost after being bought. False if the gene [Patho-Stasis] is used, true otherwise.");
 
             LanguageRegister.RegisterSCPlusVariable(
                 LANGUAGE,
